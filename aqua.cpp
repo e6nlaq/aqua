@@ -1,14 +1,19 @@
 
 #include <bits/stdc++.h>
 #include "./lib/all.h"
-#include "./lib/string.h"
 using namespace std;
 
 #define co(x) cout << (x) << "\n"
 
-void aqua(string script)
+void aqua(string script, vector<string> line)
 {
-	co(cutstr("\"Hello,world!\""));
+	vector<string> code = scriptcut(script);
+	string func = code[0];
+	if (func == "out")
+	{
+		if (code[1][0] == '\"')
+			out(cutstr(code[1]));
+	}
 }
 
 int main(int argc, char const *argv[])
@@ -36,7 +41,7 @@ int main(int argc, char const *argv[])
 
 	for (string line : lines)
 	{
-		aqua(line);
+		aqua(line, lines);
 	}
 
 	return 0;
