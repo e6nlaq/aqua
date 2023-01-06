@@ -1,4 +1,2 @@
 
-using io
-
-cons "Hello, world!"
+out "Hello, world!"
