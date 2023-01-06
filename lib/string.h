@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <bits/stdc++.h>
+#include <string>
 using namespace std;
 
 string cutstr(string cut)
