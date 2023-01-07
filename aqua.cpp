@@ -9,10 +9,18 @@ bool op_funcskip = false;
 
 void errorlog(vector<string> line, int linenum, int errorcode)
 {
+	cout << "\n\nError: ";
 	switch (errorcode)
 	{
 	case 1:
-		co("\n\nError: Invalid function passed.");
+		co("Invalid function passed.");
+		break;
+	case 2:
+		co("Invalid argument.");
+		break;
+
+	case 3:
+		co("Invalid option.");
 		break;
 	}
 
@@ -35,6 +43,29 @@ void aqua(string script, vector<string> line, int linenum)
 	{
 		if (code[1][0] == '\"')
 			out(cutstr(code[1]));
+	}
+	else if (func == "option")
+	{
+		if (code[1] == "function_skip")
+		{
+			if (code[2] == "true")
+				op_funcskip = true;
+			else if (code[2] == "false")
+				op_funcskip = false;
+			else
+			{
+				errorlog(line, linenum, 2);
+			}
+		}
+		else
+		{
+			errorlog(line, linenum, 3);
+		}
+	}
+	else if (func == "outf")
+	{
+		if (code[1][0] == '\"')
+			outf(cutstr(code[1]));
 	}
 	else
 	{

@@ -1,4 +1,5 @@
 
-out "Hello, world!"
-outt "Error"
-out "test"
+
+option function_skip false
+outf "Hello, world!"
+outf "rnrn"

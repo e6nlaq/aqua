@@ -16,7 +16,7 @@ vector<string> scriptcut(string line)
 	{
 		if (c != ' ')
 		{
-			if (c != '\t')
+			if (c != '\t' && (c == '\n' || c >= ' '))
 				result[i] += c;
 			if (c == '\"')
 			{
