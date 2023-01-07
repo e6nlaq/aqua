@@ -4,6 +4,7 @@
 using namespace std;
 
 #define co(x) cout << (x) << "\n"
+#define err(x) errorlog(line, linenum, (x));
 
 bool op_funcskip = false;
 
@@ -12,6 +13,11 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 	cout << "\n\nError: ";
 	switch (errorcode)
 	{
+
+	case 0:
+		co("Example Error");
+		break;
+
 	case 1:
 		co("Invalid function passed.");
 		break;
@@ -22,16 +28,34 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 	case 3:
 		co("Invalid option.");
 		break;
+
+	case 4:
+		co("User-defined exception thrown");
+		break;
+
+	case 5:
+		co("Invalid error code");
+		break;
+
+	default:
+		err(5);
+		return;
+		break;
 	}
 
 	co("The program ended with code " + to_string(errorcode));
 	co("Line " + to_string(linenum + 1));
 	co("Error location\n");
+	if (linenum > 1)
+		co(to_string(linenum - 1) + "| " + line[linenum - 2]);
 	if (linenum > 0)
 		co(to_string(linenum) + "| " + line[linenum - 1]);
 	co(to_string(linenum + 1) + "| \033[1m\033[31m\033[4m" + line[linenum] + "\033[m");
 	if (linenum != line.size() - 1)
 		co(to_string(linenum + 2) + "| " + line[linenum + 1]);
+
+	if (linenum + 2 < line.size())
+		co(to_string(linenum + 3) + "| " + line[linenum + 2]);
 	exit(errorcode);
 }
 
@@ -66,6 +90,27 @@ void aqua(string script, vector<string> line, int linenum)
 	{
 		if (code[1][0] == '\"')
 			outf(cutstr(code[1]));
+	}
+	else if (func == "#" || func == "comment")
+	{
+	}
+	else if (func == "exit")
+	{
+		if (code.size() == 1)
+			exit(0);
+		else
+			exit(stoi(code[1]));
+	}
+	else if (func == "throw")
+	{
+		if (code.size() == 1)
+		{
+			err(4);
+		}
+		else
+		{
+			err(stoi(code[1]));
+		}
 	}
 	else
 	{

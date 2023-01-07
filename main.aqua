@@ -1,5 +1,11 @@
 
-
 option function_skip false
+
+# comment
+comment comment
+
 outf "Hello, world!"
 outf "rnrn"
+
+# error
+# throw 0
