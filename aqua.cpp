@@ -5,7 +5,9 @@ using namespace std;
 
 #define co(x) cout << (x) << "\n"
 
-void aqua(string script, vector<string> line)
+bool op_funcskip = false;
+
+void aqua(string script, vector<string> line, int linenum)
 {
 	vector<string> code = scriptcut(script);
 	string func = code[0];
@@ -13,6 +15,16 @@ void aqua(string script, vector<string> line)
 	{
 		if (code[1][0] == '\"')
 			out(cutstr(code[1]));
+	}
+	else
+	{
+		if (!op_funcskip)
+		{
+			co("Error: Invalid function passed.");
+			co("Line " + linenum);
+			co(script);
+			exit(1);
+		}
 	}
 }
 
@@ -39,9 +51,9 @@ int main(int argc, char const *argv[])
 		lines.push_back(read_file);
 	}
 
-	for (string line : lines)
+	for (int i = 0; i < lines.size(); i++)
 	{
-		aqua(line, lines);
+		aqua(lines[i], lines, i);
 	}
 
 	return 0;
