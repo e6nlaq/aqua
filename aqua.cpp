@@ -7,6 +7,26 @@ using namespace std;
 
 bool op_funcskip = false;
 
+void errorlog(vector<string> line, int linenum, int errorcode)
+{
+	switch (errorcode)
+	{
+	case 1:
+		co("\n\nError: Invalid function passed.");
+		break;
+	}
+
+	co("The program ended with code " + to_string(errorcode));
+	co("Line " + to_string(linenum + 1));
+	co("Error location\n");
+	if (linenum > 0)
+		co(to_string(linenum) + "| " + line[linenum - 1]);
+	co(to_string(linenum + 1) + "| \033[1m\033[31m\033[4m" + line[linenum] + "\033[m");
+	if (linenum != line.size() - 1)
+		co(to_string(linenum + 2) + "| " + line[linenum + 1]);
+	exit(errorcode);
+}
+
 void aqua(string script, vector<string> line, int linenum)
 {
 	vector<string> code = scriptcut(script);
@@ -18,12 +38,9 @@ void aqua(string script, vector<string> line, int linenum)
 	}
 	else
 	{
-		if (!op_funcskip)
+		if (!op_funcskip && func != "" && func[0] >= '0')
 		{
-			co("Error: Invalid function passed.");
-			co("Line " + linenum);
-			co(script);
-			exit(1);
+			errorlog(line, linenum, 1);
 		}
 	}
 }

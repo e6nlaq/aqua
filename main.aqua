@@ -1,3 +1,4 @@
 
 out "Hello, world!"
 outt "Error"
+out "test"
