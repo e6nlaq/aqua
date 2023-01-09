@@ -1,6 +1,6 @@
 # How to Install Aqua
 
-## Windows / Linux / Ubuntu
+## Windows / Mac / Linux / Ubuntu
 [こちら](https://github.com/e6nlaq/aqua/releases)から最新版Aquaをダウンロードし、好きな場所に配置します
 
 解凍後、`PATH`に`bin/`を追加します。
@@ -16,7 +16,7 @@ Let's specify the Aqua script as the first argument!
 
 と表示されたら成功です。
 
-## Mac / Etc
+## Etc..
 
 注: g++がインストールされている必要があります
 
