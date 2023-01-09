@@ -6,7 +6,9 @@ using namespace std;
 #define co(x) cout << (x) << "\n"
 #define err(x) errorlog(line, linenum, (x));
 
+// Variant
 bool op_funcskip = false;
+map<string, int> var_int;
 
 void errorlog(vector<string> line, int linenum, int errorcode)
 {
@@ -37,11 +39,17 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Invalid error code");
 		break;
 
+	case 6:
+		co("invalid type");
+		break;
+
 	default:
 		err(5);
 		return;
 		break;
 	}
+
+#pragma region Error Messages
 
 	co("The program ended with code " + to_string(errorcode));
 	co("Line " + to_string(linenum + 1));
@@ -57,6 +65,8 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 	if (linenum + 2 < line.size())
 		co(to_string(linenum + 3) + "| " + line[linenum + 2]);
 	exit(errorcode);
+
+#pragma endregion
 }
 
 void aqua(string script, vector<string> line, int linenum)
@@ -110,6 +120,16 @@ void aqua(string script, vector<string> line, int linenum)
 		else
 		{
 			err(stoi(code[1]));
+		}
+	}
+	else if (func == "var")
+	{
+		if (code[1] == "int")
+		{
+		}
+		else
+		{
+			err(6);
 		}
 	}
 	else
