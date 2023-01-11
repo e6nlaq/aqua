@@ -1,5 +1,7 @@
 
-// e6nlaq / Aqua
+// Aqua / @e6nlaq
+// This program and source code are available under the Apache License.
+// See LICENSE for details.
 
 #include <bits/stdc++.h>
 #include "./lib/all.h"
