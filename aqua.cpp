@@ -1,8 +1,4 @@
 
-// Aqua / @e6nlaq
-// This program and source code are available under the Apache License.
-// See LICENSE for details.
-
 #include <bits/stdc++.h>
 #include "./lib/all.h"
 using namespace std;
@@ -134,6 +130,18 @@ void aqua(string script, vector<string> line, int linenum)
 		else
 		{
 			err(6);
+		}
+	}
+	else if (func == "ln")
+	{
+		if (code.size() == 1)
+		{
+			cout << "\n";
+		}
+		else
+		{
+			for (int i = 0; i < stoi(code[1]); i++)
+				cout << "\n";
 		}
 	}
 	else

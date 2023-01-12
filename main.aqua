@@ -1,11 +1,10 @@
 
 option function_skip false
 
-# comment
-comment comment
+# test
+out "Hello"
+ln
+out "te"
 
-outf "Hello, world!"
-outf "rnrn"
-
-# error
-# throw 0
+ln 3
+out "ee"
