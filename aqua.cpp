@@ -144,6 +144,9 @@ void aqua(string script, vector<string> line, int linenum)
 				cout << "\n";
 		}
 	}
+	else if (func == "style")
+	{
+		}
 	else
 	{
 		if (!op_funcskip && func != "" && func[0] >= '0')
