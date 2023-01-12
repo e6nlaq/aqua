@@ -2,9 +2,15 @@
 option function_skip false
 
 # test
-out "Hello"
+outf "Hello"
 ln
-out "te"
+outf "te"
 
 ln 3
-out "ee"
+outf "ee"
+
+style text red
+
+outf "text style test"
+
+outf "aa"
