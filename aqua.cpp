@@ -4,6 +4,7 @@
 using namespace std;
 
 #define co(x) cout << (x) << "\n"
+#define cou(x) cout << (x)
 #define err(x) errorlog(line, linenum, (x));
 
 // Variant
@@ -41,6 +42,10 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 6:
 		co("invalid type");
+		break;
+
+	case 7:
+		co("Invalid Style");
 		break;
 
 	default:
@@ -146,7 +151,22 @@ void aqua(string script, vector<string> line, int linenum)
 	}
 	else if (func == "style")
 	{
+		if (code[1] == "text")
+		{
+			if (code[2] == "red")
+			{
+				cou("\033[31m");
+			}
+			else
+			{
+				err(7);
+			}
 		}
+		else
+		{
+			err(2);
+		}
+	}
 	else
 	{
 		if (!op_funcskip && func != "" && func[0] >= '0')
@@ -183,6 +203,8 @@ int main(int argc, char const *argv[])
 	{
 		aqua(lines[i], lines, i);
 	}
+
+	cou("\033[m");
 
 	return 0;
 }
