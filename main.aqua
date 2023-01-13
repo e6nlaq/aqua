@@ -13,4 +13,11 @@ style text red
 
 outf "text style test"
 
+style text italic
+
 outf "aa"
+
+style reset
+
+outf "reset"
+
