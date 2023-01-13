@@ -153,14 +153,70 @@ void aqua(string script, vector<string> line, int linenum)
 	{
 		if (code[1] == "text")
 		{
-			if (code[2] == "red")
+			if (code[2] == "black")
+			{
+				cou("\033[30m");
+			}
+			else if (code[2] == "red")
 			{
 				cou("\033[31m");
+			}
+			else if (code[2] == "green")
+			{
+				cou("\033[32m");
+			}
+			else if (code[2] == "yellow")
+			{
+				cou("\033[33m");
+			}
+			else if (code[2] == "blue")
+			{
+				cou("\033[34m");
+			}
+			else if (code[2] == "magenta")
+			{
+				cou("\033[35m");
+			}
+			else if (code[2] == "cyan")
+			{
+				cou("\033[36m");
+			}
+			else if (code[2] == "white")
+			{
+				cou("\033[37m");
+			}
+			else if (code[2] == "bold")
+			{
+				cou("\033[1m");
+			}
+			else if (code[2] == "thinly")
+			{
+				cou("\033[2m");
+			}
+			else if (code[2] == "italic")
+			{
+				cou("\033[3m");
+			}
+			else if (code[2] == "underline")
+			{
+				cou("\033[4m");
+			}
+			else if (code[2] == "blink")
+			{
+				cou("\033[5m");
+			}
+			else if (code[2] == "fastblink")
+			{
+				cou("\033[6m");
 			}
 			else
 			{
 				err(7);
 			}
+		}
+		else if (code[1] == "reset")
+		{
+			cou("\033[m");
 		}
 		else
 		{
