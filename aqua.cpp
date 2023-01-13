@@ -96,7 +96,7 @@ void aqua(string script, vector<string> line, int linenum)
 				errorlog(line, linenum, 2);
 			}
 		}
-		if (code[1] == "reset_style")
+		else if (code[1] == "reset_style")
 		{
 			if (code[2] == "true")
 				op_stylereset = true;

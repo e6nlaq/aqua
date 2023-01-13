@@ -1,23 +1,35 @@
 
+# Option
+
 option function_skip false
+option reset_style true
 
-# test
-outf "Hello"
-ln
-outf "te"
+# Output
 
-ln 3
-outf "ee"
+out "No ln"
+out "No ln2"
+
+ln 2
+
+outf "Lm"
+
+# Style test
 
 style text red
 
-outf "text style test"
+outf "Red"
 
-style text italic
+style text bold
 
-outf "aa"
+outf "Red Bold"
+
+style background white
+
+outf "Backgroumd White Bold Red Text"
 
 style reset
 
-outf "reset"
+outf "Reset"
+
+outf "Reset?"
 
