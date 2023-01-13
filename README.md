@@ -29,4 +29,4 @@ This program and its source code are available under the GNU General Public Lice
 
 # New Features
 
-Please click [here](https://github.com/e6nlaq/aqua/issues) to see the status of the new additions.
+Please click [here](https://github.com/e6nlaq/aqua/issues?q=is%3Aissue+is%3Aopen+sort%3Acreated-asc) to see the status of the new additions.
