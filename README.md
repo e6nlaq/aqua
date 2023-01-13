@@ -30,9 +30,3 @@ This program and its source code are available under the GNU General Public Lice
 # New Features
 
 Please click [here](https://github.com/e6nlaq/aqua/issues) to see the status of the new additions.
-
-# Production
-
-Aqua is developed by the following developers
-
-@e6nlaq
