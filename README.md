@@ -1,9 +1,38 @@
-# Aqua
+# What is Aqua?
 
 <img src="https://github.com/e6nlaq/aqua/blob/main/image/aqua.png" width="200px"></img>
 
-Aquaは非常にシンプルで複雑なプログラミング言語です。
+Aqua is a very simple and complex programming language.
 
-Windows, Mac, Linux, Ubuntuで利用できます。
+Available for Windows, Mac, Linux and Ubuntu.
 
-[How To Install](./INSTALL.md)
+# How to Install Aqua
+
+Install and deploy the latest version of Aqua from [here](https://github.com/e6nlaq/aqua/releases).
+
+After expansion, add the folder `bin` to the `PATH`.
+
+In the terminal, run `aqua` and
+
+```
+Welcome to Aqua!
+
+Aqua helps to solve a very small problem
+Let's specify the Aqua script as the first argument!
+```
+
+is displayed, you are done.
+
+# Terms of Use
+
+This program and its source code are available under the GNU General Public License v3.0.
+
+# New Features
+
+Please click [here](https://github.com/e6nlaq/aqua/issues) to see the status of the new additions.
+
+# Production
+
+Aqua is developed by the following developers
+
+@e6nlaq
