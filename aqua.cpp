@@ -8,7 +8,7 @@ using namespace std;
 #define err(x) errorlog(line, linenum, (x));
 
 // Variant
-bool op_funcskip = false;
+bool op_funcskip = false, op_stylereset = true;
 map<string, int> var_int;
 
 void errorlog(vector<string> line, int linenum, int errorcode)
@@ -94,6 +94,17 @@ void aqua(string script, vector<string> line, int linenum)
 			else
 			{
 				errorlog(line, linenum, 2);
+			}
+		}
+		if (code[1] == "reset_style")
+		{
+			if (code[2] == "true")
+				op_stylereset = true;
+			else if (code[2] == "false")
+				op_stylereset = false;
+			else
+			{
+				err(2)
 			}
 		}
 		else
@@ -295,7 +306,8 @@ int main(int argc, char const *argv[])
 		aqua(lines[i], lines, i);
 	}
 
-	cou("\033[m");
+	if (op_stylereset)
+		cou("\033[m");
 
 	return 0;
 }
