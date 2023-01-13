@@ -218,6 +218,41 @@ void aqua(string script, vector<string> line, int linenum)
 		{
 			cou("\033[m");
 		}
+		else if (code[1] == "background")
+		{
+			if (code[2] == "black")
+			{
+				cou("\033[40m");
+			}
+			else if (code[2] == "red")
+			{
+				cou("\033[41m");
+			}
+			else if (code[2] == "green")
+			{
+				cou("\033[42m");
+			}
+			else if (code[2] == "yellow")
+			{
+				cou("\033[43m");
+			}
+			else if (code[2] == "blue")
+			{
+				cou("\033[44m");
+			}
+			else if (code[2] == "magenta")
+			{
+				cou("\033[45m");
+			}
+			else if (code[2] == "cyan")
+			{
+				cou("\033[46m");
+			}
+			else if (code[2] == "white")
+			{
+				cou("\033[47m");
+			}
+		}
 		else
 		{
 			err(2);
