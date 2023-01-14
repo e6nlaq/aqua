@@ -331,6 +331,19 @@ void aqua(string script, vector<string> line, int linenum)
 	}
 	else if (func == "in")
 	{
+		switch (var_search(code[1]))
+		{
+		case 1:
+			cin >> var_int[code[1]];
+			break;
+
+		case 2:
+			cin >> var_string[code[1]];
+
+		default:
+			err(10);
+			break;
+		}
 	}
 	else
 	{

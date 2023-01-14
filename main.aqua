@@ -37,3 +37,6 @@ outf "Reset?"
 
 var int A
 
+in A
+
+in B
