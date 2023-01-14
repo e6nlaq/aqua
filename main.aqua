@@ -37,6 +37,10 @@ outf "Reset?"
 
 var int A
 
-in A
+set A 12
 
-in B
+outf A
+
+set A 55
+
+outf A
