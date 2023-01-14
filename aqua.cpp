@@ -24,6 +24,22 @@ bool dup_varname(string name)
 	return true;
 }
 
+int var_search(string name)
+{
+	if (var_int.count(name))
+	{
+		return 1;
+	}
+	else if (var_string.count(name))
+	{
+		return 2;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
 void errorlog(vector<string> line, int linenum, int errorcode)
 {
 	cout << "\n\nError: ";
@@ -67,6 +83,10 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 9:
 		co("Overlapping variables");
+		break;
+
+	case 10:
+		co("Non-existent variable");
 		break;
 
 	default:
@@ -308,6 +328,9 @@ void aqua(string script, vector<string> line, int linenum)
 		{
 			err(2);
 		}
+	}
+	else if (func == "in")
+	{
 	}
 	else
 	{
