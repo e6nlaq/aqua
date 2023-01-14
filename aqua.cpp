@@ -119,10 +119,33 @@ void aqua(string script, vector<string> line, int linenum)
 {
 	vector<string> code = scriptcut(script);
 	string func = code[0];
+
+	for (int i = 0; i < 10; i++)
+	{
+		code.push_back("");
+	}
+
 	if (func == "out")
 	{
 		if (code[1][0] == '\"')
 			out(cutstr(code[1]));
+		else
+		{
+			switch (var_search(code[1]))
+			{
+			case 1:
+				out(var_int[code[1]]);
+				break;
+
+			case 2:
+				out(var_string[code[1]]);
+				break;
+
+			default:
+				err(10);
+				break;
+			}
+		}
 	}
 	else if (func == "option")
 	{
@@ -157,6 +180,23 @@ void aqua(string script, vector<string> line, int linenum)
 	{
 		if (code[1][0] == '\"')
 			outf(cutstr(code[1]));
+		else
+		{
+			switch (var_search(code[1]))
+			{
+			case 1:
+				outf(var_int[code[1]]);
+				break;
+
+			case 2:
+				outf(var_string[code[1]]);
+				break;
+
+			default:
+				err(10);
+				break;
+			}
+		}
 	}
 	else if (func == "#" || func == "comment")
 	{
