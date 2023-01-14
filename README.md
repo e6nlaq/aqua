@@ -1,4 +1,6 @@
-# What is Aqua?
+# Aqua
+
+## What is Aqua?
 
 <img src="https://github.com/e6nlaq/aqua/blob/main/image/aqua.png" width="200px"></img>
 
@@ -6,7 +8,7 @@ Aqua is a very simple and complex programming language.
 
 Available for Windows, Mac, Linux and Ubuntu.
 
-# How to Install Aqua
+## Install
 
 Install and deploy the latest version of Aqua from [here](https://github.com/e6nlaq/aqua/releases).
 
@@ -23,10 +25,10 @@ Let's specify the Aqua script as the first argument!
 
 is displayed, you are done.
 
-# Terms of Use
+## Terms of Use
 
 This program and its source code are available under the GNU General Public License v3.0.
 
-# New Features
+## New Features
 
 Please click [here](https://github.com/e6nlaq/aqua/issues?q=is%3Aissue+is%3Aopen+sort%3Acreated-asc) to see the status of the new additions.
