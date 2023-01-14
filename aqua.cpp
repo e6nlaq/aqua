@@ -345,6 +345,23 @@ void aqua(string script, vector<string> line, int linenum)
 			break;
 		}
 	}
+	else if (func == "set")
+	{
+		switch (var_search(code[1]))
+		{
+		case 1:
+			var_int[code[1]] = stoi(code[2]);
+			break;
+
+		case 2:
+			var_string[code[1]] = code[2];
+			break;
+
+		default:
+			err(10);
+			break;
+		}
+	}
 	else
 	{
 		if (!op_funcskip && func != "" && func[0] >= '0')
