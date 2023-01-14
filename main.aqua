@@ -37,6 +37,11 @@ outf "Reset?"
 
 var int A
 
+in A
+
+outf A
+outf "A"
+
 set A 12
 
 outf A

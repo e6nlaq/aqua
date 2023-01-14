@@ -13,6 +13,9 @@ using namespace std;
 bool op_funcskip = false, op_stylereset = true;
 map<string, int> var_int;
 map<string, string> var_string;
+vector<string> lines;
+
+void errorlog(vector<string> line, int linenum, int errorcode);
 
 bool dup_varname(string name)
 {
@@ -38,6 +41,26 @@ int var_search(string name)
 	{
 		return 0;
 	}
+}
+
+string var_value(string name)
+{
+	switch (var_search(name))
+	{
+	case 1:
+		return to_string(var_int[name]);
+		break;
+
+	case 2:
+		return var_string[name];
+		break;
+
+	default:
+		// err(10);
+		break;
+	}
+
+	return "";
 }
 
 void errorlog(vector<string> line, int linenum, int errorcode)
@@ -131,20 +154,7 @@ void aqua(string script, vector<string> line, int linenum)
 			out(cutstr(code[1]));
 		else
 		{
-			switch (var_search(code[1]))
-			{
-			case 1:
-				out(var_int[code[1]]);
-				break;
-
-			case 2:
-				out(var_string[code[1]]);
-				break;
-
-			default:
-				err(10);
-				break;
-			}
+			out(var_value(code[1]));
 		}
 	}
 	else if (func == "option")
@@ -182,24 +192,12 @@ void aqua(string script, vector<string> line, int linenum)
 			outf(cutstr(code[1]));
 		else
 		{
-			switch (var_search(code[1]))
-			{
-			case 1:
-				outf(var_int[code[1]]);
-				break;
-
-			case 2:
-				outf(var_string[code[1]]);
-				break;
-
-			default:
-				err(10);
-				break;
-			}
+			outf(var_value(code[1]));
 		}
 	}
 	else if (func == "#" || func == "comment")
 	{
+		// Nothing. :)
 	}
 	else if (func == "exit")
 	{
@@ -426,8 +424,6 @@ int main(int argc, char const *argv[])
 	file.open(argv[1]);
 
 	string read_file;
-
-	vector<string> lines;
 
 	while (getline(file, read_file))
 	{
