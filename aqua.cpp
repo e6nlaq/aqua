@@ -12,10 +12,11 @@ using namespace std;
 // Variant
 bool op_funcskip = false, op_stylereset = true;
 map<string, int> var_int;
+map<string, string> var_string;
 
 bool dup_varname(string name)
 {
-	if (var_int.count(name))
+	if (var_int.count(name) || var_string.count(name))
 	{
 		return false;
 	}
@@ -167,6 +168,10 @@ void aqua(string script, vector<string> line, int linenum)
 				if (code[1] == "int")
 				{
 					var_int[code[2]] = 0;
+				}
+				else if (code[1] == "string")
+				{
+					var_string[code[2]] = "";
 				}
 				else
 				{
