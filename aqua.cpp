@@ -392,7 +392,7 @@ void aqua(string script, vector<string> line, int linenum)
 			break;
 
 		case 2:
-			var_string[code[1]] = code[2];
+			var_string[code[1]] = cutstr(code[2]);
 			break;
 
 		default:
