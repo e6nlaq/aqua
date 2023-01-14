@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <bits/stdc++.h>
+#include "./stdc++.h"
 using namespace std;
 
 vector<string> scriptcut(string line)
