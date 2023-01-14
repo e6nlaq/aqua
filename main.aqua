@@ -33,3 +33,7 @@ outf "Reset"
 
 outf "Reset?"
 
+# Variant test
+
+var int A
+

@@ -3,13 +3,25 @@
 #include "./lib/all.h"
 using namespace std;
 
+// Macro
 #define co(x) cout << (x) << "\n"
 #define cou(x) cout << (x)
 #define err(x) errorlog(line, linenum, (x));
+#define all(x) x.begin(), x.end()
 
 // Variant
 bool op_funcskip = false, op_stylereset = true;
 map<string, int> var_int;
+
+bool dup_varname(string name)
+{
+	if (var_int.count(name))
+	{
+		return false;
+	}
+
+	return true;
+}
 
 void errorlog(vector<string> line, int linenum, int errorcode)
 {
@@ -46,6 +58,14 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 7:
 		co("Invalid Style");
+		break;
+
+	case 8:
+		co("Invalid name");
+		break;
+
+	case 9:
+		co("Overlapping variables");
 		break;
 
 	default:
@@ -140,12 +160,27 @@ void aqua(string script, vector<string> line, int linenum)
 	}
 	else if (func == "var")
 	{
-		if (code[1] == "int")
+		if (isvarok(code[2]))
 		{
+			if (dup_varname(code[2]))
+			{
+				if (code[1] == "int")
+				{
+					var_int[code[2]] = 0;
+				}
+				else
+				{
+					err(6);
+				}
+			}
+			else
+			{
+				err(9);
+			}
 		}
 		else
 		{
-			err(6);
+			err(8);
 		}
 	}
 	else if (func == "ln")
