@@ -25,6 +25,14 @@ Let's specify the Aqua script as the first argument!
 
 is displayed, you are done.
 
+## Aqua Learn
+
+Want to learn Aqua?
+
+We have just the thing for you!
+
+[Aqua Learn](./learn/CONTENS.md)
+
 ## Terms of Use
 
 This program and its source code are available under the GNU General Public License v3.0.
