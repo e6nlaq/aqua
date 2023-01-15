@@ -13,7 +13,10 @@ using namespace std;
 bool op_funcskip = false, op_stylereset = true;
 map<string, int> var_int;
 map<string, string> var_string;
+map<string, bool> var_bool;
+map<string, double> var_double;
 vector<string> lines;
+int linenume;
 
 void errorlog(vector<string> line, int linenum, int errorcode);
 
@@ -37,6 +40,14 @@ int var_search(string name)
 	{
 		return 2;
 	}
+	else if (var_bool.count(name))
+	{
+		return 3;
+	}
+	else if (var_double.count(name))
+	{
+		return 4;
+	}
 	else
 	{
 		return 0;
@@ -55,8 +66,15 @@ string var_value(string name)
 		return var_string[name];
 		break;
 
+	case 3:
+		return to_string(var_bool[name]);
+		break;
+
+	case 4:
+		return to_string(var_double[name]);
+
 	default:
-		// err(10);
+		errorlog(lines, linenume, 10);
 		break;
 	}
 
@@ -231,6 +249,14 @@ void aqua(string script, vector<string> line, int linenum)
 				{
 					var_string[code[2]] = "";
 				}
+				else if (code[1] == "bool")
+				{
+					var_bool[code[2]] = true;
+				}
+				else if (code[1] == "double")
+				{
+					var_double[code[2]] = 0.0;
+				}
 				else
 				{
 					err(6);
@@ -378,6 +404,12 @@ void aqua(string script, vector<string> line, int linenum)
 		case 2:
 			cin >> var_string[code[1]];
 
+		case 3:
+			cin >> var_bool[code[1]];
+
+		case 4:
+			cin >> var_double[code[1]];
+
 		default:
 			err(10);
 			break;
@@ -399,6 +431,16 @@ void aqua(string script, vector<string> line, int linenum)
 				var_string[code[1]] = cutstr(code[2]);
 			else
 				var_string[code[1]] = var_value(code[2]);
+			break;
+
+		case 3:
+			var_bool[code[1]] = stob(var_value(code[2]));
+
+		case 4:
+			if (isvarok(code[2]))
+				var_double[code[1]] = stoi(var_value(code[2]));
+			else
+				var_double[code[1]] = stoi(code[2]);
 			break;
 
 		default:
@@ -438,6 +480,7 @@ int main(int argc, char const *argv[])
 
 	for (int i = 0; i < lines.size(); i++)
 	{
+		linenume = i;
 		aqua(lines[i], lines, i);
 	}
 
