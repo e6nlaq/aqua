@@ -36,16 +36,11 @@ outf "Reset?"
 # Variant test
 
 var int A
+var int B
 
-in A
+set A 32
 
-outf A
-outf "A"
-
-set A 12
+set B A
 
 outf A
-
-set A 55
-
-outf A
+outf B

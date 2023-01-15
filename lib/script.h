@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
+#include "./stdc++.h"
 using namespace std;
 
 vector<string> scriptcut(string line)
@@ -44,7 +45,7 @@ bool isvarok(string s)
 {
 	for (char c : s)
 	{
-		if (!(isdigit(c) || c == '_' || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')))
+		if (!(!isdigit(c) || c == '_' || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')))
 			return false;
 	}
 
