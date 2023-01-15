@@ -459,6 +459,9 @@ string aqua(string script, vector<string> line, int linenum)
 			break;
 		}
 	}
+	else if (func == "add")
+	{
+	}
 	else
 	{
 		if (!op_funcskip && func != "" && func[0] >= '0')
@@ -477,7 +480,7 @@ int main(int argc, char const *argv[])
 
 	var_bool["true"] = true;
 	var_bool["false"] = false;
-	var_int["null"] = NULL;
+	var_int["null"] = (int)NULL;
 
 #pragma endregion
 
