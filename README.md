@@ -25,6 +25,10 @@ Let's specify the Aqua script as the first argument!
 
 is displayed, you are done.
 
+## Associations (Windows only)
+
+After installation, run `association.bat` in `install/` with **administrator privileges**.
+
 ## Aqua Learn
 
 Want to learn Aqua?
