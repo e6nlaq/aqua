@@ -388,11 +388,17 @@ void aqua(string script, vector<string> line, int linenum)
 		switch (var_search(code[1]))
 		{
 		case 1:
-			var_int[code[1]] = stoi(code[2]);
+			if (isvarok(code[2]))
+				var_int[code[1]] = stoi(var_value(code[2]));
+			else
+				var_int[code[1]] = stoi(code[2]);
 			break;
 
 		case 2:
-			var_string[code[1]] = cutstr(code[2]);
+			if (code[2][0] == '\"')
+				var_string[code[1]] = cutstr(code[2]);
+			else
+				var_string[code[1]] = var_value(code[2]);
 			break;
 
 		default:
