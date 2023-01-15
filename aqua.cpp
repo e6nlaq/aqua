@@ -10,7 +10,7 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 
 // Variant
-bool op_funcskip = false, op_stylereset = true;
+bool op_funcskip = false, op_stylereset = true, op_end_anykey = false;
 map<string, int> var_int;
 map<string, string> var_string;
 map<string, bool> var_bool;
@@ -194,6 +194,17 @@ void aqua(string script, vector<string> line, int linenum)
 				op_stylereset = true;
 			else if (code[2] == "false")
 				op_stylereset = false;
+			else
+			{
+				err(2)
+			}
+		}
+		else if (code[1] == "end_anykey")
+		{
+			if (code[2] == "true")
+				op_end_anykey = true;
+			else if (code[2] == "false")
+				op_end_anykey = false;
 			else
 			{
 				err(2)
@@ -493,6 +504,14 @@ int main(int argc, char const *argv[])
 
 	if (op_stylereset)
 		cou("\033[m");
+
+	if (op_end_anykey)
+	{
+		co("\nThe program was successfully completed.");
+		co("To exit, press Enter key.");
+		int get;
+		get = getchar();
+	}
 
 	return 0;
 }
