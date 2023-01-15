@@ -16,3 +16,10 @@ string cutstr(string cut)
 
 	return ret;
 }
+
+bool stob(string s)
+{
+	if (s == "true")
+		return true;
+	return false;
+}
