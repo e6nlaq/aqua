@@ -49,3 +49,5 @@ set b a
 
 outf B
 outf b
+
+outf true

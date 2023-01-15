@@ -460,6 +460,13 @@ void aqua(string script, vector<string> line, int linenum)
 int main(int argc, char const *argv[])
 {
 
+#pragma region Aqua System Variables
+
+	var_bool["true"] = true;
+	var_bool["false"] = false;
+
+#pragma endregion
+
 	if (argc == 1 || argc > 2 || argv[1] == "--help")
 	{
 		co("Welcome to Aqua!");
