@@ -477,6 +477,7 @@ int main(int argc, char const *argv[])
 
 	var_bool["true"] = true;
 	var_bool["false"] = false;
+	var_int["null"] = NULL;
 
 #pragma endregion
 
