@@ -156,7 +156,7 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 #pragma endregion
 }
 
-void aqua(string script, vector<string> line, int linenum)
+string aqua(string script, vector<string> line, int linenum)
 {
 	vector<string> code = scriptcut(script);
 	string func = code[0];
@@ -466,6 +466,8 @@ void aqua(string script, vector<string> line, int linenum)
 			errorlog(line, linenum, 1);
 		}
 	}
+
+	return "";
 }
 
 int main(int argc, char const *argv[])
