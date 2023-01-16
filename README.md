@@ -12,7 +12,7 @@ Available for Windows, Mac, Linux and Ubuntu.
 
 Install and deploy the latest version of Aqua from [here](https://github.com/e6nlaq/aqua/releases).
 
-After installation, run `install.bat` in `install/` with **administrator privileges**.
+After installation, run `install.bat` in `script/` with **administrator privileges**.
 ## Install (Mac, Linux, Ubuntu)
 
 Install and deploy the latest version of Aqua from [here](https://github.com/e6nlaq/aqua/releases).
