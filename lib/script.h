@@ -50,3 +50,33 @@ bool isvarok(string s)
 
 	return true;
 }
+
+string bond(string a, string b)
+{
+	return a + b;
+}
+
+string ret(string type, string value)
+{
+	if (type == "int")
+	{
+		return bond("001", value);
+	}
+	else if (type == "string")
+	{
+		return bond("002", value);
+	}
+	else if (type == "bool")
+	{
+		return bond("003", value);
+	}
+	else if (type == "double")
+	{
+		return bond("004", value);
+	}
+}
+
+string boty(string s)
+{
+	return s.substr(3);
+}
