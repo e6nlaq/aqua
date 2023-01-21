@@ -461,7 +461,7 @@ string aqua(string script, vector<string> line, int linenum)
 	}
 	else if (func == "add")
 	{
-	}
+		}
 	else
 	{
 		if (!op_funcskip && func != "" && func[0] >= '0')
