@@ -10,6 +10,7 @@
         "sstream": "cpp",
         "functional": "cpp",
         "regex": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "*.tcc": "cpp"
     }
 }
