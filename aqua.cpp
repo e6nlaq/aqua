@@ -463,6 +463,10 @@ string aqua(string script, vector<string> line, int linenum)
 			break;
 		}
 	}
+	else if (func == "flush")
+	{
+		cout << flush;
+	}
 	else if (func == "add")
 	{
 	}
