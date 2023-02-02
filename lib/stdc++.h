@@ -16,3 +16,4 @@
 #include <bitset>        // bitset
 #include <cctype>        // isupper, islower, isdigit, toupper, tolower
 #include <fstream>
+#include <iomanip>

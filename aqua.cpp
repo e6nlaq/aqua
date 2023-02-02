@@ -210,6 +210,10 @@ string aqua(string script, vector<string> line, int linenum)
 				err(2)
 			}
 		}
+		else if (code[1] == "set_few")
+		{
+			cout << fixed << setprecision(stoi(code[2]));
+		}
 		else
 		{
 			errorlog(line, linenum, 3);
