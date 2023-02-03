@@ -17,3 +17,4 @@
 #include <cctype>        // isupper, islower, isdigit, toupper, tolower
 #include <fstream>
 #include <iomanip>
+#include <math.h>

@@ -605,6 +605,7 @@ int main(int argc, char const *argv[])
 	var_bool["true"] = true;
 	var_bool["false"] = false;
 	var_int["null"] = (int)NULL;
+	var_double["pi"] = acos(-1);
 
 #pragma endregion
 
