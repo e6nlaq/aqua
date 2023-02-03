@@ -3,6 +3,7 @@
 
 option function_skip false
 option reset_style true
+option set_few 20
 
 # Output
 
@@ -51,3 +52,5 @@ outf B
 outf b
 
 outf true
+
++ 0 0
