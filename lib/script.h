@@ -4,7 +4,7 @@
 #include "./stdc++.h"
 using namespace std;
 
-vector<string> scriptcut(string line)
+inline vector<string> scriptcut(string line)
 {
 
 	vector<string> result(1, "");
@@ -40,7 +40,7 @@ vector<string> scriptcut(string line)
 	return result;
 }
 
-bool isvarok(string s)
+inline bool isvarok(string s)
 {
 
 	if (s == ":")
@@ -55,7 +55,7 @@ bool isvarok(string s)
 	return true;
 }
 
-string bond(string a, string b)
+inline string bond(string a, string b)
 {
 	return a + b;
 }
@@ -80,7 +80,7 @@ string bond(string a, string b)
 // 	}
 // }
 
-string boty(string s)
+inline string boty(string s)
 {
 	return s.substr(3);
 }

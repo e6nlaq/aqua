@@ -5,13 +5,13 @@
 using namespace std;
 
 template <typename T>
-void out(T output)
+inline void out(T output)
 {
     cout << output;
 }
 
 template <typename T>
-void outf(T output)
+inline void outf(T output)
 {
     cout << output << "\n";
 }
