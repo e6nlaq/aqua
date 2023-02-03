@@ -36,7 +36,7 @@ inline string nx();
 
 inline bool dup_varname(string name)
 {
-	if (var_int.count(name) || var_string.count(name))
+	if (var_int.count(name) || var_string.count(name) || var_bool.count(name) || var_double.count(name))
 	{
 		return false;
 	}
