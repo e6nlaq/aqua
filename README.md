@@ -8,12 +8,12 @@ Aqua is a very simple and complex programming language.
 
 Available for Windows, Mac, Linux and Ubuntu.
 
-## Install (Windows only)
+## Install (Windows)
 
 Install and deploy the latest version of Aqua from [here](https://github.com/e6nlaq/aqua/releases).
 
 After installation, run `install.bat` in `script/` with **administrator privileges**.
-## Install (Mac, Linux, Ubuntu)
+## Install (UNIX)
 
 Install and deploy the latest version of Aqua from [here](https://github.com/e6nlaq/aqua/releases).
 
@@ -36,7 +36,7 @@ Want to learn Aqua?
 
 We have just the thing for you!
 
-[Aqua Learn](./learn/CONTENS.md)
+[Aqua Learn](./learn/README.md)
 
 ## Terms of Use
 
