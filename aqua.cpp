@@ -30,7 +30,9 @@ map<string, double> var_double;
 vector<string> lines;
 int linenume;
 
+// Advance Declaration
 void errorlog(vector<string> line, int linenum, int errorcode);
+string nx();
 
 bool dup_varname(string name)
 {
@@ -570,6 +572,11 @@ string aqua(string script, vector<string> line, int linenum)
 	}
 
 	return "";
+}
+
+string nx()
+{
+	return aqua(lines[linenume + 1], lines, linenume + 1);
 }
 
 int main(int argc, char const *argv[])
