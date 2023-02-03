@@ -31,10 +31,10 @@ vector<string> lines;
 int linenume;
 
 // Advance Declaration
-void errorlog(vector<string> line, int linenum, int errorcode);
-string nx();
+inline void errorlog(vector<string> line, int linenum, int errorcode);
+inline string nx();
 
-bool dup_varname(string name)
+inline bool dup_varname(string name)
 {
 	if (var_int.count(name) || var_string.count(name))
 	{
@@ -44,7 +44,7 @@ bool dup_varname(string name)
 	return true;
 }
 
-int var_search(string name)
+inline int var_search(string name)
 {
 	if (var_int.count(name))
 	{
@@ -68,7 +68,7 @@ int var_search(string name)
 	}
 }
 
-string var_value(string name)
+inline string var_value(string name)
 {
 	switch (var_search(name))
 	{
@@ -95,7 +95,7 @@ string var_value(string name)
 	return "";
 }
 
-void errorlog(vector<string> line, int linenum, int errorcode)
+inline void errorlog(vector<string> line, int linenum, int errorcode)
 {
 	cout << "\n\nError: ";
 	switch (errorcode)
@@ -174,7 +174,7 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 #pragma endregion
 }
 
-string aqua(string script, vector<string> line, int linenum)
+inline string aqua(string script, vector<string> line, int linenum)
 {
 	vector<string> code = scriptcut(script);
 	string func = code[0];
@@ -593,7 +593,7 @@ string aqua(string script, vector<string> line, int linenum)
 	return "";
 }
 
-string nx()
+inline string nx()
 {
 	return aqua(lines[linenume + 1], lines, linenume + 1);
 }

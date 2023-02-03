@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-string cutstr(string cut)
+inline string cutstr(string cut)
 {
 	string ret = "";
 
@@ -17,7 +17,7 @@ string cutstr(string cut)
 	return ret;
 }
 
-bool stob(string s)
+inline bool stob(string s)
 {
 	if (s == "true")
 		return true;
