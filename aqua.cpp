@@ -1,5 +1,13 @@
 
-// #include <bits/stdc++.h>
+/***************************************
+
+			  aqua.cpp
+
+	Created at: Jan 7, 2023, 7:41 AM GMT+9
+	Copyright (C) 2023 e6nlaq
+
+***************************************/
+
 #include "./lib/all.h"
 using namespace std;
 
@@ -8,6 +16,10 @@ using namespace std;
 #define cou(x) cout << (x)
 #define err(x) errorlog(line, linenum, (x));
 #define all(x) x.begin(), x.end()
+
+// Using Type
+using ll = long long;
+using ld = long double;
 
 // Variant
 bool op_funcskip = false, op_stylereset = true, op_end_anykey = false;
@@ -128,6 +140,10 @@ void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 10:
 		co("Non-existent variable");
+		break;
+
+	case 11:
+		co("Division by zero is not allowed");
 		break;
 
 	default:
@@ -467,8 +483,83 @@ string aqua(string script, vector<string> line, int linenum)
 	{
 		cout << flush;
 	}
-	else if (func == "add")
+	else if (func == "+")
 	{
+		ld a, b;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		if (isvarok(code[2]))
+			b = stold(var_value(code[2]));
+		else
+			b = stold(code[2]);
+
+		return to_string(a + b);
+	}
+	else if (func == "-")
+	{
+		ld a, b;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		if (isvarok(code[2]))
+			b = stold(var_value(code[2]));
+		else
+			b = stold(code[2]);
+
+		return to_string(a - b);
+	}
+	else if (func == "*")
+	{
+		ld a, b;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		if (isvarok(code[2]))
+			b = stold(var_value(code[2]));
+		else
+			b = stold(code[2]);
+
+		return to_string(a * b);
+	}
+	else if (func == "/")
+	{
+		ld a, b;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		if (isvarok(code[2]))
+			b = stold(var_value(code[2]));
+		else
+			b = stold(code[2]);
+
+		if (b == 0)
+			err(11);
+
+		return to_string(a / b);
+	}
+	else if (func == "%")
+	{
+		ll a, b;
+		if (isvarok(code[1]))
+			a = stoll(var_value(code[1]));
+		else
+			a = stoll(code[1]);
+
+		if (isvarok(code[2]))
+			b = stoll(var_value(code[2]));
+		else
+			b = stoll(code[2]);
+
+		return to_string(a % b);
 	}
 	else
 	{
