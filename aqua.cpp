@@ -259,7 +259,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		if (code.size() == 1)
 			exit(0);
 		else
-			exit(stoi(code[1]));
+			exit(stoll(code[1]));
 	}
 	else if (func == "throw")
 	{
@@ -612,9 +612,27 @@ int main(int argc, char const *argv[])
 
 	if (argc == 1 || argc > 2 || argv[1] == "--help")
 	{
-		co("Welcome to Aqua!");
+		co("----------------------------------------------------------------------");
+		cou("Welcome to Aqua For ");
+
+// OS
+#ifdef _WIN64
+		cou("Windows 64bit");
+#endif
+
+#ifdef _WIN32
+		cou("Windows 32bit");
+#endif
+
+#if defined(__unix) || defined(__unix__)
+		cou("UNIX");
+#endif
+
+		co("!");
 		co("\nAqua helps to solve a very small problem");
 		co("Let's specify the Aqua script as the first argument!");
+		co("----------------------------------------------------------------------");
+
 		return 0;
 	}
 
@@ -644,6 +662,8 @@ int main(int argc, char const *argv[])
 		int get;
 		get = getchar();
 	}
+
+	// Program End
 
 	return 0;
 }
