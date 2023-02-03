@@ -197,46 +197,35 @@ inline string aqua(string script, vector<string> line, int linenum)
 	}
 	else if (func == "option")
 	{
-		if (code[1] == "function_skip")
+
+		// True or False?
+		if (code[2] == "true" || code[2] == "false")
 		{
-			if (code[2] == "true")
-				op_funcskip = true;
-			else if (code[2] == "false")
-				op_funcskip = false;
+
+			if (code[1] == "function_skip")
+			{
+				op_funcskip = stob(code[1]);
+			}
+			else if (code[1] == "reset_style")
+			{
+				op_stylereset = stob(code[1]);
+			}
+			else if (code[1] == "end_anykey")
+			{
+				op_end_anykey = stob(code[1]);
+			}
+			else if (code[1] == "set_few")
+			{
+				cout << fixed << setprecision(stoi(code[2]));
+			}
 			else
 			{
-				errorlog(line, linenum, 2);
+				errorlog(line, linenum, 3);
 			}
-		}
-		else if (code[1] == "reset_style")
-		{
-			if (code[2] == "true")
-				op_stylereset = true;
-			else if (code[2] == "false")
-				op_stylereset = false;
-			else
-			{
-				err(2)
-			}
-		}
-		else if (code[1] == "end_anykey")
-		{
-			if (code[2] == "true")
-				op_end_anykey = true;
-			else if (code[2] == "false")
-				op_end_anykey = false;
-			else
-			{
-				err(2)
-			}
-		}
-		else if (code[1] == "set_few")
-		{
-			cout << fixed << setprecision(stoi(code[2]));
 		}
 		else
 		{
-			errorlog(line, linenum, 3);
+			err(2);
 		}
 	}
 	else if (func == "outf")
