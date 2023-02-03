@@ -188,6 +188,8 @@ string aqua(string script, vector<string> line, int linenum)
 	{
 		if (code[1][0] == '\"')
 			out(cutstr(code[1]));
+		else if (code[1] == ":")
+			out(nx());
 		else
 		{
 			out(var_value(code[1]));
@@ -241,6 +243,8 @@ string aqua(string script, vector<string> line, int linenum)
 	{
 		if (code[1][0] == '\"')
 			outf(cutstr(code[1]));
+		else if (code[1] == ":")
+			outf(nx());
 		else
 		{
 			outf(var_value(code[1]));
@@ -455,6 +459,8 @@ string aqua(string script, vector<string> line, int linenum)
 		case 1:
 			if (isvarok(code[2]))
 				var_int[code[1]] = stoi(var_value(code[2]));
+			else if (code[2] == ":")
+				var_int[code[1]] = stoi(nx());
 			else
 				var_int[code[1]] = stoi(code[2]);
 			break;
@@ -462,16 +468,25 @@ string aqua(string script, vector<string> line, int linenum)
 		case 2:
 			if (code[2][0] == '\"')
 				var_string[code[1]] = cutstr(code[2]);
+			else if (code[2] == ":")
+				var_string[code[1]] = nx();
 			else
 				var_string[code[1]] = var_value(code[2]);
 			break;
 
 		case 3:
-			var_bool[code[1]] = stob(var_value(code[2]));
+			if (isvarok(code[2]))
+				var_bool[code[1]] = stob(var_value(code[2]));
+			else if (code[2] == ":")
+				var_bool[code[1]] = stob(nx());
+			else
+				var_bool[code[1]] = stob(var_value(code[2]));
 
 		case 4:
 			if (isvarok(code[2]))
 				var_double[code[1]] = stoi(var_value(code[2]));
+			else if (code[2] == ":")
+				var_double[code[1]] = stod(nx());
 			else
 				var_double[code[1]] = stoi(code[2]);
 			break;
