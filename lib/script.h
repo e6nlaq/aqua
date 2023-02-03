@@ -42,9 +42,13 @@ vector<string> scriptcut(string line)
 
 bool isvarok(string s)
 {
+
+	if (s == ":")
+		return false;
+
 	for (char c : s)
 	{
-		if (!(!isdigit(c) || c == '_' || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')))
+		if (!(!isdigit(c) || c == '_' || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) && (c != ':'))
 			return false;
 	}
 

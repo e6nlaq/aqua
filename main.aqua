@@ -51,7 +51,7 @@ set b a
 outf B
 outf b
 
-# set A :
-+ 1 5
+set A :
++ 1 99.72
 
-outf pi
+outf A

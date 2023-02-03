@@ -454,6 +454,7 @@ string aqua(string script, vector<string> line, int linenum)
 	}
 	else if (func == "set")
 	{
+		// co(to_string(isvarok(":")));
 		switch (var_search(code[1]))
 		{
 		case 1:
