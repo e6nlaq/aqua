@@ -576,6 +576,9 @@ string aqua(string script, vector<string> line, int linenum)
 		else
 			b = stoll(code[2]);
 
+		if (b == 0)
+			err(11);
+
 		return to_string(a % b);
 	}
 	else
