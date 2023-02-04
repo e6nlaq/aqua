@@ -635,6 +635,8 @@ int main(int argc, char const *argv[])
 		lines.push_back(read_file);
 	}
 
+	lines = incident(lines);
+
 	for (int i = 0; i < lines.size(); i++)
 	{
 		linenume = i;

@@ -52,6 +52,6 @@ outf B
 outf b
 
 set A :
-+ 1 99.72
+   + 1 99.72
 
 outf A
