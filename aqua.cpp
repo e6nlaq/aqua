@@ -68,6 +68,11 @@ inline int var_search(string name)
 	}
 }
 
+inline bool m_numt(string name)
+{
+	return (var_search(name) == 1 || var_search(name) == 4);
+}
+
 inline string var_value(string name)
 {
 	switch (var_search(name))

@@ -11,6 +11,9 @@
         "functional": "cpp",
         "regex": "cpp",
         "typeinfo": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "vector": "cpp",
+        "utility": "cpp",
+        "cstdint": "cpp"
     }
 }
