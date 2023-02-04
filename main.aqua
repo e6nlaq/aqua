@@ -3,7 +3,6 @@
 
 option function_skip false
 option reset_style true
-option end_anykey true
 
 
 # Output
@@ -52,7 +51,11 @@ set b a
 outf B
 outf b
 
-set A :
-   + 1 99.72
+var int C
+set C 0
+++ C
+++ C
+-- C
 
-outf A
+outf :
++ C 3
