@@ -57,9 +57,6 @@ outf "true if"
 if true
     outf "nicc"
     if false
-        outf "no"
+        out "no"
     endif
 end if
-
-end if
-

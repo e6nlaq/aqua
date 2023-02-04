@@ -203,518 +203,546 @@ inline string aqua(string script, vector<string> line, int linenum)
 		code.push_back("");
 	}
 
-	if (func == "out")
-	{
-		if (code[1][0] == '\"')
-			out(cutstr(code[1]));
-		else if (code[1] == ":")
-			out(nx());
-		else
-		{
-			out(var_value(code[1]));
-		}
-	}
-	else if (func == "option")
+	if (inc_code == inc_now)
 	{
 
-		// True or False?
-		if (code[2] == "true" || code[2] == "false")
+		if (func == "out")
 		{
-
-			if (code[1] == "function_skip")
-			{
-				op_funcskip = stob(code[2]);
-			}
-			else if (code[1] == "reset_style")
-			{
-				op_stylereset = stob(code[2]);
-			}
-			else if (code[1] == "end_anykey")
-			{
-				op_end_anykey = stob(code[2]);
-			}
-			else if (code[1] == "set_few")
-			{
-				cout << fixed << setprecision(stoi(code[2]));
-			}
+			if (code[1][0] == '\"')
+				out(cutstr(code[1]));
+			else if (code[1] == ":")
+				out(nx());
 			else
 			{
-				errorlog(line, linenum, 3);
+				out(var_value(code[1]));
 			}
 		}
-		else
+		else if (func == "option")
 		{
-			err(2);
-		}
-	}
-	else if (func == "outf" && inc_code == inc_now)
-	{
-		if (code[1][0] == '\"')
-			outf(cutstr(code[1]));
-		else if (code[1] == ":")
-			outf(nx());
-		else
-		{
-			outf(var_value(code[1]));
-		}
-	}
-	else if (func == "#" || func == "comment")
-	{
-		// Nothing. :)
-	}
-	else if (func == "exit")
-	{
-		if (code.size() == 1)
-			exit(0);
-		else
-			exit(stoll(code[1]));
-	}
-	else if (func == "throw")
-	{
-		if (code.size() == 1)
-		{
-			err(4);
-		}
-		else
-		{
-			err(stoi(code[1]));
-		}
-	}
-	else if (func == "var")
-	{
-		if (isvarok(code[2]))
-		{
-			if (dup_varname(code[2]))
+
+			// True or False?
+			if (code[2] == "true" || code[2] == "false")
 			{
-				if (code[1] == "int")
+
+				if (code[1] == "function_skip")
 				{
-					var_int[code[2]] = 0;
+					op_funcskip = stob(code[2]);
 				}
-				else if (code[1] == "string")
+				else if (code[1] == "reset_style")
 				{
-					var_string[code[2]] = "";
+					op_stylereset = stob(code[2]);
 				}
-				else if (code[1] == "bool")
+				else if (code[1] == "end_anykey")
 				{
-					var_bool[code[2]] = true;
+					op_end_anykey = stob(code[2]);
 				}
-				else if (code[1] == "double")
+				else if (code[1] == "set_few")
 				{
-					var_double[code[2]] = 0.0;
+					cout << fixed << setprecision(stoi(code[2]));
 				}
 				else
 				{
-					err(6);
+					errorlog(line, linenum, 3);
 				}
 			}
 			else
 			{
-				err(9);
+				err(2);
 			}
 		}
-		else
+		else if (func == "outf")
 		{
-			err(8);
+			if (code[1][0] == '\"')
+				outf(cutstr(code[1]));
+			else if (code[1] == ":")
+				outf(nx());
+			else
+			{
+				outf(var_value(code[1]));
+			}
 		}
-	}
-	else if (func == "ln")
-	{
-		if (code.size() == 1)
+		else if (func == "#" || func == "comment")
 		{
-			cout << "\n";
+			// Nothing. :)
 		}
-		else
+		else if (func == "exit")
 		{
-			for (int i = 0; i < stoi(code[1]); i++)
+			if (code.size() == 1)
+				exit(0);
+			else
+				exit(stoll(code[1]));
+		}
+		else if (func == "throw")
+		{
+			if (code.size() == 1)
+			{
+				err(4);
+			}
+			else
+			{
+				err(stoi(code[1]));
+			}
+		}
+		else if (func == "var")
+		{
+			if (isvarok(code[2]))
+			{
+				if (dup_varname(code[2]))
+				{
+					if (code[1] == "int")
+					{
+						var_int[code[2]] = 0;
+					}
+					else if (code[1] == "string")
+					{
+						var_string[code[2]] = "";
+					}
+					else if (code[1] == "bool")
+					{
+						var_bool[code[2]] = true;
+					}
+					else if (code[1] == "double")
+					{
+						var_double[code[2]] = 0.0;
+					}
+					else
+					{
+						err(6);
+					}
+				}
+				else
+				{
+					err(9);
+				}
+			}
+			else
+			{
+				err(8);
+			}
+		}
+		else if (func == "ln")
+		{
+			if (code.size() == 1)
+			{
 				cout << "\n";
-		}
-	}
-	else if (func == "style")
-	{
-		if (code[1] == "text")
-		{
-			if (code[2] == "black")
-			{
-				cou("\033[30m");
-			}
-			else if (code[2] == "red")
-			{
-				cou("\033[31m");
-			}
-			else if (code[2] == "green")
-			{
-				cou("\033[32m");
-			}
-			else if (code[2] == "yellow")
-			{
-				cou("\033[33m");
-			}
-			else if (code[2] == "blue")
-			{
-				cou("\033[34m");
-			}
-			else if (code[2] == "magenta")
-			{
-				cou("\033[35m");
-			}
-			else if (code[2] == "cyan")
-			{
-				cou("\033[36m");
-			}
-			else if (code[2] == "white")
-			{
-				cou("\033[37m");
-			}
-			else if (code[2] == "bold")
-			{
-				cou("\033[1m");
-			}
-			else if (code[2] == "thinly")
-			{
-				cou("\033[2m");
-			}
-			else if (code[2] == "italic")
-			{
-				cou("\033[3m");
-			}
-			else if (code[2] == "underline")
-			{
-				cou("\033[4m");
-			}
-			else if (code[2] == "blink")
-			{
-				cou("\033[5m");
-			}
-			else if (code[2] == "fastblink")
-			{
-				cou("\033[6m");
 			}
 			else
 			{
-				err(7);
+				for (int i = 0; i < stoi(code[1]); i++)
+					cout << "\n";
 			}
 		}
-		else if (code[1] == "reset")
+		else if (func == "style")
 		{
-			cou("\033[m");
+			if (code[1] == "text")
+			{
+				if (code[2] == "black")
+				{
+					cou("\033[30m");
+				}
+				else if (code[2] == "red")
+				{
+					cou("\033[31m");
+				}
+				else if (code[2] == "green")
+				{
+					cou("\033[32m");
+				}
+				else if (code[2] == "yellow")
+				{
+					cou("\033[33m");
+				}
+				else if (code[2] == "blue")
+				{
+					cou("\033[34m");
+				}
+				else if (code[2] == "magenta")
+				{
+					cou("\033[35m");
+				}
+				else if (code[2] == "cyan")
+				{
+					cou("\033[36m");
+				}
+				else if (code[2] == "white")
+				{
+					cou("\033[37m");
+				}
+				else if (code[2] == "bold")
+				{
+					cou("\033[1m");
+				}
+				else if (code[2] == "thinly")
+				{
+					cou("\033[2m");
+				}
+				else if (code[2] == "italic")
+				{
+					cou("\033[3m");
+				}
+				else if (code[2] == "underline")
+				{
+					cou("\033[4m");
+				}
+				else if (code[2] == "blink")
+				{
+					cou("\033[5m");
+				}
+				else if (code[2] == "fastblink")
+				{
+					cou("\033[6m");
+				}
+				else
+				{
+					err(7);
+				}
+			}
+			else if (code[1] == "reset")
+			{
+				cou("\033[m");
+			}
+			else if (code[1] == "background")
+			{
+				if (code[2] == "black")
+				{
+					cou("\033[40m");
+				}
+				else if (code[2] == "red")
+				{
+					cou("\033[41m");
+				}
+				else if (code[2] == "green")
+				{
+					cou("\033[42m");
+				}
+				else if (code[2] == "yellow")
+				{
+					cou("\033[43m");
+				}
+				else if (code[2] == "blue")
+				{
+					cou("\033[44m");
+				}
+				else if (code[2] == "magenta")
+				{
+					cou("\033[45m");
+				}
+				else if (code[2] == "cyan")
+				{
+					cou("\033[46m");
+				}
+				else if (code[2] == "white")
+				{
+					cou("\033[47m");
+				}
+			}
+			else
+			{
+				err(2);
+			}
 		}
-		else if (code[1] == "background")
+		else if (func == "in")
 		{
-			if (code[2] == "black")
+			switch (var_search(code[1]))
 			{
-				cou("\033[40m");
-			}
-			else if (code[2] == "red")
-			{
-				cou("\033[41m");
-			}
-			else if (code[2] == "green")
-			{
-				cou("\033[42m");
-			}
-			else if (code[2] == "yellow")
-			{
-				cou("\033[43m");
-			}
-			else if (code[2] == "blue")
-			{
-				cou("\033[44m");
-			}
-			else if (code[2] == "magenta")
-			{
-				cou("\033[45m");
-			}
-			else if (code[2] == "cyan")
-			{
-				cou("\033[46m");
-			}
-			else if (code[2] == "white")
-			{
-				cou("\033[47m");
-			}
-		}
-		else
-		{
-			err(2);
-		}
-	}
-	else if (func == "in")
-	{
-		switch (var_search(code[1]))
-		{
-		case 1:
-			cin >> var_int[code[1]];
-			break;
+			case 1:
+				cin >> var_int[code[1]];
+				break;
 
-		case 2:
-			cin >> var_string[code[1]];
+			case 2:
+				cin >> var_string[code[1]];
 
-		case 3:
-			cin >> var_bool[code[1]];
+			case 3:
+				cin >> var_bool[code[1]];
 
-		case 4:
-			cin >> var_double[code[1]];
+			case 4:
+				cin >> var_double[code[1]];
 
-		default:
-			err(10);
-			break;
+			default:
+				err(10);
+				break;
+			}
 		}
-	}
-	else if (func == "set")
-	{
-		// co(to_string(isvarok(":")));
-		switch (var_search(code[1]))
+		else if (func == "set")
 		{
-		case 1:
+			// co(to_string(isvarok(":")));
+			switch (var_search(code[1]))
+			{
+			case 1:
+				if (isvarok(code[2]))
+					var_int[code[1]] = stoi(var_value(code[2]));
+				else if (code[2] == ":")
+					var_int[code[1]] = stoi(nx());
+				else
+					var_int[code[1]] = stoi(code[2]);
+				break;
+
+			case 2:
+				if (code[2][0] == '\"')
+					var_string[code[1]] = cutstr(code[2]);
+				else if (code[2] == ":")
+					var_string[code[1]] = nx();
+				else
+					var_string[code[1]] = var_value(code[2]);
+				break;
+
+			case 3:
+				if (isvarok(code[2]))
+					var_bool[code[1]] = stob(var_value(code[2]));
+				else if (code[2] == ":")
+					var_bool[code[1]] = stob(nx());
+				else
+					var_bool[code[1]] = stob(var_value(code[2]));
+
+			case 4:
+				if (isvarok(code[2]))
+					var_double[code[1]] = stoi(var_value(code[2]));
+				else if (code[2] == ":")
+					var_double[code[1]] = stod(nx());
+				else
+					var_double[code[1]] = stoi(code[2]);
+				break;
+
+			default:
+				err(10);
+				break;
+			}
+		}
+		else if (func == "flush")
+		{
+			cout << flush;
+		}
+		else if (func == "+")
+		{
+			ld a, b;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
+			else
+				a = stold(code[1]);
+
 			if (isvarok(code[2]))
-				var_int[code[1]] = stoi(var_value(code[2]));
-			else if (code[2] == ":")
-				var_int[code[1]] = stoi(nx());
+				b = stold(var_value(code[2]));
 			else
-				var_int[code[1]] = stoi(code[2]);
-			break;
+				b = stold(code[2]);
 
-		case 2:
-			if (code[2][0] == '\"')
-				var_string[code[1]] = cutstr(code[2]);
-			else if (code[2] == ":")
-				var_string[code[1]] = nx();
+			return to_string(a + b);
+		}
+		else if (func == "-")
+		{
+			ld a, b;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
 			else
-				var_string[code[1]] = var_value(code[2]);
-			break;
+				a = stold(code[1]);
 
-		case 3:
 			if (isvarok(code[2]))
-				var_bool[code[1]] = stob(var_value(code[2]));
-			else if (code[2] == ":")
-				var_bool[code[1]] = stob(nx());
+				b = stold(var_value(code[2]));
 			else
-				var_bool[code[1]] = stob(var_value(code[2]));
+				b = stold(code[2]);
 
-		case 4:
+			return to_string(a - b);
+		}
+		else if (func == "*")
+		{
+			ld a, b;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
+			else
+				a = stold(code[1]);
+
 			if (isvarok(code[2]))
-				var_double[code[1]] = stoi(var_value(code[2]));
-			else if (code[2] == ":")
-				var_double[code[1]] = stod(nx());
+				b = stold(var_value(code[2]));
 			else
-				var_double[code[1]] = stoi(code[2]);
-			break;
+				b = stold(code[2]);
 
-		default:
-			err(10);
-			break;
+			return to_string(a * b);
 		}
-	}
-	else if (func == "flush")
-	{
-		cout << flush;
-	}
-	else if (func == "+")
-	{
-		ld a, b;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		if (isvarok(code[2]))
-			b = stold(var_value(code[2]));
-		else
-			b = stold(code[2]);
-
-		return to_string(a + b);
-	}
-	else if (func == "-")
-	{
-		ld a, b;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		if (isvarok(code[2]))
-			b = stold(var_value(code[2]));
-		else
-			b = stold(code[2]);
-
-		return to_string(a - b);
-	}
-	else if (func == "*")
-	{
-		ld a, b;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		if (isvarok(code[2]))
-			b = stold(var_value(code[2]));
-		else
-			b = stold(code[2]);
-
-		return to_string(a * b);
-	}
-	else if (func == "/")
-	{
-		ld a, b;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		if (isvarok(code[2]))
-			b = stold(var_value(code[2]));
-		else
-			b = stold(code[2]);
-
-		if (b == 0)
-			err(11);
-
-		return to_string(a / b);
-	}
-	else if (func == "%")
-	{
-		ll a, b;
-		if (isvarok(code[1]))
-			a = stoll(var_value(code[1]));
-		else
-			a = stoll(code[1]);
-
-		if (isvarok(code[2]))
-			b = stoll(var_value(code[2]));
-		else
-			b = stoll(code[2]);
-
-		if (b == 0)
-			err(11);
-
-		return to_string(a % b);
-	}
-	else if (func == "abs")
-	{
-		ld a;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		return to_string(abs(a));
-	}
-	else if (func == "sqrt")
-	{
-		ld a;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		if (a < 0)
-			err(12);
-
-		return to_string(sqrt(a));
-	}
-	else if (func == "sin")
-	{
-		ld a;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		return to_string(sin(a));
-	}
-	else if (func == "cos")
-	{
-		ld a;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		return to_string(cos(a));
-	}
-	else if (func == "tan")
-	{
-		ld a;
-		if (isvarok(code[1]))
-			a = stold(var_value(code[1]));
-		else
-			a = stold(code[1]);
-
-		return to_string(tan(a));
-	}
-	else if (func == "++")
-	{
-		if (m_numt(code[1]))
+		else if (func == "/")
 		{
-			if (var_search(code[1]) == 1)
+			ld a, b;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
+			else
+				a = stold(code[1]);
+
+			if (isvarok(code[2]))
+				b = stold(var_value(code[2]));
+			else
+				b = stold(code[2]);
+
+			if (b == 0)
+				err(11);
+
+			return to_string(a / b);
+		}
+		else if (func == "%")
+		{
+			ll a, b;
+			if (isvarok(code[1]))
+				a = stoll(var_value(code[1]));
+			else
+				a = stoll(code[1]);
+
+			if (isvarok(code[2]))
+				b = stoll(var_value(code[2]));
+			else
+				b = stoll(code[2]);
+
+			if (b == 0)
+				err(11);
+
+			return to_string(a % b);
+		}
+		else if (func == "abs")
+		{
+			ld a;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
+			else
+				a = stold(code[1]);
+
+			return to_string(abs(a));
+		}
+		else if (func == "sqrt")
+		{
+			ld a;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
+			else
+				a = stold(code[1]);
+
+			if (a < 0)
+				err(12);
+
+			return to_string(sqrt(a));
+		}
+		else if (func == "sin")
+		{
+			ld a;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
+			else
+				a = stold(code[1]);
+
+			return to_string(sin(a));
+		}
+		else if (func == "cos")
+		{
+			ld a;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
+			else
+				a = stold(code[1]);
+
+			return to_string(cos(a));
+		}
+		else if (func == "tan")
+		{
+			ld a;
+			if (isvarok(code[1]))
+				a = stold(var_value(code[1]));
+			else
+				a = stold(code[1]);
+
+			return to_string(tan(a));
+		}
+		else if (func == "++")
+		{
+			if (m_numt(code[1]))
 			{
-				var_int[code[1]]++;
+				if (var_search(code[1]) == 1)
+				{
+					var_int[code[1]]++;
+				}
+				else
+				{
+					var_int[code[1]]++;
+				}
 			}
 			else
-			{
-				var_int[code[1]]++;
-			}
+				err(13);
 		}
-		else
-			err(13);
-	}
-	else if (func == "--")
-	{
-		if (m_numt(code[1]))
+		else if (func == "--")
 		{
-			if (var_search(code[1]) == 1)
+			if (m_numt(code[1]))
 			{
-				var_int[code[1]]--;
+				if (var_search(code[1]) == 1)
+				{
+					var_int[code[1]]--;
+				}
+				else
+				{
+					var_int[code[1]]--;
+				}
 			}
 			else
-			{
-				var_int[code[1]]--;
-			}
+				err(13);
 		}
-		else
-			err(13);
-	}
-	else if (func == "end")
-	{
-		if (code[1] == "if")
+		else if (func == "if")
 		{
+			if (isvarok(code[1]))
+			{
+				runcode = stob(var_value(code[1]));
+			}
+			else if (code[1] == ":")
+				runcode = stob(nx());
+			else
+			{
+				runcode = stob(code[1]);
+			}
+
 			if (runcode)
 			{
-				inc_now--;
-				inc_code--;
+				inc_now++;
+				inc_code++;
 			}
 			else
-				inc_now--;
-		}
-	}
-	else if (func == "if")
-	{
-		if (isvarok(code[1]))
-		{
-			runcode = stob(var_value(code[1]));
-		}
-		else if (code[1] == ":")
-			runcode = stob(nx());
-		else
-		{
-			runcode = stob(code[1]);
-		}
-
-		if (runcode)
-		{
-			inc_now++;
-			inc_code++;
+				inc_now++;
 		}
 		else
-			inc_now++;
+		{
+			if (!op_funcskip && func != "" && func[0] >= '0')
+			{
+				if (inc_now == inc_code)
+					errorlog(line, linenum, 1);
+			}
+		}
 	}
 	else
 	{
-		if (!op_funcskip && func != "" && func[0] >= '0')
+		if (func == "end")
 		{
-			if (inc_now == inc_code)
-				errorlog(line, linenum, 1);
+			if (code[1] == "if")
+			{
+				if (runcode)
+				{
+					inc_now--;
+					inc_code--;
+				}
+				else
+					inc_now--;
+			}
+		}
+		else if (func == "if")
+		{
+			if (isvarok(code[1]))
+			{
+				runcode = stob(var_value(code[1]));
+			}
+			else if (code[1] == ":")
+				runcode = stob(nx());
+			else
+			{
+				runcode = stob(code[1]);
+			}
+
+			if (runcode)
+			{
+				inc_now++;
+				inc_code++;
+			}
+			else
+				inc_now++;
 		}
 	}
 
