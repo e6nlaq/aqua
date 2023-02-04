@@ -1,12 +1,12 @@
 
-/***************************************
+/**********************************************
 
 			  aqua.cpp
 
 	Created at: Jan 7, 2023, 7:41 AM GMT+9
 	Copyright (C) 2023 e6nlaq
 
-***************************************/
+**********************************************/
 
 #include "./lib/all.h"
 using namespace std;
@@ -22,13 +22,19 @@ using ll = long long;
 using ld = long double;
 
 // Variant
-bool op_funcskip = false, op_stylereset = true, op_end_anykey = false;
+bool op_funcskip = false;
+bool op_stylereset = true;
+bool op_end_anykey = false;
+
 map<string, int> var_int;
 map<string, string> var_string;
 map<string, bool> var_bool;
 map<string, double> var_double;
 vector<string> lines;
 int linenume;
+bool runcode = true;
+int inc_now = 0;
+int inc_code = 0;
 
 // Advance Declaration
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -241,7 +247,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			err(2);
 		}
 	}
-	else if (func == "outf")
+	else if (func == "outf" && inc_code == inc_now)
 	{
 		if (code[1][0] == '\"')
 			outf(cutstr(code[1]));
@@ -669,11 +675,46 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else
 			err(13);
 	}
+	else if (func == "end")
+	{
+		if (code[1] == "if")
+		{
+			if (runcode)
+			{
+				inc_now--;
+				inc_code--;
+			}
+			else
+				inc_now--;
+		}
+	}
+	else if (func == "if")
+	{
+		if (isvarok(code[1]))
+		{
+			runcode = stob(var_value(code[1]));
+		}
+		else if (code[1] == ":")
+			runcode = stob(nx());
+		else
+		{
+			runcode = stob(code[1]);
+		}
+
+		if (runcode)
+		{
+			inc_now++;
+			inc_code++;
+		}
+		else
+			inc_now++;
+	}
 	else
 	{
 		if (!op_funcskip && func != "" && func[0] >= '0')
 		{
-			errorlog(line, linenum, 1);
+			if (inc_now == inc_code)
+				errorlog(line, linenum, 1);
 		}
 	}
 

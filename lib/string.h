@@ -19,7 +19,7 @@ inline string cutstr(string cut)
 
 inline bool stob(string s)
 {
-	if (s == "true")
+	if (s == "true" || s == "1")
 		return true;
 	return false;
 }

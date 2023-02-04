@@ -51,11 +51,15 @@ set b a
 outf B
 outf b
 
-var int C
-set C 0
-++ C
-++ C
--- C
+if true
+outf "true if"
 
-outf :
-+ C 3
+if true
+    outf "nicc"
+    if false
+        outf "no"
+    endif
+end if
+
+end if
+
