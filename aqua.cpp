@@ -204,15 +204,15 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			if (code[1] == "function_skip")
 			{
-				op_funcskip = stob(code[1]);
+				op_funcskip = stob(code[2]);
 			}
 			else if (code[1] == "reset_style")
 			{
-				op_stylereset = stob(code[1]);
+				op_stylereset = stob(code[2]);
 			}
 			else if (code[1] == "end_anykey")
 			{
-				op_end_anykey = stob(code[1]);
+				op_end_anykey = stob(code[2]);
 			}
 			else if (code[1] == "set_few")
 			{
