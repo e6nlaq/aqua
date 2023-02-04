@@ -157,6 +157,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("There is no square root of a negative number");
 		break;
 
+	case 13:
+		co("Invalid Variable");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -632,6 +636,38 @@ inline string aqua(string script, vector<string> line, int linenum)
 			a = stold(code[1]);
 
 		return to_string(tan(a));
+	}
+	else if (func == "++")
+	{
+		if (m_numt(code[1]))
+		{
+			if (var_search(code[1]) == 1)
+			{
+				var_int[code[1]]++;
+			}
+			else
+			{
+				var_int[code[1]]++;
+			}
+		}
+		else
+			err(13);
+	}
+	else if (func == "--")
+	{
+		if (m_numt(code[1]))
+		{
+			if (var_search(code[1]) == 1)
+			{
+				var_int[code[1]]--;
+			}
+			else
+			{
+				var_int[code[1]]--;
+			}
+		}
+		else
+			err(13);
 	}
 	else
 	{
