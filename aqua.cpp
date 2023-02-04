@@ -153,6 +153,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Division by zero is not allowed");
 		break;
 
+	case 12:
+		co("There is no square root of a negative number");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -575,6 +579,59 @@ inline string aqua(string script, vector<string> line, int linenum)
 			err(11);
 
 		return to_string(a % b);
+	}
+	else if (func == "abs")
+	{
+		ld a;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		return to_string(abs(a));
+	}
+	else if (func == "sqrt")
+	{
+		ld a;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		if (a < 0)
+			err(12);
+
+		return to_string(sqrt(a));
+	}
+	else if (func == "sin")
+	{
+		ld a;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		return to_string(sin(a));
+	}
+	else if (func == "cos")
+	{
+		ld a;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		return to_string(cos(a));
+	}
+	else if (func == "tan")
+	{
+		ld a;
+		if (isvarok(code[1]))
+			a = stold(var_value(code[1]));
+		else
+			a = stold(code[1]);
+
+		return to_string(tan(a));
 	}
 	else
 	{
