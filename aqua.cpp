@@ -694,6 +694,9 @@ int main(int argc, char const *argv[])
 	var_bool["false"] = false;
 	var_int["null"] = (int)NULL;
 	var_double["pi"] = acos(-1);
+	var_int["api_version"] = 20230204;
+	var_bool["api_systrue"] = true;
+	var_bool["api_sysfalse"] = false;
 
 #pragma endregion
 
@@ -705,14 +708,17 @@ int main(int argc, char const *argv[])
 // OS
 #ifdef _WIN64
 		cou("Windows 64bit");
+		var_string["api_os"] = "win64";
 #endif
 
 #ifdef _WIN32
 		cou("Windows 32bit");
+		var_string["api_os"] = "win32";
 #endif
 
 #if defined(__unix) || defined(__unix__)
 		cou("UNIX");
+		var_string["api_os"] = "unix";
 #endif
 
 		co("!");
