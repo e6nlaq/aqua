@@ -84,3 +84,34 @@ inline string boty(string s)
 {
 	return s.substr(3);
 }
+
+inline vector<string> incident(vector<string> s)
+{
+	// Return
+	vector<string> ret;
+	string a = "";
+	bool in_char = false;
+
+	// For each
+	for (auto x : s)
+	{
+		a = "";
+		in_char = false;
+		for (auto c : x)
+		{
+			if (!in_char)
+			{
+				if (c != ' ' && c != '\t')
+				{
+					a.push_back(c);
+					in_char = true;
+				}
+			}
+			else
+				a.push_back(c);
+		}
+		ret.push_back(a);
+	}
+
+	return ret;
+}
