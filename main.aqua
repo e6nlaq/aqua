@@ -51,12 +51,11 @@ set b a
 outf B
 outf b
 
-if true
-outf "true if"
+var string s
+set s "A"
 
-if true
-    outf "nicc"
-    if false
-        out "no"
-    endif
+if :
+is "A" s
+
+    outf "OK"
 end if

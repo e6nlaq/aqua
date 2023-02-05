@@ -680,6 +680,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "if")
 		{
+			// co("ififif");
 			if (isvarok(code[1]))
 			{
 				runcode = stob(var_value(code[1]));
@@ -698,6 +699,145 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else
 				inc_now++;
+		}
+		else if (func == "end")
+		{
+			// For if condition is true
+		}
+		else if (func == "and")
+		{
+			bool a, b;
+			if (isvarok(code[1]))
+			{
+				a = stob(var_value(code[1]));
+			}
+			else if (code[1] == ":")
+			{
+				a = stob(nx());
+			}
+			else
+				a = stob(code[1]);
+
+			if (isvarok(code[2]))
+			{
+				b = stob(var_value(code[2]));
+			}
+			else if (code[2] == ":")
+			{
+				b = stob(nx());
+			}
+			else
+				b = stob(code[2]);
+
+			return to_string(a && b);
+		}
+		else if (func == "or")
+		{
+			bool a, b;
+			if (isvarok(code[1]))
+			{
+				a = stob(var_value(code[1]));
+			}
+			else if (code[1] == ":")
+			{
+				a = stob(nx());
+			}
+			else
+				a = stob(code[1]);
+
+			if (isvarok(code[2]))
+			{
+				b = stob(var_value(code[2]));
+			}
+			else if (code[2] == ":")
+			{
+				b = stob(nx());
+			}
+			else
+				b = stob(code[2]);
+
+			return to_string(a || b);
+		}
+		else if (func == "xor")
+		{
+			bool a, b;
+			if (isvarok(code[1]))
+			{
+				a = stob(var_value(code[1]));
+			}
+			else if (code[1] == ":")
+			{
+				a = stob(nx());
+			}
+			else
+				a = stob(code[1]);
+
+			if (isvarok(code[2]))
+			{
+				b = stob(var_value(code[2]));
+			}
+			else if (code[2] == ":")
+			{
+				b = stob(nx());
+			}
+			else
+				b = stob(code[2]);
+
+			return to_string(a ^ b);
+		}
+		else if (func == "not")
+		{
+			bool a;
+			if (isvarok(code[1]))
+			{
+				a = stob(var_value(code[1]));
+			}
+			else if (code[1] == ":")
+			{
+				a = stob(nx());
+			}
+			else
+				a = stob(code[1]);
+
+			return to_string(!a);
+		}
+		else if (func == "is")
+		{
+			string a, b;
+
+			if (isvarok(code[1]))
+			{
+				a = var_value(code[1]);
+			}
+			else if (code[1] == ":")
+				a = nx();
+			else
+			{
+				if (code[1][0] == '\"')
+				{
+					a = cutstr(code[1]);
+				}
+				else
+					a = code[1];
+			}
+
+			if (isvarok(code[2]))
+			{
+				b = var_value(code[2]);
+			}
+			else if (code[2] == ":")
+				b = nx();
+			else
+			{
+				if (code[1][0] == '\"')
+				{
+					b = cutstr(code[1]);
+				}
+				else
+					b = code[1];
+			}
+
+			return to_string(a == b);
 		}
 		else
 		{
@@ -735,6 +875,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				runcode = stob(code[1]);
 			}
+
+			// co("ififififif");
 
 			if (runcode)
 			{
@@ -832,8 +974,8 @@ int main(int argc, char const *argv[])
 	{
 		co("\nThe program was successfully completed.");
 		co("To exit, press Enter key.");
-		int get;
-		get = getchar();
+		int aqua_get;
+		aqua_get = getchar();
 	}
 
 	// Program End
