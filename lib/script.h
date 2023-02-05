@@ -48,7 +48,15 @@ inline bool isvarok(string s)
 
 	for (char c : s)
 	{
-		if (!(!isdigit(c) || c == '_' || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) && (c != ':'))
+		if (!isdigit(c))
+		{
+			if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_')
+			{
+			}
+			else
+				return false;
+		}
+		else
 			return false;
 	}
 
