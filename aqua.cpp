@@ -774,15 +774,22 @@ int main(int argc, char const *argv[])
 		co("----------------------------------------------------------------------");
 		cou("Welcome to Aqua For ");
 
-// OS
+		// OS
+
+		bool os_win64 = false;
+
 #ifdef _WIN64
 		cou("Windows 64bit");
 		var_string["api_os"] = "win64";
+		os_win64 = true;
 #endif
 
 #ifdef _WIN32
-		cou("Windows 32bit");
-		var_string["api_os"] = "win32";
+		if (!os_win64)
+		{
+			cou("Windows 32bit");
+			var_string["api_os"] = "win32";
+		}
 #endif
 
 #if defined(__unix) || defined(__unix__)
@@ -794,6 +801,8 @@ int main(int argc, char const *argv[])
 		co("\nAqua helps to solve a very small problem");
 		co("Let's specify the Aqua script as the first argument!");
 		co("----------------------------------------------------------------------");
+		co("\nTo exit, press Enter key.");
+		int i = getchar();
 
 		return 0;
 	}
