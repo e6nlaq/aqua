@@ -52,10 +52,6 @@ outf B
 outf b
 
 var string s
-set s "A"
+set s "ABC!""
 
-if :
-is "A" s
-
-    outf "OK"
-end if
+outf s
