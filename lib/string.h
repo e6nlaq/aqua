@@ -6,13 +6,10 @@ using namespace std;
 
 inline string cutstr(string cut)
 {
+
 	string ret = "";
 
-	for (char c : cut)
-	{
-		if (c != '\"')
-			ret += c;
-	}
+	ret = cut.substr(1, cut.size() - 2);
 
 	return ret;
 }
