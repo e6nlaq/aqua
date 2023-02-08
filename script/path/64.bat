@@ -8,10 +8,10 @@ if %errorlevel% neq 0 (
 	exit /B 0
 )
 
-pushd %~dp0..\
+pushd %~dp0..\..\
 set Aquapath=%CD%
 popd
 
-setx /M PATH "%PATH%; %Aquapath%\bin"
+setx /M PATH "%PATH%; %Aquapath%\bin\x64"
 
 exit /b 0
