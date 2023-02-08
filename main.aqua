@@ -52,10 +52,8 @@ outf B
 outf b
 
 var string s
-
-clear
 set s "ABC!"\n\n\n\na"
 
-exit 0
+exit
 
 outf s

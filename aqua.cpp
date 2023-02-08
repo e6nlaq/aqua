@@ -267,14 +267,18 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "exit")
 		{
-			if (code.size() == 1)
+			if (code[1] == "")
+			{
 				exit(0);
+			}
 			else
-				exit(stoll(code[1]));
+			{
+				exit(stoi(code[1]));
+			}
 		}
 		else if (func == "throw")
 		{
-			if (code.size() == 1)
+			if (code[1] == "")
 			{
 				err(4);
 			}
@@ -322,7 +326,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "ln")
 		{
-			if (code.size() == 1)
+			if (code[1] == "")
 			{
 				cout << "\n";
 			}
