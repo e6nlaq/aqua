@@ -839,6 +839,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			return to_string(a == b);
 		}
+		else if (func == "clear")
+		{
+			system("clear");
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
