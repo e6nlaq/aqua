@@ -52,6 +52,10 @@ outf B
 outf b
 
 var string s
-set s "ABC!""
+
+clear
+set s "ABC!"\n\n\n\na"
+
+exit 0
 
 outf s
