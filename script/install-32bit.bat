@@ -12,9 +12,7 @@ pushd %~dp0..\
 set Aquapath=%CD%
 popd
 
-call "./path/86.bat"
-@REM del /q "%Aquapath%\install\path.bat"
-pause
+call "%Aquapath%\script\path\86.bat"
 
 "%systemroot%\system32\reg.exe" add "HKEY_CLASSES_ROOT\.aqua" /d Aqua.Script /f
 "%systemroot%\system32\reg.exe" add "HKEY_CLASSES_ROOT\Aqua.Script" /d "Aqua Script File" /f

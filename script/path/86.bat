@@ -8,7 +8,7 @@ if %errorlevel% neq 0 (
 	exit /B 0
 )
 
-pushd %~dp0..\
+pushd %~dp0..\..\
 set Aquapath=%CD%
 popd
 
