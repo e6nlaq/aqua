@@ -58,3 +58,6 @@ if :
 not false
     outf "true"
 end if
+
+outf :
+& "Hello, " "World!"

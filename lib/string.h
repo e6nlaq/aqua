@@ -20,3 +20,8 @@ inline bool stob(string s)
 		return true;
 	return false;
 }
+
+inline bool isstring(string str)
+{
+	return str[0] == '\"';
+}

@@ -256,10 +256,12 @@ inline string aqua(string script, vector<string> line, int linenum)
 				outf(cutstr(code[1]));
 			else if (code[1] == ":")
 				outf(nx());
-			else
+			else if (isvarok(code[1]))
 			{
 				outf(var_value(code[1]));
 			}
+			else
+				err(2);
 		}
 		else if (func == "#" || func == "comment")
 		{
@@ -846,6 +848,46 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "clear")
 		{
 			system("clear");
+		}
+		else if (func == "&")
+		{
+			string a, b;
+
+			if (isvarok(code[1]))
+			{
+				a = var_value(code[1]);
+			}
+			else if (isstring(code[1]))
+			{
+				a = cutstr(code[1]);
+			}
+			else if (code[1] == ":")
+			{
+				a = nx();
+			}
+			else
+			{
+				err(2);
+			}
+
+			if (isvarok(code[2]))
+			{
+				b = var_value(code[2]);
+			}
+			else if (isstring(code[2]))
+			{
+				b = cutstr(code[2]);
+			}
+			else if (code[2] == ":")
+			{
+				b = nx();
+			}
+			else
+			{
+				err(2);
+			}
+
+			return a + b;
 		}
 		else
 		{
