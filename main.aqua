@@ -54,6 +54,7 @@ outf b
 var string s
 set s "ABC!"\n\n\n\na"
 
-exit
-
-outf s
+if :
+not false
+    outf "true"
+end if

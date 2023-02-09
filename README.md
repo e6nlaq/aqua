@@ -12,12 +12,12 @@ Available for Windows, Mac, Linux and Ubuntu.
 
 Install and deploy the latest version of Aqua from [here](https://github.com/e6nlaq/aqua/releases).
 
-After installation, run `install.bat` in `script/` with **administrator privileges**.
+After installation, run `install-XXbit.bat` in `script/` with **administrator privileges**.
 ## Install (UNIX)
 
 Install and deploy the latest version of Aqua from [here](https://github.com/e6nlaq/aqua/releases).
 
-After expansion, add the folder `bin` to the `PATH`.
+After expansion, add the folder `bin\xNN` to the `PATH`.
 
 In the terminal, run `aqua` and
 
