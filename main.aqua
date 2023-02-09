@@ -61,3 +61,5 @@ end if
 
 outf :
 ! true
+
+throw

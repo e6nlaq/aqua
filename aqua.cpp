@@ -188,7 +188,7 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 	if (linenum + 2 < line.size())
 		co(to_string(linenum + 3) + "| " + line[linenum + 2]);
-	exit(errorcode);
+	exit(-1);
 
 #pragma endregion
 }
