@@ -791,7 +791,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			return to_string(a ^ b);
 		}
-		else if (func == "not")
+		else if (func == "not" || func == "!")
 		{
 			bool a;
 			if (isvarok(code[1]))
