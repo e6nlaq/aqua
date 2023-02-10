@@ -11,15 +11,16 @@
 #include "./lib/all.h"
 using namespace std;
 
+// Using Type
+using ll = long long;
+using ld = long double;
+
 // Macro
 #define co(x) cout << (x) << "\n"
 #define cou(x) cout << (x)
 #define err(x) errorlog(line, linenum, (x));
 #define all(x) x.begin(), x.end()
-
-// Using Type
-using ll = long long;
-using ld = long double;
+#define rep(i, n) for (ll i = 0; i < (n); i++)
 
 // Variant
 bool op_funcskip = false;
@@ -35,6 +36,8 @@ int linenume;
 bool runcode = true;
 int inc_now = 0;
 int inc_code = 0;
+
+ll debug_test = 0;
 
 // Advance Declaration
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -167,6 +170,14 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Invalid Variable");
 		break;
 
+	case 14:
+		co("Missing argument");
+		break;
+
+	case 15:
+		co("You can't use : here.");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -252,10 +263,12 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "outf")
 		{
-			if (code[1][0] == '\"')
+			if (isstring(code[1]))
 				outf(cutstr(code[1]));
 			else if (code[1] == ":")
+			{
 				outf(nx());
+			}
 			else if (isvarok(code[1]))
 			{
 				outf(var_value(code[1]));
@@ -449,14 +462,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "in")
 		{
-
-			// string tmp;
-			// getline(cin, tmp);
 			switch (var_search(code[1]))
 			{
 			case 1:
 				cin >> var_int[code[1]];
-				// var_int[code[1]] = stoi(tmp);
 				break;
 
 			case 2:
@@ -858,43 +867,39 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "&")
 		{
-			string a, b;
+			string ans = "";
 
-			if (isvarok(code[1]))
-			{
-				a = var_value(code[1]);
-			}
-			else if (isstring(code[1]))
-			{
-				a = cutstr(code[1]);
-			}
-			else if (code[1] == ":")
-			{
-				a = nx();
-			}
-			else
-			{
-				err(2);
-			}
+			if (code.size() < 3)
+				err(14);
 
-			if (isvarok(code[2]))
+			rep(i, code.size())
 			{
-				b = var_value(code[2]);
-			}
-			else if (isstring(code[2]))
-			{
-				b = cutstr(code[2]);
-			}
-			else if (code[2] == ":")
-			{
-				b = nx();
-			}
-			else
-			{
-				err(2);
+				if (i == 0)
+					continue;
+
+				string arg = code[i];
+				if (arg == "")
+					continue;
+
+				if (isstring(arg))
+				{
+					ans += cutstr(arg);
+				}
+				else if (isvarok(arg))
+				{
+					ans += var_value(arg);
+				}
+				else if (arg == ":")
+				{
+					err(15);
+				}
+				else
+				{
+					err(2);
+				}
 			}
 
-			return a + b;
+			return ans;
 		}
 		else
 		{
@@ -932,8 +937,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				runcode = stob(code[1]);
 			}
-
-			// co("ififififif");
 
 			if (runcode)
 			{

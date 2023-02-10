@@ -43,7 +43,13 @@ inline vector<string> scriptcut(string line)
 inline bool isvarok(string s)
 {
 
+	if (s == "")
+		return false;
+
 	if (s == ":")
+		return false;
+
+	if (s[0] == '\"')
 		return false;
 
 	for (char c : s)
