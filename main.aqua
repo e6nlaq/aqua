@@ -68,4 +68,5 @@ var string name
 in name
 
 outf :
-& "Hey, " name
+& "Hey, " name "!"
+
