@@ -59,7 +59,13 @@ if :
     outf "true"
 end if
 
-outf :
-! true
+ln
 
-# throw
+outf "Hello!"
+outf "What your name?"
+
+var string name
+in name
+
+outf :
+& "Hey, " name
