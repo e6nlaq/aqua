@@ -449,20 +449,27 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "in")
 		{
+
+			// string tmp;
+			// getline(cin, tmp);
 			switch (var_search(code[1]))
 			{
 			case 1:
 				cin >> var_int[code[1]];
+				// var_int[code[1]] = stoi(tmp);
 				break;
 
 			case 2:
 				cin >> var_string[code[1]];
+				break;
 
 			case 3:
 				cin >> var_bool[code[1]];
+				break;
 
 			case 4:
 				cin >> var_double[code[1]];
+				break;
 
 			default:
 				err(10);
