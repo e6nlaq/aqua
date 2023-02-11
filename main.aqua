@@ -62,13 +62,14 @@ end if
 ln
 
 if false
-
-    outf "JIK"
-
-    break
-
-    outf "NOJ"
-
+    outf "NO"
+else
+    outf "YES"
 end if
 
-outf "OO!"
+if :
+! false
+    outf "T_RU"
+else
+    outf "FALSE"
+end if
