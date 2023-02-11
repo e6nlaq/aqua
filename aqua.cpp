@@ -8,6 +8,7 @@
 
 **********************************************/
 
+// Include
 #include "./lib/all.h"
 using namespace std;
 
@@ -22,11 +23,12 @@ using ld = long double;
 #define all(x) x.begin(), x.end()
 #define rep(i, n) for (ll i = 0; i < (n); i++)
 
-// Variant
+// Variant (Option)
 bool op_funcskip = false;
 bool op_stylereset = true;
 bool op_end_anykey = false;
 
+// Variant ()
 map<string, int> var_int;
 map<string, string> var_string;
 map<string, bool> var_bool;
@@ -729,6 +731,29 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "end")
 		{
 			// For if condition is true
+			// Nothing (LOL)
+		}
+		else if (func == "else")
+		{
+			if (runcode)
+			{
+				inc_now--;
+				inc_code--;
+			}
+			else
+			{
+				inc_now--;
+			}
+
+			runcode = !runcode;
+
+			if (runcode)
+			{
+				inc_now++;
+				inc_code++;
+			}
+			else
+				inc_now++;
 		}
 		else if (func == "and")
 		{
@@ -941,6 +966,28 @@ inline string aqua(string script, vector<string> line, int linenum)
 					inc_now--;
 				}
 			}
+		}
+		else if (func == "else")
+		{
+			if (runcode)
+			{
+				inc_now--;
+				inc_code--;
+			}
+			else
+			{
+				inc_now--;
+			}
+
+			runcode = !runcode;
+
+			if (runcode)
+			{
+				inc_now++;
+				inc_code++;
+			}
+			else
+				inc_now++;
 		}
 		else if (func == "if")
 		{
