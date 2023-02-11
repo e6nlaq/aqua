@@ -910,7 +910,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 			if (inc_code == 0 && inc_now == 0)
 				err(16);
 
-			inc_now--;
+			if (inc_code == inc_now)
+			{
+				inc_now++;
+				runcode = false;
+			}
 		}
 		else
 		{
@@ -933,7 +937,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 					inc_code--;
 				}
 				else
+				{
 					inc_now--;
+				}
 			}
 		}
 		else if (func == "if")

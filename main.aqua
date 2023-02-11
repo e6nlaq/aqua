@@ -61,7 +61,7 @@ end if
 
 ln
 
-if true
+if false
 
     outf "JIK"
 
@@ -70,3 +70,5 @@ if true
     outf "NOJ"
 
 end if
+
+outf "OO!"
