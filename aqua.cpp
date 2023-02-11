@@ -22,28 +22,30 @@ using ld = long double;
 #define err(x) errorlog(line, linenum, (x));
 #define all(x) x.begin(), x.end()
 #define rep(i, n) for (ll i = 0; i < (n); i++)
+#define sn(i) now(setting, (i));
 
 // Variant (Option)
 bool op_funcskip = false;
 bool op_stylereset = true;
 bool op_end_anykey = false;
 
-// Variant ()
+// Variant
 map<string, int> var_int;
 map<string, string> var_string;
 map<string, bool> var_bool;
 map<string, double> var_double;
 vector<string> lines;
+vector<int> sett;
 int linenume;
 bool runcode = true;
 int inc_now = 0;
 int inc_code = 0;
-
-ll debug_test = 0;
+bool iswin = true;
 
 // Advance Declaration
 inline void errorlog(vector<string> line, int linenum, int errorcode);
 inline string nx();
+inline void aqua_setting();
 
 inline bool dup_varname(string name)
 {
@@ -195,16 +197,25 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 	co("The program ended with code " + to_string(errorcode));
 	co("Line " + to_string(linenum + 1));
 	co("Error location\n");
-	if (linenum > 1)
-		co(to_string(linenum - 1) + "| " + line[linenum - 2]);
-	if (linenum > 0)
-		co(to_string(linenum) + "| " + line[linenum - 1]);
-	co(to_string(linenum + 1) + "| \033[1m\033[31m\033[4m" + line[linenum] + "\033[m");
-	if (linenum != line.size() - 1)
-		co(to_string(linenum + 2) + "| " + line[linenum + 1]);
 
-	if (linenum + 2 < line.size())
-		co(to_string(linenum + 3) + "| " + line[linenum + 2]);
+	if (sett[0])
+	{
+		if (linenum > 1)
+			co(to_string(linenum - 1) + "| " + line[linenum - 2]);
+		if (linenum > 0)
+			co(to_string(linenum) + "| " + line[linenum - 1]);
+
+		co(to_string(linenum + 1) + "| \033[1m\033[31m\033[4m" + line[linenum] + "\033[m");
+		if (linenum != line.size() - 1)
+			co(to_string(linenum + 2) + "| " + line[linenum + 1]);
+
+		if (linenum + 2 < line.size())
+			co(to_string(linenum + 3) + "| " + line[linenum + 2]);
+	}
+	else
+	{
+		co(to_string(linenum + 1) + "| " + line[linenum]);
+	}
 	exit(-1);
 
 #pragma endregion
@@ -359,111 +370,114 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "style")
 		{
-			if (code[1] == "text")
+			if (sett[0])
 			{
-				if (code[2] == "black")
+				if (code[1] == "text")
 				{
-					cou("\033[30m");
+					if (code[2] == "black")
+					{
+						cou("\033[30m");
+					}
+					else if (code[2] == "red")
+					{
+						cou("\033[31m");
+					}
+					else if (code[2] == "green")
+					{
+						cou("\033[32m");
+					}
+					else if (code[2] == "yellow")
+					{
+						cou("\033[33m");
+					}
+					else if (code[2] == "blue")
+					{
+						cou("\033[34m");
+					}
+					else if (code[2] == "magenta")
+					{
+						cou("\033[35m");
+					}
+					else if (code[2] == "cyan")
+					{
+						cou("\033[36m");
+					}
+					else if (code[2] == "white")
+					{
+						cou("\033[37m");
+					}
+					else if (code[2] == "bold")
+					{
+						cou("\033[1m");
+					}
+					else if (code[2] == "thinly")
+					{
+						cou("\033[2m");
+					}
+					else if (code[2] == "italic")
+					{
+						cou("\033[3m");
+					}
+					else if (code[2] == "underline")
+					{
+						cou("\033[4m");
+					}
+					else if (code[2] == "blink")
+					{
+						cou("\033[5m");
+					}
+					else if (code[2] == "fastblink")
+					{
+						cou("\033[6m");
+					}
+					else
+					{
+						err(7);
+					}
 				}
-				else if (code[2] == "red")
+				else if (code[1] == "reset")
 				{
-					cou("\033[31m");
+					cou("\033[m");
 				}
-				else if (code[2] == "green")
+				else if (code[1] == "background")
 				{
-					cou("\033[32m");
-				}
-				else if (code[2] == "yellow")
-				{
-					cou("\033[33m");
-				}
-				else if (code[2] == "blue")
-				{
-					cou("\033[34m");
-				}
-				else if (code[2] == "magenta")
-				{
-					cou("\033[35m");
-				}
-				else if (code[2] == "cyan")
-				{
-					cou("\033[36m");
-				}
-				else if (code[2] == "white")
-				{
-					cou("\033[37m");
-				}
-				else if (code[2] == "bold")
-				{
-					cou("\033[1m");
-				}
-				else if (code[2] == "thinly")
-				{
-					cou("\033[2m");
-				}
-				else if (code[2] == "italic")
-				{
-					cou("\033[3m");
-				}
-				else if (code[2] == "underline")
-				{
-					cou("\033[4m");
-				}
-				else if (code[2] == "blink")
-				{
-					cou("\033[5m");
-				}
-				else if (code[2] == "fastblink")
-				{
-					cou("\033[6m");
+					if (code[2] == "black")
+					{
+						cou("\033[40m");
+					}
+					else if (code[2] == "red")
+					{
+						cou("\033[41m");
+					}
+					else if (code[2] == "green")
+					{
+						cou("\033[42m");
+					}
+					else if (code[2] == "yellow")
+					{
+						cou("\033[43m");
+					}
+					else if (code[2] == "blue")
+					{
+						cou("\033[44m");
+					}
+					else if (code[2] == "magenta")
+					{
+						cou("\033[45m");
+					}
+					else if (code[2] == "cyan")
+					{
+						cou("\033[46m");
+					}
+					else if (code[2] == "white")
+					{
+						cou("\033[47m");
+					}
 				}
 				else
 				{
-					err(7);
+					err(2);
 				}
-			}
-			else if (code[1] == "reset")
-			{
-				cou("\033[m");
-			}
-			else if (code[1] == "background")
-			{
-				if (code[2] == "black")
-				{
-					cou("\033[40m");
-				}
-				else if (code[2] == "red")
-				{
-					cou("\033[41m");
-				}
-				else if (code[2] == "green")
-				{
-					cou("\033[42m");
-				}
-				else if (code[2] == "yellow")
-				{
-					cou("\033[43m");
-				}
-				else if (code[2] == "blue")
-				{
-					cou("\033[44m");
-				}
-				else if (code[2] == "magenta")
-				{
-					cou("\033[45m");
-				}
-				else if (code[2] == "cyan")
-				{
-					cou("\033[46m");
-				}
-				else if (code[2] == "white")
-				{
-					cou("\033[47m");
-				}
-			}
-			else
-			{
-				err(2);
 			}
 		}
 		else if (func == "in")
@@ -1020,8 +1034,18 @@ inline string nx()
 	return aqua(lines[linenume + 1], lines, linenume + 1);
 }
 
+inline void cscle()
+{
+	if (iswin)
+		system("cls");
+	else
+		system("clear");
+}
+
 int main(int argc, char const *argv[])
 {
+
+	string arg1 = argv[1];
 
 #pragma region Aqua System Variables
 
@@ -1035,7 +1059,7 @@ int main(int argc, char const *argv[])
 
 #pragma endregion
 
-	if (argc == 1 || argc > 2 || argv[1] == "--help")
+	if (argc == 1 || argc > 2 || arg1 == "--help")
 	{
 		co("----------------------------------------------------------------------");
 		cou("Welcome to Aqua For ");
@@ -1048,6 +1072,7 @@ int main(int argc, char const *argv[])
 		cou("Windows 64bit");
 		var_string["api_os"] = "win64";
 		os_win64 = true;
+		iswin = true;
 #endif
 
 #ifdef _WIN32
@@ -1056,6 +1081,7 @@ int main(int argc, char const *argv[])
 			cou("Windows 32bit");
 			var_string["api_os"] = "win32";
 		}
+		iswin = true;
 #endif
 
 #if defined(__unix) || defined(__unix__)
@@ -1073,8 +1099,29 @@ int main(int argc, char const *argv[])
 		return 0;
 	}
 
+	if (arg1 == "--setting" || arg1 == "--s")
+	{
+
+#if defined(__unix) || defined(__unix__)
+		iswin = false;
+#endif
+
+		aqua_setting();
+	}
+
+	ifstream settingfile;
+	settingfile.open("./setting/setting.txt");
+	string reads;
+
+	while (getline(settingfile, reads))
+	{
+		sett.push_back(stoi(reads));
+	}
+
+	settingfile.close();
+
 	ifstream file;
-	file.open(argv[1]);
+	file.open(arg1);
 
 	string read_file;
 
@@ -1091,7 +1138,7 @@ int main(int argc, char const *argv[])
 		aqua(lines[i], lines, i);
 	}
 
-	if (op_stylereset)
+	if (op_stylereset && sett[0])
 		cou("\033[m");
 
 	if (op_end_anykey)
@@ -1105,4 +1152,149 @@ int main(int argc, char const *argv[])
 	// Program End
 
 	return 0;
+}
+
+int ans;
+
+inline void inp()
+{
+	cou("\n> ");
+	cin >> ans;
+}
+
+inline void aqua_setting()
+{
+	// v1.4.0
+	// Aqua Setting
+
+	cou("Aqua Setting> File is open...    ");
+
+	vector<string> settingf;
+	vector<string> setting;
+	ifstream settingfile;
+	settingfile.open("./setting/setting.txt");
+	string reads;
+
+	while (getline(settingfile, reads))
+	{
+		settingf.push_back(reads);
+	}
+
+	setting = settingf;
+
+	settingfile.close();
+
+	co("OK");
+
+	cscle();
+
+	co("----------------------------------------------");
+	co("Welcome to Aqua Setting");
+	co("Please select your desired setting.");
+	co("----------------------------------------------\n");
+
+	while (true)
+	{
+		co("0: Exit");
+		co("1: Environment settings");
+		co("2: Reset");
+
+		inp();
+		cscle();
+
+		switch (ans)
+		{
+		case 0:
+			if (setting != settingf)
+			{
+				cscle();
+				co("Settings are not saved.");
+				co("Do you want to save it?");
+
+				co("0: Don't Save Close");
+				co("1: Save and Close");
+
+				inp();
+
+				if (ans)
+				{
+					ofstream w_setting;
+					w_setting.open("./setting/setting.txt", ios::out);
+					w_setting << vtos(setting);
+					w_setting.close();
+				}
+			}
+
+			cscle();
+			exit(0);
+
+			break;
+
+		case 1:
+			co("0: go back");
+			co("1: Style");
+
+			inp();
+			cscle();
+
+			switch (ans)
+			{
+			case 0:
+				break;
+
+			case 1:
+
+				co("Style");
+				co("Enable or select ASCII style in Aqua.");
+
+				sn(0);
+
+				co("0: Disable");
+				co("1: Enable (Specified value)");
+
+				inp();
+
+				if (ans)
+					setting[0] = "1";
+				else
+					setting[0] = "0";
+
+				break;
+			}
+
+			break;
+
+		case 2:
+			co("0: go back");
+			co("1: Setting");
+
+			inp();
+			cscle();
+
+			switch (ans)
+			{
+			case 0:
+				break;
+
+			case 1:
+				co("Restore settings to default values");
+				co("Resets the setting to the specified value.");
+				co("*All settings are discarded.");
+
+				co("0: No");
+				co("1: Yes");
+
+				inp();
+
+				if (ans)
+				{
+					setting = {"1"};
+				}
+
+				break;
+			}
+		}
+
+		cscle();
+	}
 }

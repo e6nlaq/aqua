@@ -129,3 +129,21 @@ inline vector<string> incident(vector<string> s)
 
 	return ret;
 }
+
+inline string vtos(vector<string> s)
+{
+	string ans = "";
+
+	for (auto x : s)
+	{
+		ans += x;
+		ans += "\n";
+	}
+
+	return ans;
+}
+
+inline void now(vector<string> s, int a)
+{
+	cout << "\nCurrent Value: " << s[a] << "\n\n";
+}

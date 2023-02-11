@@ -73,3 +73,5 @@ if :
 else
     outf "FALSE"
 end if
+
+throw
