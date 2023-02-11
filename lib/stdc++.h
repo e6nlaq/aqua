@@ -18,3 +18,5 @@
 #include <fstream>
 #include <iomanip>
 #include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
