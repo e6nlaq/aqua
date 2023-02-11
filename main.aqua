@@ -61,12 +61,12 @@ end if
 
 ln
 
-outf "Hello!"
-outf "What your name?"
+if true
 
-var string name
-in name
+    outf "JIK"
 
-outf :
-& "Hey, " name "!"
+    break
 
+    outf "NOJ"
+
+end if

@@ -178,6 +178,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("You can't use : here.");
 		break;
 
+	case 16:
+		co("You can't break here.");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -900,6 +904,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 
 			return ans;
+		}
+		else if (func == "break")
+		{
+			if (inc_code == 0 && inc_now == 0)
+				err(16);
+
+			inc_now--;
 		}
 		else
 		{
