@@ -41,6 +41,7 @@ bool runcode = true;
 int inc_now = 0;
 int inc_code = 0;
 bool iswin = true;
+ll code_line = 0;
 
 // Advance Declaration
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -184,6 +185,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 16:
 		co("You can't break here.");
+		break;
+
+	case 17:
+		co("goto must be greater than or equal to 1");
 		break;
 
 	default:
@@ -955,12 +960,35 @@ inline string aqua(string script, vector<string> line, int linenum)
 				runcode = false;
 			}
 		}
+		else if (func == "goto")
+		{
+			if (stoll(code[1]) < 1)
+				err(17);
+
+			if (isvarok(code[1]))
+			{
+				code_line = stoll(var_value(code[1]));
+			}
+			else if (code[1] == ":")
+			{
+				code_line = stoll(nx());
+			}
+			else
+			{
+				code_line = stoll(code[1]);
+			}
+
+			code_line -= 2;
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
 			{
 				if (inc_now == inc_code)
+				{
+					co(func.size());
 					errorlog(line, linenum, 1);
+				}
 			}
 		}
 	}
@@ -1132,10 +1160,10 @@ int main(int argc, char const *argv[])
 
 	lines = incident(lines);
 
-	for (int i = 0; i < lines.size(); i++)
+	for (code_line = 0; code_line < lines.size(); code_line++)
 	{
-		linenume = i;
-		aqua(lines[i], lines, i);
+		linenume = code_line;
+		aqua(lines[code_line], lines, code_line);
 	}
 
 	if (op_stylereset && sett[0])
@@ -1164,7 +1192,6 @@ inline void inp()
 
 inline void aqua_setting()
 {
-	// v1.4.0
 	// Aqua Setting
 
 	cou("Aqua Setting> File is open...    ");
