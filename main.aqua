@@ -3,6 +3,7 @@
 
 option function_skip false
 option reset_style true
+option end_anykey true
 
 
 # Output
@@ -67,11 +68,7 @@ else
     outf "YES"
 end if
 
-if :
-! false
-    outf "T_RU"
-else
-    outf "FALSE"
-end if
 
-throw
+outf "aA"
+
+goto 92
