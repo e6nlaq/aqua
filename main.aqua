@@ -3,7 +3,6 @@
 
 option function_skip false
 option reset_style true
-option end_anykey true
 
 
 # Output
@@ -69,6 +68,5 @@ else
 end if
 
 
-outf "aA"
-
-goto 92
+outf :
+^ 2 5

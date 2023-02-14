@@ -980,6 +980,38 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			code_line -= 2;
 		}
+		else if (func == "^")
+		{
+			ld a, b;
+
+			if (isvarok(code[1]))
+			{
+				a = stold(var_value(code[1]));
+			}
+			else if (code[1] == ":")
+			{
+				a = stold(nx());
+			}
+			else
+			{
+				a = stold(code[1]);
+			}
+
+			if (isvarok(code[2]))
+			{
+				b = stold(var_value(code[2]));
+			}
+			else if (code[2] == ":")
+			{
+				b = stold(nx());
+			}
+			else
+			{
+				b = stold(code[2]);
+			}
+
+			return to_string(powl(a, b));
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
@@ -1073,8 +1105,6 @@ inline void cscle()
 int main(int argc, char const *argv[])
 {
 
-	string arg1 = argv[1];
-
 #pragma region Aqua System Variables
 
 	var_bool["true"] = true;
@@ -1087,7 +1117,7 @@ int main(int argc, char const *argv[])
 
 #pragma endregion
 
-	if (argc == 1 || argc > 2 || arg1 == "--help")
+	if (argc == 1 || argc > 2)
 	{
 		co("----------------------------------------------------------------------");
 		cou("Welcome to Aqua For ");
@@ -1126,6 +1156,8 @@ int main(int argc, char const *argv[])
 
 		return 0;
 	}
+
+	string arg1 = argv[1];
 
 	if (arg1 == "--setting" || arg1 == "--s")
 	{
