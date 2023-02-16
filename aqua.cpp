@@ -1157,28 +1157,44 @@ int main(int argc, char const *argv[])
 		return 0;
 	}
 
-	string arg1 = argv[1];
-
-	if (arg1 == "--setting" || arg1 == "--s")
-	{
-
 #if defined(__unix) || defined(__unix__)
-		iswin = false;
+	iswin = false;
 #endif
 
-		aqua_setting();
-	}
+	string arg1 = argv[1];
 
-	ifstream settingfile;
-	settingfile.open("./setting/setting.txt");
-	string reads;
+	// 	if (arg1 == "--install")
+	// 	{
 
-	while (getline(settingfile, reads))
-	{
-		sett.push_back(stoi(reads));
-	}
+	// 		if (iswin)
+	// 		{
+	// #include <direct.h>
+	// 			_mkdir("C:\\Aqua\\");
+	// 		}
+	// 		else
+	// 		{
+	// #include <sys/stat.h>
+	// 			mkdir("/usr/program/aqua");
+	// 		}
+	// 	}
 
-	settingfile.close();
+	// 	if (arg1 == "--setting" || arg1 == "--s")
+	// 	{
+	// 		aqua_setting();
+	// 	}
+
+	// ifstream settingfile;
+	// settingfile.open("./setting/setting.txt");
+	// string reads;
+
+	// while (getline(settingfile, reads))
+	// {
+	// 	sett.push_back(stoi(reads));
+	// }
+
+	// settingfile.close();
+
+	sett = {1};
 
 	ifstream file;
 	file.open(arg1);
@@ -1208,6 +1224,9 @@ int main(int argc, char const *argv[])
 		int aqua_get;
 		aqua_get = getchar();
 	}
+
+	// if (op_stylereset && sett[0])
+	// 	cou("\033[m");
 
 	// Program End
 
