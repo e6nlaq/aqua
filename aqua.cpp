@@ -114,6 +114,7 @@ inline string var_value(string name)
 	return "";
 }
 
+// エラー
 inline void errorlog(vector<string> line, int linenum, int errorcode)
 {
 	cout << "\n\nError: ";
@@ -231,14 +232,16 @@ inline string aqua(string script, vector<string> line, int linenum)
 	vector<string> code = scriptcut(script);
 	string func = code[0];
 
+	// 実行時エラー防止
 	for (int i = 0; i < 10; i++)
 	{
 		code.push_back("");
 	}
 
+	// インシデントチェック
 	if (inc_code == inc_now)
 	{
-
+		// 以下、関数記述
 		if (func == "out")
 		{
 			if (code[1][0] == '\"')
@@ -1105,6 +1108,8 @@ inline void cscle()
 int main(int argc, char const *argv[])
 {
 
+	// Aqua基本処理系
+
 #pragma region Aqua System Variables
 
 	var_bool["true"] = true;
@@ -1116,6 +1121,8 @@ int main(int argc, char const *argv[])
 	var_bool["api_sysfalse"] = false;
 
 #pragma endregion
+
+	// 何もオプションがない場合
 
 	if (argc == 1 || argc > 2)
 	{
@@ -1157,6 +1164,7 @@ int main(int argc, char const *argv[])
 		return 0;
 	}
 
+	// UNIXだったらfalse
 #if defined(__unix) || defined(__unix__)
 	iswin = false;
 #endif
@@ -1194,8 +1202,10 @@ int main(int argc, char const *argv[])
 
 	// settingfile.close();
 
+	// TODO: Aqua Setting無効化のため
 	sett = {1};
 
+	// ファイル読み込み
 	ifstream file;
 	file.open(arg1);
 
@@ -1206,8 +1216,10 @@ int main(int argc, char const *argv[])
 		lines.push_back(read_file);
 	}
 
+	// インシデント対応
 	lines = incident(lines);
 
+	// Aqua実行
 	for (code_line = 0; code_line < lines.size(); code_line++)
 	{
 		linenume = code_line;

@@ -3,7 +3,6 @@
 
 option function_skip false
 option reset_style true
-option end_anykey true
 
 
 # Output
@@ -71,3 +70,5 @@ end if
 
 outf :
 ^ 2 5
+
+outf "おい!日本語対応してるか!"
