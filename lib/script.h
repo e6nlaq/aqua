@@ -1,3 +1,14 @@
+﻿
+/*******************************************************
+
+			  lib/script.h
+
+	Created at: Jan 7, 2023, 8:00 AM GMT+9
+	Copyright (C) 2023 e6nlaq
+	This file is part of aqua.
+	Licensed under GNU General Public License v3.0.
+
+*******************************************************/
 
 #pragma once
 
