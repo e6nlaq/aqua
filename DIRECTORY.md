@@ -1,26 +1,28 @@
 
-# Aqua file directory (v1.1.0)
+# Aqua file directory (v1.3.1)
 
-```
+```|   aqua-test.cpp
 |   aqua.cpp
 |   aqua.obj
+|   at.out
 |   DIRECTORY.md
 |   index.html
 |   LICENSE
 |   main.aqua
 |   README.md
-|   SECURITY.md
-|   vc140.pdb
 |
 +---.vscode
 |       c_cpp_properties.json
 |       settings.json
 |
 +---bin
-|       aqua
-|       aqua.exe
-|       aqua.ilk
-|       aqua.pdb
+|   +---x64
+|   |       aqua
+|   |       aqua.exe
+|   |
+|   \---x86
+|           aqua
+|           aqua.exe
 |
 +---image
 |       aqua.ico
@@ -31,7 +33,7 @@
 |       1.md
 |       2.aqua
 |       2.md
-|       CONTENS.md
+|       README.md
 |
 +---lib
 |       all.h
@@ -40,23 +42,16 @@
 |       stdc++.h
 |       string.h
 |
-+---log
 +---script
-|   |   install.bat
-|   |   path.bat
-|   |   update.ps1
+|   |   install-ubuntu.sh
+|   |   install-win32bit.bat
+|   |   install-win64bit.bat
+|   |   uninstall.bat
 |   |
-|   +---data
-|   |       update_version_data.dat
-|   |
-|   \---temp
-|           version.txt
+|   \---path
+|           64.bat
+|           86.bat
 |
-\---system
-    +---global
-    |       log
-    |       variable.setting
-    |
-    \---local
-            version.txt
+\---setting
+        setting.txt
 ```

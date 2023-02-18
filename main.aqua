@@ -72,3 +72,26 @@ outf :
 ^ 2 5
 
 outf "おい!日本語対応してるか!"
+
+var int i
+set i 0
+
+forever
+
+    outf i
+    set i :
+    + i 1
+
+    if :
+    is i "1000"
+
+        exit 0
+
+    end if
+
+    forever
+        outf "UTIGAWA"
+        exit 0
+    end forever
+
+end forever
