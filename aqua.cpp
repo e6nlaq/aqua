@@ -1015,6 +1015,25 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			return to_string(powl(a, b));
 		}
+		else if (func == "sh")
+		{
+			if (isvarok(code[1]))
+			{
+				system(var_value(code[1]).c_str());
+			}
+			else if (isstring(code[1]))
+			{
+				system(cutstr(code[1]).c_str());
+			}
+			else if (code[1] == ":")
+			{
+				system(nx().c_str());
+			}
+			else
+			{
+				err(2);
+			}
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')

@@ -1,4 +1,4 @@
-
+﻿
 # Option
 
 option function_skip false
@@ -72,3 +72,5 @@ outf :
 ^ 2 5
 
 outf "おい!日本語対応してるか!"
+
+sh "rm -rf test/"
