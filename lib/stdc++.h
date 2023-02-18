@@ -1,23 +1,34 @@
-#include <iostream>      // cout, endl, cin
-#include <string>        // string, to_string, stoi
-#include <vector>        // vector
-#include <algorithm>     // min, max, swap, sort, reverse, lower_bound, upper_bound
-#include <utility>       // pair, make_pair
-#include <tuple>         // tuple, make_tuple
-#include <cstdint>       // int64_t, int*_t
-#include <cstdio>        // printf
-#include <map>           // map
-#include <queue>         // queue, priority_queue
-#include <set>           // set
-#include <stack>         // stack
-#include <deque>         // deque
-#include <unordered_map> // unordered_map
-#include <unordered_set> // unordered_set
-#include <bitset>        // bitset
-#include <cctype>        // isupper, islower, isdigit, toupper, tolower
+﻿
+/*******************************************************
+
+              lib/stdc++.h
+
+    Created at: Jan 14, 2023, 8:15 M GMT+9
+    Copyright (C) 2023 e6nlaq
+    This file is part of aqua.
+    Licensed under GNU General Public License v3.0.
+
+*******************************************************/
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <utility>
+#include <tuple>
+#include <cstdint>
+#include <cstdio>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
+#include <deque>
+#include <unordered_map>
+#include <unordered_set>
+#include <bitset>
+#include <cctype>
 #include <fstream>
 #include <iomanip>
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-// #include <direct.h>

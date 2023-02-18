@@ -72,5 +72,3 @@ outf :
 ^ 2 5
 
 outf "おい!日本語対応してるか!"
-
-sh "rm -rf test/"
