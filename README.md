@@ -1,8 +1,10 @@
 # Aqua
 
+![GitHub repo size](https://img.shields.io/github/repo-size/e6nlaq/aqua?label=Repo%20Size&logo=github)
+
 ## What is Aqua?
 
-<img src="https://github.com/e6nlaq/aqua/blob/main/image/aqua.png" width="200px"></img>
+<img src="./image/aqua.png" width="200px"></img>
 
 Aqua is a very simple and complex programming language.
 
