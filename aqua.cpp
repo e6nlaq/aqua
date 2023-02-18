@@ -44,6 +44,7 @@ int inc_now = 0;
 int inc_code = 0;
 bool iswin = true;
 ll code_line = 0;
+ll forever_line = -1;
 
 // Advance Declaration
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -192,6 +193,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 17:
 		co("goto must be greater than or equal to 1");
+		break;
+
+	case 18:
+		co("This is only valid within the FOREVER");
 		break;
 
 	default:
@@ -754,8 +759,17 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "end")
 		{
-			// For if condition is true
-			// Nothing (LOL)
+			if (code[1] == "forever")
+			{
+				if (forever_line != -1)
+				{
+					code_line = forever_line;
+				}
+				else
+				{
+					err(18);
+				}
+			}
 		}
 		else if (func == "else")
 		{
@@ -1035,6 +1049,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				err(2);
 			}
+		}
+		else if (func == "forever")
+		{
+			forever_line = code_line;
 		}
 		else
 		{
