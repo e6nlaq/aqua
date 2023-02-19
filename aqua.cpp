@@ -199,6 +199,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("This is only valid within the FOREVER");
 		break;
 
+	case 19:
+		co("I can't find a sentence that fits the end");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -759,6 +763,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "end")
 		{
+			// インシデントチェック
+			if (inc_now == 0 && inc_code == 0)
+				err(19);
 			if (code[1] == "forever")
 			{
 				if (forever_line != -1)
@@ -769,6 +776,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 				{
 					err(18);
 				}
+			}
+			else if (code[1] == "if")
+			{
+				inc_now--;
+				inc_code--;
 			}
 		}
 		else if (func == "else")
@@ -1054,6 +1066,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 		{
 			forever_line = code_line;
 		}
+		else if (func == "aq_debug")
+		{
+			co(inc_code);
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
@@ -1070,17 +1086,14 @@ inline string aqua(string script, vector<string> line, int linenum)
 	{
 		if (func == "end")
 		{
+
 			if (code[1] == "if")
 			{
-				if (runcode)
-				{
-					inc_now--;
-					inc_code--;
-				}
-				else
-				{
-					inc_now--;
-				}
+				// インシデントチェック
+				if (inc_now == 0 && inc_code == 0)
+					err(19);
+
+				inc_now--;
 			}
 		}
 		else if (func == "else")
