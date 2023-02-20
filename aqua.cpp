@@ -763,14 +763,18 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "end")
 		{
+
 			// インシデントチェック
 			if (inc_now == 0 && inc_code == 0)
 				err(19);
+
 			if (code[1] == "forever")
 			{
 				if (forever_line != -1)
 				{
 					code_line = forever_line;
+					// inc_now--;
+					// inc_code--;
 				}
 				else
 				{
@@ -1065,6 +1069,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "forever")
 		{
 			forever_line = code_line;
+			inc_code++;
+			inc_now++;
 		}
 		else if (func == "aq_debug")
 		{

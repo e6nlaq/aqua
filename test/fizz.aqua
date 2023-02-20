@@ -1,0 +1,16 @@
+
+# FizzBuzz
+
+var int inp
+in inp
+
+var int tmp
+set tmp :
+% inp 3
+
+if :
+is : 0
+% inp 3
+
+
+end if

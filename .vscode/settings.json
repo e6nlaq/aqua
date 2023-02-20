@@ -3,6 +3,7 @@
         "vector": "cpp",
         "string": "cpp",
         "xstring": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "system_error": "cpp"
     }
 }
