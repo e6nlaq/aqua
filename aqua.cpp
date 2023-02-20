@@ -203,6 +203,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("I can't find a sentence that fits the end");
 		break;
 
+	case 20:
+		co("Strings are invalid for this function.");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -1072,9 +1076,31 @@ inline string aqua(string script, vector<string> line, int linenum)
 			inc_code++;
 			inc_now++;
 		}
-		else if (func == "aq_debug")
+		else if (func == "fibz")
 		{
-			co(inc_code);
+			ll a = 0;
+
+			if (isstring(code[1]))
+			{
+				err(20);
+			}
+			else if (isvarok(code[1]))
+			{
+				a = stoll(var_value(code[1]));
+			}
+			else
+			{
+				a = stoll(code[1]);
+			}
+
+			if (a % 3 == 0 && a % 5 == 0)
+				return "FizzBuzz";
+			else if (a % 3 == 0)
+				return "Fizz";
+			else if (a % 5 == 0)
+				return "Buzz";
+			else
+				return to_string(a);
 		}
 		else
 		{
