@@ -21,7 +21,7 @@ using ld = long double;
 // Macro
 #define co(x) cout << (x) << "\n"
 #define cou(x) cout << (x)
-#define err(x) errorlog(line, linenum, (x));
+#define err(x) errorlog(lines, code_line, (x));
 #define all(x) x.begin(), x.end()
 #define rep(i, n) for (ll i = 0; i < (n); i++)
 #define sn(i) now(setting, (i));
@@ -240,6 +240,64 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 	exit(-1);
 
 #pragma endregion
+}
+
+inline string f_math(int id, string s, string t)
+{
+
+	ll a, b;
+
+	if (isstring(s) || isstring(t))
+		err(20);
+
+	if (isvarok(s))
+		a = stold(var_value(s));
+	else if (s == ":")
+		a = stold(nx());
+	else
+		a = stold(s);
+
+	if (isvarok(t))
+		b = stold(var_value(t));
+	else if (t == ":")
+		b = stold(nx());
+	else
+		b = stold(t);
+
+	switch (id)
+	{
+	case 1:
+		return to_string(a + b);
+		break;
+
+	case 2:
+		return to_string(a - b);
+		break;
+
+	case 3:
+		return to_string(a * b);
+		break;
+
+	case 4:
+		if (b != 0)
+			return to_string(a / b);
+		else
+			err(11);
+		break;
+
+	case 5:
+		if (b != 0)
+			return to_string(a % b);
+		else
+			err(11);
+		break;
+
+	case 6:
+		return to_string(pow(a, b));
+		break;
+	}
+
+	return "";
 }
 
 inline string aqua(string script, vector<string> line, int linenum)
@@ -579,84 +637,23 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "+")
 		{
-			ld a, b;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			if (isvarok(code[2]))
-				b = stold(var_value(code[2]));
-			else
-				b = stold(code[2]);
-
-			return to_string(a + b);
+			return f_math(1, code[1], code[2]);
 		}
 		else if (func == "-")
 		{
-			ld a, b;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			if (isvarok(code[2]))
-				b = stold(var_value(code[2]));
-			else
-				b = stold(code[2]);
-
-			return to_string(a - b);
+			return f_math(2, code[1], code[2]);
 		}
 		else if (func == "*")
 		{
-			ld a, b;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			if (isvarok(code[2]))
-				b = stold(var_value(code[2]));
-			else
-				b = stold(code[2]);
-
-			return to_string(a * b);
+			return f_math(3, code[1], code[2]);
 		}
 		else if (func == "/")
 		{
-			ld a, b;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			if (isvarok(code[2]))
-				b = stold(var_value(code[2]));
-			else
-				b = stold(code[2]);
-
-			if (b == 0)
-				err(11);
-
-			return to_string(a / b);
+			return f_math(4, code[1], code[2]);
 		}
 		else if (func == "%")
 		{
-			ll a, b;
-			if (isvarok(code[1]))
-				a = stoll(var_value(code[1]));
-			else
-				a = stoll(code[1]);
-
-			if (isvarok(code[2]))
-				b = stoll(var_value(code[2]));
-			else
-				b = stoll(code[2]);
-
-			if (b == 0)
-				err(11);
-
-			return to_string(a % b);
+			return f_math(5, code[1], code[2]);
 		}
 		else if (func == "abs")
 		{
@@ -1021,35 +1018,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "^")
 		{
-			ld a, b;
-
-			if (isvarok(code[1]))
-			{
-				a = stold(var_value(code[1]));
-			}
-			else if (code[1] == ":")
-			{
-				a = stold(nx());
-			}
-			else
-			{
-				a = stold(code[1]);
-			}
-
-			if (isvarok(code[2]))
-			{
-				b = stold(var_value(code[2]));
-			}
-			else if (code[2] == ":")
-			{
-				b = stold(nx());
-			}
-			else
-			{
-				b = stold(code[2]);
-			}
-
-			return to_string(powl(a, b));
+			return f_math(6, code[1], code[2]);
 		}
 		else if (func == "sh")
 		{
@@ -1178,7 +1147,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 inline string nx()
 {
-	return aqua(lines[linenume + 1], lines, linenume + 1);
+	string ans;
+	code_line++;
+	ans = aqua(lines[code_line], lines, code_line);
+	code_line--;
+	return ans;
 }
 
 inline void cscle()

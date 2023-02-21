@@ -1,6 +1,3 @@
 
-forever
-
-
-
-end if
+outf :
+^ 2 3
