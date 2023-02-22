@@ -295,6 +295,23 @@ inline string f_math(int id, string s, string t)
 	case 6:
 		return to_string(pow(a, b));
 		break;
+
+	case 7:
+		return to_string(a > b);
+		break;
+
+	case 8:
+		return to_string(a < b);
+
+		break;
+
+	case 9:
+		return to_string(a <= b);
+		break;
+
+	case 10:
+		return to_string(a >= b);
+		break;
 	}
 
 	return "";
@@ -337,6 +354,10 @@ inline string f_trig(int id, string s)
 
 	return "";
 }
+
+// inline string f_comp(int id, string s, string t){
+
+// }
 
 inline string aqua(string script, vector<string> line, int linenum)
 {
@@ -1075,6 +1096,22 @@ inline string aqua(string script, vector<string> line, int linenum)
 				return "Buzz";
 			else
 				return to_string(a);
+		}
+		else if (func == ">")
+		{
+			return f_math(7, code[1], code[2]);
+		}
+		else if (func == "<")
+		{
+			return f_math(8, code[1], code[2]);
+		}
+		else if (func == "<=")
+		{
+			return f_math(9, code[1], code[2]);
+		}
+		else if (func == ">=")
+		{
+			return f_math(10, code[1], code[2]);
 		}
 		else
 		{
