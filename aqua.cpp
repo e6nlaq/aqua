@@ -300,6 +300,44 @@ inline string f_math(int id, string s, string t)
 	return "";
 }
 
+inline string f_trig(int id, string s)
+{
+	ld a;
+	if (isvarok(s))
+		a = stold(var_value(s));
+	else if (s == ":")
+		a = stold(nx());
+	else
+		a = stold(s);
+
+	switch (id)
+	{
+	case 1:
+		return to_string(abs(a));
+		break;
+
+	case 2:
+		if (a < 0)
+			err(12);
+		return to_string(sqrtl(a));
+		break;
+
+	case 3:
+		return to_string(sinl(a));
+		break;
+
+	case 4:
+		return to_string(cosl(a));
+		break;
+
+	case 5:
+		return to_string(tanl(a));
+		break;
+	}
+
+	return "";
+}
+
 inline string aqua(string script, vector<string> line, int linenum)
 {
 	vector<string> code = scriptcut(script);
@@ -657,56 +695,23 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "abs")
 		{
-			ld a;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			return to_string(abs(a));
+			return f_trig(1, code[1]);
 		}
 		else if (func == "sqrt")
 		{
-			ld a;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			if (a < 0)
-				err(12);
-
-			return to_string(sqrt(a));
+			return f_trig(2, code[1]);
 		}
 		else if (func == "sin")
 		{
-			ld a;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			return to_string(sin(a));
+			return f_trig(3, code[1]);
 		}
 		else if (func == "cos")
 		{
-			ld a;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			return to_string(cos(a));
+			return f_trig(4, code[1]);
 		}
 		else if (func == "tan")
 		{
-			ld a;
-			if (isvarok(code[1]))
-				a = stold(var_value(code[1]));
-			else
-				a = stold(code[1]);
-
-			return to_string(tan(a));
+			return f_trig(5, code[1]);
 		}
 		else if (func == "++")
 		{
