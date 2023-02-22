@@ -30,6 +30,8 @@ using ld = long double;
 bool op_funcskip = false;
 bool op_stylereset = true;
 bool op_end_anykey = false;
+bool st_using_yes = false;
+bool us_shell = false;
 
 // Variant
 map<string, int> var_int;
@@ -46,10 +48,11 @@ bool iswin = true;
 ll code_line = 0;
 ll forever_line = -1;
 
-// Advance Declaration
+// 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
 inline string nx();
 inline void aqua_setting();
+inline void cscle();
 
 inline bool dup_varname(string name)
 {
@@ -207,6 +210,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Strings are invalid for this function.");
 		break;
 
+	case 21:
+		co("No access rights");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -240,6 +247,45 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 	exit(-1);
 
 #pragma endregion
+}
+
+inline void usinglog(int id)
+{
+	string ans = "";
+	if (!st_using_yes)
+	{
+		cscle();
+
+		co("-----------------------------------------------------------------------");
+		co("A request was received from this Aqua script.");
+		co("By accepting this request, the following will become available\n");
+
+		switch (id)
+		{
+		case 1:
+			co("Shell");
+			co("All operations on this OS and PC");
+			break;
+		}
+
+		co("\nAre you sure you want to do this? (Y/n)");
+		cou("> ");
+
+		cin >> ans;
+		transform(all(ans), ans.begin(), ::tolower);
+	}
+
+	if (st_using_yes || ans == "y" || ans == "yes")
+	{
+		switch (id)
+		{
+		case 1:
+			us_shell = true;
+		}
+	}
+
+	if (!st_using_yes)
+		cscle();
 }
 
 inline string f_math(int id, string s, string t)
@@ -354,10 +400,6 @@ inline string f_trig(int id, string s)
 
 	return "";
 }
-
-// inline string f_comp(int id, string s, string t){
-
-// }
 
 inline string aqua(string script, vector<string> line, int linenum)
 {
@@ -1048,6 +1090,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "sh")
 		{
+
+			if (!us_shell)
+				err(21);
+
 			if (isvarok(code[1]))
 			{
 				system(var_value(code[1]).c_str());
@@ -1112,6 +1158,17 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == ">=")
 		{
 			return f_math(10, code[1], code[2]);
+		}
+		else if (func == "using")
+		{
+			if (code[1] == "sh" || code[1] == "shell")
+			{
+				usinglog(1);
+			}
+			else
+			{
+				err(2);
+			}
 		}
 		else
 		{
@@ -1184,7 +1241,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 	}
 
-	return "";
+	return "undefined";
 }
 
 inline string nx()
@@ -1221,9 +1278,12 @@ int main(int argc, char const *argv[])
 
 #pragma endregion
 
+	// 引数をvector<string>に変換
+	vector<string> args(argv, argv + argc);
+
 	// 何もオプションがない場合
 
-	if (argc == 1 || argc > 2)
+	if (argc == 1)
 	{
 		co("----------------------------------------------------------------------");
 		cou("Welcome to Aqua For ");
@@ -1268,45 +1328,20 @@ int main(int argc, char const *argv[])
 	iswin = false;
 #endif
 
-	string arg1 = argv[1];
+	// コマンド引数適用
+	if (count(all(args), "--no-style"))
+		sett = {0};
+	else
+		sett = {1};
 
-	// 	if (arg1 == "--install")
-	// 	{
-
-	// 		if (iswin)
-	// 		{
-	// #include <direct.h>
-	// 			_mkdir("C:\\Aqua\\");
-	// 		}
-	// 		else
-	// 		{
-	// #include <sys/stat.h>
-	// 			mkdir("/usr/program/aqua");
-	// 		}
-	// 	}
-
-	// 	if (arg1 == "--setting" || arg1 == "--s")
-	// 	{
-	// 		aqua_setting();
-	// 	}
-
-	// ifstream settingfile;
-	// settingfile.open("./setting/setting.txt");
-	// string reads;
-
-	// while (getline(settingfile, reads))
-	// {
-	// 	sett.push_back(stoi(reads));
-	// }
-
-	// settingfile.close();
-
-	// TODO: Aqua Setting無効化のため
-	sett = {1};
+	if (count(all(args), "--yes"))
+		st_using_yes = true;
+	else
+		st_using_yes = false;
 
 	// ファイル読み込み
 	ifstream file;
-	file.open(arg1);
+	file.open(args[1]);
 
 	string read_file;
 

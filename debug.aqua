@@ -1,6 +1,4 @@
-﻿
-var int a
-in a
 
-outf :
-<= a 3
+using sh
+
+sh "echo e"
