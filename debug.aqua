@@ -1,4 +1,6 @@
 ﻿
+var int a
+in a
+
 outf :
-abs :
-- 1 2
+<= a 3
