@@ -39,6 +39,7 @@ map<string, int> var_int;
 map<string, string> var_string;
 map<string, bool> var_bool;
 map<string, double> var_double;
+map<string, ll> label_list;
 vector<string> lines;
 vector<int> sett;
 int linenume;
@@ -213,6 +214,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 21:
 		co("No access rights");
+		break;
+
+	case 22:
+		co("Duplicate labels");
 		break;
 
 	default:
@@ -1173,6 +1178,24 @@ inline string aqua(string script, vector<string> line, int linenum)
 			else
 			{
 				err(2);
+			}
+		}
+		else if (func == "label")
+		{
+
+			// 形式検査
+			if (code[1] == "")
+				err(2);
+			if (code[1] == ":")
+				err(15);
+
+			if (label_list.count(code[1]))
+			{
+				err(22);
+			}
+			else
+			{
+				label_list[code[1]] = code_line;
 			}
 		}
 		else

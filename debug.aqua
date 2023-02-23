@@ -1,9 +1,4 @@
 
-option over_var true
+label ss
 
-var int A
-set A 443
-
-var int A
-
-outf A
+label ss
