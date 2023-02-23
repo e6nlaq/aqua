@@ -220,6 +220,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Duplicate labels");
 		break;
 
+	case 23:
+		co("Invalid label name");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -1076,23 +1080,27 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "goto")
 		{
-			if (stoll(code[1]) < 1)
-				err(17);
 
-			if (isvarok(code[1]))
+			if (!isint(code[1]))
 			{
-				code_line = stoll(var_value(code[1]));
+				if (label_list.count(code[1]))
+				{
+					code_line = label_list[code[1]];
+				}
 			}
 			else if (code[1] == ":")
 			{
 				code_line = stoll(nx());
+				code_line -= 2;
 			}
 			else
 			{
+				if (stoll(code[1]) < 1)
+					err(17);
 				code_line = stoll(code[1]);
-			}
 
-			code_line -= 2;
+				code_line -= 2;
+			}
 		}
 		else if (func == "^")
 		{
@@ -1188,6 +1196,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 				err(2);
 			if (code[1] == ":")
 				err(15);
+			if (!isvarok(code[1]))
+				err(23);
 
 			if (label_list.count(code[1]))
 			{
