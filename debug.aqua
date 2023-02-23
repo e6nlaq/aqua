@@ -1,4 +1,9 @@
 
-using sh
+option over_var true
 
-sh "echo e"
+var int A
+set A 443
+
+var int A
+
+outf A

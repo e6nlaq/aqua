@@ -30,6 +30,7 @@ using ld = long double;
 bool op_funcskip = false;
 bool op_stylereset = true;
 bool op_end_anykey = false;
+bool op_over_var = false;
 bool st_using_yes = false;
 bool us_shell = false;
 
@@ -450,6 +451,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 				{
 					cout << fixed << setprecision(stoi(code[2]));
 				}
+				else if (code[1] == "over_var")
+				{
+					op_over_var = stob(code[2]);
+				}
 				else
 				{
 					errorlog(line, linenum, 3);
@@ -505,7 +510,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		{
 			if (isvarok(code[2]))
 			{
-				if (dup_varname(code[2]))
+				if (dup_varname(code[2]) || op_over_var)
 				{
 					if (code[1] == "int")
 					{
