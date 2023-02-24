@@ -224,6 +224,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Invalid label name");
 		break;
 
+	case 24:
+		co("nonexistent label");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -1083,18 +1087,38 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			if (!isint(code[1]))
 			{
+				// あ～ね。ラベル系ね。
 				if (label_list.count(code[1]))
 				{
+					// あ～おｋ、そのラベルね
 					code_line = label_list[code[1]];
+				}
+				else
+				{
+					// そんなラベルねえよ。先にあるんじゃないの?
+					auto itr = find(all(lines), "label " + code[1]);
+
+					if (itr != lines.end())
+					{
+						// な～んだ。あるじゃねえか。
+						code_line = distance(lines.begin(), itr);
+					}
+					else
+					{
+						// マジでねえじゃねえか! おい! エラーぶん投げるぞ!
+						err(24);
+					}
 				}
 			}
 			else if (code[1] == ":")
 			{
+				// え? next?
 				code_line = stoll(nx());
 				code_line -= 2;
 			}
 			else
 			{
+				// 数値直接指定????まじ????
 				if (stoll(code[1]) < 1)
 					err(17);
 				code_line = stoll(code[1]);

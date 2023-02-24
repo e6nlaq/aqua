@@ -133,7 +133,11 @@ inline vector<string> incident(vector<string> s)
 				}
 			}
 			else
-				a.push_back(c);
+			{
+				// XXX: なんか動いた。
+				if (c > 31)
+					a.push_back(c);
+			}
 		}
 		ret.push_back(a);
 	}
