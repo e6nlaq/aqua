@@ -1,6 +1,12 @@
 
+label abc
+
+
 goto abc
 
 outf "No"
 
-label abc
+outf "umm..."
+
+
+outf ":)"
