@@ -15,6 +15,20 @@
 #include <string>
 using namespace std;
 
+inline bool isint(string s)
+{
+	if (s == "")
+		return false;
+
+	for (char c : s)
+	{
+		if (!(c >= '0' && c <= '9'))
+			return false;
+	}
+
+	return true;
+}
+
 inline string cutstr(string cut)
 {
 
@@ -27,8 +41,16 @@ inline string cutstr(string cut)
 
 inline bool stob(string s)
 {
-	if (s == "true" || s == "1")
+
+	if (s == "true")
 		return true;
+
+	if (isint(s))
+	{
+		if (stoi(s) != 0)
+			return true;
+	}
+
 	return false;
 }
 

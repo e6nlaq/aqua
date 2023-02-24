@@ -80,20 +80,6 @@ inline bool isvarok(string s)
 	return true;
 }
 
-inline bool isint(string s)
-{
-	if (s == "")
-		return false;
-
-	for (char c : s)
-	{
-		if (!(c >= '0' && c <= '9'))
-			return false;
-	}
-
-	return true;
-}
-
 inline string bond(string a, string b)
 {
 	return a + b;

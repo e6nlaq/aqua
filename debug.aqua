@@ -1,4 +1,6 @@
 
-label ss
+goto abc
 
-goto ss
+outf "No"
+
+label abc
