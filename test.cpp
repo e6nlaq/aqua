@@ -7,10 +7,7 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 
-	while (true)
-	{
-		/* code */
-	}
+	cerr << "Error" << endl;
 
 	return 0;
 }

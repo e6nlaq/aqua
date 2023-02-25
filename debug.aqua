@@ -1,12 +1,8 @@
 
-label abc
+var int a
+set a 33
 
+outf :
+sum 1 2 a : bf24hi
++ 1 4
 
-goto abc
-
-outf "No"
-
-outf "umm..."
-
-
-outf ":)"

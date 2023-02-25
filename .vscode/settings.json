@@ -5,6 +5,7 @@
         "xstring": "cpp",
         "bitset": "cpp",
         "system_error": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "iostream": "cpp"
     }
 }
