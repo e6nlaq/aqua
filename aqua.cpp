@@ -35,6 +35,8 @@ map<string, int> var_int;
 map<string, string> var_string;
 map<string, bool> var_bool;
 map<string, double> var_double;
+map<string, int64_t> var_int64;
+map<string, ll> var_ll;
 map<string, ll> label_list;
 vector<string> lines;
 vector<int> sett;
@@ -79,6 +81,14 @@ inline int var_search(string name)
 	else if (var_double.count(name))
 	{
 		return 4;
+	}
+	else if (var_int64.count(name))
+	{
+		return 5;
+	}
+	else if (var_ll.count(name))
+	{
+		return 6;
 	}
 	else
 	{
@@ -551,6 +561,14 @@ inline string aqua(string script, vector<string> line, int linenum)
 					{
 						var_double[code[2]] = 0.0;
 					}
+					else if (code[1] == "int64_t")
+					{
+						var_int64[code[2]] = 0;
+					}
+					else if (code[1] == "longlong" || code[1] == "ll")
+					{
+						var_ll[code[2]] = 0ll;
+					}
 					else
 					{
 						err(6);
@@ -725,6 +743,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 					var_int[code[1]] = stoi(var_value(code[2]));
 				else if (code[2] == ":")
 					var_int[code[1]] = stoi(nx());
+				else if (isstring(code[2]))
+				{
+					err(20);
+				}
 				else
 					var_int[code[1]] = stoi(code[2]);
 				break;
@@ -743,16 +765,50 @@ inline string aqua(string script, vector<string> line, int linenum)
 					var_bool[code[1]] = stob(var_value(code[2]));
 				else if (code[2] == ":")
 					var_bool[code[1]] = stob(nx());
+				else if (isstring(code[2]))
+				{
+					err(20);
+				}
 				else
 					var_bool[code[1]] = stob(var_value(code[2]));
 
 			case 4:
 				if (isvarok(code[2]))
-					var_double[code[1]] = stoi(var_value(code[2]));
+					var_double[code[1]] = stod(var_value(code[2]));
 				else if (code[2] == ":")
 					var_double[code[1]] = stod(nx());
+				else if (isstring(code[2]))
+				{
+					err(20);
+				}
 				else
-					var_double[code[1]] = stoi(code[2]);
+					var_double[code[1]] = stod(code[2]);
+				break;
+
+			case 5:
+				if (isvarok(code[2]))
+					var_int64[code[1]] = stoll(var_value(code[2]));
+				else if (code[2] == ":")
+					var_int64[code[1]] = stoll(nx());
+				else if (isstring(code[2]))
+				{
+					err(20);
+				}
+				else
+					var_int64[code[1]] = stoll(code[2]);
+				break;
+
+			case 6:
+				if (isvarok(code[2]))
+					var_ll[code[1]] = stoll(var_value(code[2]));
+				else if (code[2] == ":")
+					var_ll[code[1]] = stoll(nx());
+				else if (isstring(code[2]))
+				{
+					err(20);
+				}
+				else
+					var_ll[code[1]] = stoll(code[2]);
 				break;
 
 			default:
