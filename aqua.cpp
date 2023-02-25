@@ -420,7 +420,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 	vector<string> code = scriptcut(script);
 	string func = code[0];
 
-	// 実行時エラー防止
+	ll argn = code.size() - 1;
+
+	// 実行時エラー(SEGMENTATION FAULT)防止
 	for (int i = 0; i < 10; i++)
 	{
 		code.push_back("");
@@ -1232,6 +1234,67 @@ inline string aqua(string script, vector<string> line, int linenum)
 				label_list[code[1]] = code_line;
 			}
 		}
+		else if (func == "sum")
+		{
+			// 合計求めるよ～
+
+			// 出力だよ～ 小数とかも考えてlong doubleだよ～
+			ld ans = 0;
+
+			// 配列内全部チェックするよ～
+			rep(i, argn)
+			{
+
+				// 仮置き場～
+				string s = code[i + 1];
+
+				if (isvarok(s)) // これは変数?
+				{
+					try
+					{
+						ans += stold(var_value(s));
+					}
+					catch (const exception &e)
+					{
+						err(20);
+					}
+				}
+				else if (isstring(s)) // えっ、string!?
+				{
+					// stringはだめ!エラー投げる!
+					err(20);
+				}
+				else if (s == ":") // nextかぁ...
+				{
+					try
+					{
+						ans += stold(nx());
+					}
+					catch (const exception &e)
+					{
+						// まじで!?
+						err(20);
+					}
+				}
+				else
+				{ // どれも違う?
+
+					// じゃあ数値でしょ!一応tryしとくけど...
+					try
+					{
+						ans += stold(s);
+					}
+					catch (const exception &e)
+					{
+						// えぇ...
+						err(20);
+					}
+				}
+			}
+
+			// 全部終わり! じゃあね!
+			return to_string(ans);
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
@@ -1244,7 +1307,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 		}
 	}
-	else
+	else // インシデントが違うとき
 	{
 		if (func == "end")
 		{
@@ -1303,6 +1366,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 	}
 
+	// 未定義だよ～
 	return "undefined";
 }
 
