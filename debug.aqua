@@ -1,6 +1,12 @@
 
+var lfl a
+set a 1998
+
+var string str
+set str "Error :)"
+
 outf :
-lcm 333 54
+lcm 333 str
 # -> 1998
 
 
