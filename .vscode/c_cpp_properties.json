@@ -20,7 +20,8 @@
         {
             "name": "Win64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:\\mingw64\\lib"
             ],
             "defines": [
                 "_DEBUG",
@@ -28,10 +29,10 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.22000.0",
-            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x64/cl.exe",
+            "compilerPath": "C:/mingw64/bin/g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++23",
-            "intelliSenseMode": "windows-msvc-x64"
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4
