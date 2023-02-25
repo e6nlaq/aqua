@@ -1,8 +1,6 @@
 
-var int a
-set a 33
-
 outf :
-sum 1 2 a : bf24hi
-+ 1 4
+lcm 333 54
+# -> 1998
+
 

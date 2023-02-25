@@ -14,10 +14,6 @@
 #include "./lib/all.h"
 using namespace std;
 
-// Using Type
-using ll = long long;
-using ld = long double;
-
 // Macro
 #define co(x) cout << (x) << "\n"
 #define cou(x) cout << (x)
@@ -228,6 +224,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("nonexistent label");
 		break;
 
+	case 25:
+		co("Decimals not available");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -305,7 +305,7 @@ inline void usinglog(int id)
 inline string f_math(int id, string s, string t)
 {
 
-	ll a, b;
+	ld a, b;
 
 	if (isstring(s) || isstring(t))
 		err(20);
@@ -347,7 +347,7 @@ inline string f_math(int id, string s, string t)
 
 	case 5:
 		if (b != 0)
-			return to_string(a % b);
+			return to_string((ll)a % (ll)b);
 		else
 			err(11);
 		break;
@@ -371,6 +371,14 @@ inline string f_math(int id, string s, string t)
 
 	case 10:
 		return to_string(a >= b);
+		break;
+
+	case 11:
+		return to_string(a_gcd((ll)a, (ll)b));
+		break;
+
+	case 12:
+		return to_string(a_lcm((ll)a, (ll)b));
 		break;
 	}
 
@@ -1295,6 +1303,20 @@ inline string aqua(string script, vector<string> line, int linenum)
 			// 全部終わり! じゃあね!
 			return to_string(ans);
 		}
+		else if (func == "gcd")
+		{
+			if (argn != 2)
+				err(2);
+
+			return f_math(11, code[1], code[2]);
+		}
+		else if (func == "lcm")
+		{
+			if (argn != 2)
+				err(2);
+
+			return f_math(12, code[1], code[2]);
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
@@ -1497,7 +1519,7 @@ int main(int argc, char const *argv[])
 		aqua_get = getchar();
 	}
 
-	// Program End
+	// しゅ～りょ～
 
 	return 0;
 }

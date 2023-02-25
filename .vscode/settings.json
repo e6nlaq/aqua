@@ -6,6 +6,7 @@
         "bitset": "cpp",
         "system_error": "cpp",
         "cstdlib": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "numeric": "cpp"
     }
 }

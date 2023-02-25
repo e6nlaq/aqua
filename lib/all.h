@@ -14,3 +14,5 @@
 #include "./string.h"
 #include "./script.h"
 #include "./stdc++.h"
+#include "./math.h"
+#include "./type.h"

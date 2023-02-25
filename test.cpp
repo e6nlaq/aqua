@@ -7,7 +7,7 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 
-	cerr << "Error" << endl;
+	co(gcd(2, 3));
 
 	return 0;
 }
