@@ -13,6 +13,9 @@
 #pragma once
 
 #include <string>
+#include "./type.h"
+#include <cassert>
+#include <iostream>
 using namespace std;
 
 inline bool isint(string s)
@@ -32,11 +35,89 @@ inline bool isint(string s)
 inline string cutstr(string cut)
 {
 
-	string ret = "";
+	string ret = "", ans = "";
 
 	ret = cut.substr(1, cut.size() - 2);
 
-	return ret;
+	// エスケープシーケンス対応
+	for (ull i = 0; i < ret.size(); i++)
+	{
+		if (ret[i] == '\\')
+		{
+			// assert(ret[i + 1] == 'n');
+			if (i != ret.size() - 1)
+			{
+				// 次の文字によって変える
+				switch (ret[i + 1])
+				{
+
+				case 'a':
+					ans.push_back('\a');
+					break;
+
+				case 'b':
+					ans.push_back('\b');
+					break;
+
+				case 'f':
+					ans.push_back('\f');
+					break;
+
+				case 'n':
+					ans.push_back('\n');
+					break;
+
+				case 'r':
+					ans.push_back('\r');
+					break;
+
+				case 't':
+					ans.push_back('\t');
+					break;
+
+				case 'v':
+					ans.push_back('\v');
+					break;
+
+				case '\\':
+					ans.push_back('\\');
+					break;
+
+				case '?':
+					ans.push_back('\?');
+					break;
+
+				case '\'':
+					ans.push_back('\'');
+					break;
+
+				case '\"':
+					ans.push_back('\"');
+					break;
+
+				case '0':
+					ans.push_back('\0');
+					break;
+
+				default:
+					// 不正な場合は、C++と同様に
+					ans.push_back(ret[i + 1]);
+					break;
+				}
+				i++;
+			}
+			else
+			{
+				ans.push_back('\\');
+			}
+		}
+		else
+		{
+			ans.push_back(ret[i]);
+		}
+	}
+
+	return ans;
 }
 
 inline bool stob(string s)

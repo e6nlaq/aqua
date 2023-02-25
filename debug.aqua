@@ -1,12 +1,2 @@
 
-var lfl a
-set a 1998
-
-var string str
-set str "Error :)"
-
-outf :
-lcm 333 str
-# -> 1998
-
-
+outf "Hello\nWorld!"
