@@ -1,10 +1,2 @@
 
-var bool ea
-set ea true
-
-if :
-xor true true
-    outf "Yay!"
-else
-    outf ":("
-end if
+clear
