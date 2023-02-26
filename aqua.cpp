@@ -390,6 +390,18 @@ inline string f_math(int id, string s, string t)
 	case 12:
 		return to_string(a_lcm((ll)a, (ll)b));
 		break;
+
+	case 13:
+		return to_string((ll)a & ll(b));
+		break;
+
+	case 14:
+		return to_string((ll)a | ll(b));
+		break;
+
+	case 15:
+		return to_string((ll)a ^ ll(b));
+		break;
 	}
 
 	return "";
@@ -431,6 +443,10 @@ inline string f_trig(int id, string s)
 
 	case 6:
 		return to_string(is_prime((ll)a));
+		break;
+
+	case 7:
+		return to_string(!a);
 		break;
 	}
 
@@ -965,100 +981,19 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "and")
 		{
-			bool a, b;
-			if (isvarok(code[1]))
-			{
-				a = stob(var_value(code[1]));
-			}
-			else if (code[1] == ":")
-			{
-				a = stob(nx());
-			}
-			else
-				a = stob(code[1]);
-
-			if (isvarok(code[2]))
-			{
-				b = stob(var_value(code[2]));
-			}
-			else if (code[2] == ":")
-			{
-				b = stob(nx());
-			}
-			else
-				b = stob(code[2]);
-
-			return to_string(a && b);
+			return f_math(13, code[1], code[2]);
 		}
 		else if (func == "or")
 		{
-			bool a, b;
-			if (isvarok(code[1]))
-			{
-				a = stob(var_value(code[1]));
-			}
-			else if (code[1] == ":")
-			{
-				a = stob(nx());
-			}
-			else
-				a = stob(code[1]);
-
-			if (isvarok(code[2]))
-			{
-				b = stob(var_value(code[2]));
-			}
-			else if (code[2] == ":")
-			{
-				b = stob(nx());
-			}
-			else
-				b = stob(code[2]);
-
-			return to_string(a || b);
+			return f_math(14, code[1], code[2]);
 		}
 		else if (func == "xor")
 		{
-			bool a, b;
-			if (isvarok(code[1]))
-			{
-				a = stob(var_value(code[1]));
-			}
-			else if (code[1] == ":")
-			{
-				a = stob(nx());
-			}
-			else
-				a = stob(code[1]);
-
-			if (isvarok(code[2]))
-			{
-				b = stob(var_value(code[2]));
-			}
-			else if (code[2] == ":")
-			{
-				b = stob(nx());
-			}
-			else
-				b = stob(code[2]);
-
-			return to_string(a ^ b);
+			return f_math(15, code[1], code[2]);
 		}
 		else if (func == "not" || func == "!")
 		{
-			bool a;
-			if (isvarok(code[1]))
-			{
-				a = stob(var_value(code[1]));
-			}
-			else if (code[1] == ":")
-			{
-				a = stob(nx());
-			}
-			else
-				a = stob(code[1]);
-
-			return to_string(!a);
+			return f_trig(7, code[1]);
 		}
 		else if (func == "is")
 		{
