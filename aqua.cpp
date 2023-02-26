@@ -1035,7 +1035,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "clear")
 		{
-			system("clear");
+			cscle();
 		}
 		else if (func == "&")
 		{
