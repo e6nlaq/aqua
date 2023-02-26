@@ -1,2 +1,3 @@
 
-outf "Hello\nWorld!"
+outf :
+is_prime 3

@@ -428,6 +428,10 @@ inline string f_trig(int id, string s)
 	case 5:
 		return to_string(tanl(a));
 		break;
+
+	case 6:
+		return to_string(is_prime((ll)a));
+		break;
 	}
 
 	return "";
@@ -894,7 +898,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "if")
 		{
-			// co("ififif");
 			if (isvarok(code[1]))
 			{
 				runcode = stob(var_value(code[1]));
@@ -926,8 +929,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 				if (forever_line != -1)
 				{
 					code_line = forever_line;
-					// inc_now--;
-					// inc_code--;
 				}
 				else
 				{
@@ -1372,6 +1373,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 				err(2);
 
 			return f_math(12, code[1], code[2]);
+		}
+		else if (func == "is_prime")
+		{
+			return f_trig(6, code[1]);
 		}
 		else
 		{
