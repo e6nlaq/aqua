@@ -1,2 +1,4 @@
 
-clear
+style text red
+
+outf "AA"

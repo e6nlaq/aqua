@@ -47,6 +47,7 @@ int inc_code = 0;
 bool iswin = true;
 ll code_line = 0;
 ll forever_line = -1;
+const string version = "1.5.0 Preview";
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
