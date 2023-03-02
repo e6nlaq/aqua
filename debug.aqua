@@ -1,4 +1,7 @@
 
-style text red
+var ll A
 
-outf "AA"
+in A
+
+outf :
++ A 4

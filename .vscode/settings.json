@@ -7,6 +7,7 @@
         "system_error": "cpp",
         "cstdlib": "cpp",
         "iostream": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "cstdio": "cpp"
     }
 }

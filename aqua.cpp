@@ -22,7 +22,7 @@ using namespace std;
 #define rep(i, n) for (ll i = 0; i < (n); i++)
 #define sn(i) now(setting, (i));
 
-// Variant (Option)
+// optionの変数
 bool op_funcskip = false;
 bool op_stylereset = true;
 bool op_end_anykey = false;
@@ -30,7 +30,7 @@ bool op_over_var = false;
 bool st_using_yes = false;
 bool us_shell = false;
 
-// Variant
+// 変数
 map<string, int> var_int;
 map<string, string> var_string;
 map<string, bool> var_bool;
@@ -120,6 +120,15 @@ inline string var_value(string name)
 
 	case 4:
 		return to_string(var_double[name]);
+		break;
+
+	case 5:
+		return to_string(var_int64[name]);
+		break;
+
+	case 6:
+		return to_string(var_ll[name]);
+		break;
 
 	default:
 		errorlog(lines, linenume, 10);
@@ -251,6 +260,8 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 	co("Line " + to_string(linenum + 1));
 	co("Error location\n");
 
+	// エラーの周りの行を表示するやつ
+	// なんて親切((
 	if (sett[0])
 	{
 		if (linenum > 1)
@@ -276,6 +287,7 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 inline void usinglog(int id)
 {
+	// usingのやつ
 	string ans = "";
 	if (!st_using_yes)
 	{
@@ -297,7 +309,7 @@ inline void usinglog(int id)
 		cou("> ");
 
 		cin >> ans;
-		transform(all(ans), ans.begin(), ::tolower);
+		transform(all(ans), ans.begin(), ::tolower); // StackOverflow最強!
 	}
 
 	if (st_using_yes || ans == "y" || ans == "yes")
@@ -315,6 +327,8 @@ inline void usinglog(int id)
 
 inline string f_math(int id, string s, string t)
 {
+
+	// いろんな関数が使ってるやつ
 
 	ld a, b;
 
@@ -461,7 +475,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 	ll argn = code.size() - 1;
 
-	// 実行時エラー(SEGMENTATION FAULT)防止
+	// 実行時エラー(忌まわしきSEGMENTATION FAULT)防止
 	for (int i = 0; i < 10; i++)
 	{
 		code.push_back("");
@@ -536,10 +550,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "#" || func == "comment")
 		{
-			// Nothing. :)
+			// 何もない。何もしない。
 		}
 		else if (func == "exit")
 		{
+
+			// exit. そのまま。
+
 			if (code[1] == "")
 			{
 				exit(0);
@@ -551,6 +568,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "throw")
 		{
+
+			// 使う人おるの?
+
 			if (code[1] == "")
 			{
 				err(4);
@@ -562,6 +582,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "var")
 		{
+
+			// 新しい型追加するときめんどくさい(((
+
 			if (isvarok(code[2]))
 			{
 				if (dup_varname(code[2]) || op_over_var)
@@ -592,33 +615,39 @@ inline string aqua(string script, vector<string> line, int linenum)
 					}
 					else
 					{
-						err(6);
+						err(6); // 存在しない型の時
 					}
 				}
 				else
 				{
-					err(9);
+					err(9); // 変数が重複しているとき。optionで制御可能
 				}
 			}
 			else
 			{
-				err(8);
+				err(8); // やべえ名前の時
 			}
 		}
 		else if (func == "ln")
 		{
+
+			// 改行。エスケープシーケンス対応したから多分もう使わない。
+
 			if (code[1] == "")
 			{
 				cout << "\n";
 			}
 			else
 			{
-				for (int i = 0; i < stoi(code[1]); i++)
+				for (int i = 0; i < stoi(code[1]); i++) // rep使えよ
 					cout << "\n";
 			}
 		}
 		else if (func == "style")
 		{
+
+			// \033のやつ。意味わからん
+
 			if (sett[0])
 			{
 				if (code[1] == "text")
@@ -731,6 +760,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "in")
 		{
+
+			// 入力。型追加するときに忘れんな
+
 			switch (var_search(code[1]))
 			{
 			case 1:
@@ -749,6 +781,14 @@ inline string aqua(string script, vector<string> line, int linenum)
 				cin >> var_double[code[1]];
 				break;
 
+			case 5:
+				cin >> var_int64[code[1]];
+				break;
+
+			case 6:
+				cin >> var_ll[code[1]];
+				break;
+
 			default:
 				err(10);
 				break;
@@ -756,7 +796,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "set")
 		{
-			// co(to_string(isvarok(":")));
+
+			// 変数の中身を変更。上と同様
+
 			switch (var_search(code[1]))
 			{
 			case 1:
@@ -839,6 +881,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "flush")
 		{
+
+			// いるか?
+
 			cout << flush;
 		}
 		else if (func == "+")
