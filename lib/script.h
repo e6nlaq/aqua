@@ -23,15 +23,20 @@ inline vector<string> scriptcut(string line)
 	bool isstr = false;
 
 	int i = 0;
-	for (char c : line)
+
+	for (long long j = 0; j < line.size(); j++)
 	{
+
+		char c = line[j];
+
 		if (c != ' ')
 		{
 			if (c != '\t' && (c == '\n' || c >= ' '))
 				result[i] += c;
 			if (c == '\"')
 			{
-				isstr = !isstr;
+				if (line[j - 1] != '\\')
+					isstr = !isstr;
 			}
 		}
 		else
@@ -47,6 +52,10 @@ inline vector<string> scriptcut(string line)
 			}
 		}
 	}
+
+	// for (char c : line)
+	// {
+	// 	}
 
 	return result;
 }

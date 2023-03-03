@@ -57,7 +57,7 @@ inline void cscle();
 
 inline bool dup_varname(string name)
 {
-	if (var_int.count(name) || var_string.count(name) || var_bool.count(name) || var_double.count(name))
+	if (var_int.count(name) || var_string.count(name) || var_bool.count(name) || var_double.count(name) || var_int64.count(name) || var_ll.count(name))
 	{
 		return false;
 	}
@@ -99,7 +99,8 @@ inline int var_search(string name)
 
 inline bool m_numt(string name)
 {
-	return (var_search(name) == 1 || var_search(name) == 4);
+	const int tmp = var_search(name);
+	return (tmp == 1 || tmp == 4 || tmp == 5 || tmp == 6);
 }
 
 inline string var_value(string name)
@@ -470,6 +471,7 @@ inline string f_trig(int id, string s)
 
 inline string aqua(string script, vector<string> line, int linenum)
 {
+	// スペースごとに変換
 	vector<string> code = scriptcut(script);
 	string func = code[0];
 
