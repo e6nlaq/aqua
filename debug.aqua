@@ -1,2 +1,20 @@
 
-outf "\" a"
+# -> Fizz
+outf :
+fibz 3
+
+# -> Buzz
+outf :
+fibz 5
+
+# -> FizzBuzz
+outf :
+fibz 15
+
+# -> 2
+outf :
+fibz 2
+
+# -> Error
+outf :
+fibz "String"

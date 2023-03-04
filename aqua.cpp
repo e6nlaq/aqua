@@ -10,9 +10,12 @@
 
 *******************************************************/
 
+// やあ!このソースコードを見てるそこの君!
+// この難解なコードを読み解けるかな((
+
 // Include
 #include "./lib/all.h"
-using namespace std;
+using namespace std; // std?なにそれ
 
 // Macro
 #define co(x) cout << (x) << "\n"
@@ -501,7 +504,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "option")
 		{
 
-			// True or False?
+			// 大欠陥じゃねえかこれ
 			if (code[2] == "true" || code[2] == "false")
 			{
 
@@ -1467,6 +1470,8 @@ int main(int argc, char const *argv[])
 	var_int["api_version"] = 20230204;
 	var_bool["api_systrue"] = true;
 	var_bool["api_sysfalse"] = false;
+	var_string["api_version"] = version;
+	var_ll["api_randmax"] = RAND_MAX;
 
 #pragma endregion
 

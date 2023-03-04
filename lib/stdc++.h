@@ -35,3 +35,9 @@
 #include <numeric>
 #include <cassert>
 #include <time.h>
+#include <sys/stat.h>
+
+#if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#include <w32api.h>
+#endif
