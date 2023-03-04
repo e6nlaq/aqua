@@ -252,6 +252,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Decimals not available");
 		break;
 
+	case 26:
+		co("The value must be smaller on the left.");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -420,6 +424,15 @@ inline string f_math(int id, string s, string t)
 
 	case 15:
 		return to_string((ll)a ^ ll(b));
+		break;
+
+	case 16: // rand
+		if (a > b)
+		{
+			swap(a, b);
+		}
+
+		return to_string(rand() % ((ll)b - (ll)a + 1LL) + (ll)a);
 		break;
 	}
 
@@ -1363,6 +1376,15 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "is_prime")
 		{
 			return f_trig(6, code[1]);
+		}
+		else if (func == "rand")
+		{
+			// code[1]~code[2]までの乱数
+			return f_math(16, code[1], code[2]);
+		}
+		else if (func == "set_rand")
+		{
+			srand(time(NULL));
 		}
 		else
 		{
