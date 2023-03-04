@@ -36,8 +36,10 @@
 #include <cassert>
 #include <time.h>
 #include <sys/stat.h>
+#include <cstdlib>
+#include <ctime>
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
-#include <w32api.h>
+// #include <w32api.h>
 #endif
