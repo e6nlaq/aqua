@@ -38,8 +38,13 @@
 #include <sys/stat.h>
 #include <cstdlib>
 #include <ctime>
+#include <time.h>
+#include <chrono>
 
 #if defined(_WIN32) || defined(_WIN64)
+// windows
 #include <windows.h>
-// #include <w32api.h>
+#include <conio.h>
+#else
+// linux
 #endif

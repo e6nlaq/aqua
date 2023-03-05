@@ -1,5 +1,4 @@
 
-set_rand
 
 outf :
- rand 9 -100
+chr -65

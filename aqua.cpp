@@ -51,6 +51,7 @@ bool iswin = true;
 ll code_line = 0;
 ll forever_line = -1;
 const string version = "1.5.0 Preview";
+ll if_count = 0;
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -254,6 +255,14 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 26:
 		co("The value must be smaller on the left.");
+		break;
+
+	case 27:
+		co("Variables of invalid type");
+		break;
+
+	case 28:
+		co("The length of the string must be 1.");
 		break;
 
 	default:
@@ -479,6 +488,11 @@ inline string f_trig(int id, string s)
 
 	case 7:
 		return to_string(!a);
+		break;
+
+	case 8:
+		string k = {(char)a};
+		return k;
 		break;
 	}
 
@@ -978,6 +992,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "if")
 		{
+
+			if_count++;
+
 			if (isvarok(code[1]))
 			{
 				runcode = stob(var_value(code[1]));
@@ -1017,6 +1034,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else if (code[1] == "if")
 			{
+				if_count--;
+
+				if (if_count < 0)
+				{
+					err(19);
+				}
+
 				inc_now--;
 				inc_code--;
 			}
@@ -1386,6 +1410,49 @@ inline string aqua(string script, vector<string> line, int linenum)
 		{
 			srand(time(NULL));
 		}
+		else if (func == "ord")
+		{
+			// Pythonのordと一緒
+
+			string s = "";
+
+			if (isstring(code[1]))
+			{
+				s = cutstr(code[1]);
+			}
+			else if (isvarok(code[1]))
+			{
+				switch (var_search(code[1]))
+				{
+				case 3:
+					s = var_value(code[1]);
+					break;
+
+				case 0:
+					err(10);
+					break;
+
+				default:
+					err(27);
+					break;
+				}
+			}
+			else
+			{
+				err(2);
+			}
+
+			if (s.size() != 1)
+			{
+				err(28);
+			}
+
+			return to_string((int)s[0]);
+		}
+		else if (func == "chr")
+		{
+			return f_trig(8, code[1]);
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
@@ -1405,11 +1472,14 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			if (code[1] == "if")
 			{
+				if_count--;
+
 				// インシデントチェック
-				if (inc_now == 0 && inc_code == 0)
+				if (if_count < 0)
 					err(19);
 
 				inc_now--;
+				if_count--;
 			}
 		}
 		else if (func == "else")
@@ -1424,7 +1494,15 @@ inline string aqua(string script, vector<string> line, int linenum)
 				inc_now--;
 			}
 
+			if_count--;
+			if (if_count < 0)
+			{
+				err(19);
+			}
+
 			runcode = !runcode;
+
+			if_count++;
 
 			if (runcode)
 			{
@@ -1446,6 +1524,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				runcode = stob(code[1]);
 			}
+
+			if_count++;
 
 			if (runcode)
 			{

@@ -7,7 +7,7 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 
-	// co(6.5 & 7.4);
+	cout << (char)-29 << (char)-127 << (char)-126 << endl;
 
 	return 0;
 }
