@@ -1416,7 +1416,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "set_rand")
 		{
-			srand(time(NULL));
+			srand(time(NULL)); // 魔法の言葉
 		}
 		else if (func == "ord")
 		{
@@ -1445,6 +1445,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 					break;
 				}
 			}
+			else if (code[1] == ":")
+			{
+				s = nx();
+			}
 			else
 			{
 				err(2);
@@ -1463,7 +1467,43 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "at")
 		{
-			ll index = stoll(code[2]);
+			ll index = 0;
+			if (isstring(code[2]))
+			{
+				err(20);
+			}
+			else if (isvarok(code[2]))
+			{
+				switch (var_search(code[2]))
+				{
+				case 2:
+				case 3:
+				case 4:
+					err(27);
+					break;
+
+				case 0:
+					err(10);
+					break;
+
+				default:
+					index = stoll(var_value(code[2]));
+					break;
+				}
+			}
+			else if (isint(code[2]))
+			{
+				index = stoll(code[2]);
+			}
+			else if (code[2] == ":")
+			{
+				index = stoll(nx());
+			}
+			else
+			{
+				err(2);
+			}
+
 			string s = "";
 
 			if (isstring(code[1]))
@@ -1490,6 +1530,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(27);
 					break;
 				}
+			}
+			else if (code[1] == ":")
+			{
+				s = nx();
 			}
 			else
 			{
