@@ -1,3 +1,5 @@
 fibz
 out
 outf
+sh
+throw
