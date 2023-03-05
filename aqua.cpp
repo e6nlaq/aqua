@@ -265,6 +265,14 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("The length of the string must be 1.");
 		break;
 
+	case 29:
+		co("Numerical values are invalid.");
+		break;
+
+	case 30:
+		co("Out of Range");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -1452,6 +1460,51 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "chr")
 		{
 			return f_trig(8, code[1]);
+		}
+		else if (func == "at")
+		{
+			ll index = stoll(code[2]);
+			string s = "";
+
+			if (isstring(code[1]))
+			{
+				s = cutstr(code[1]);
+			}
+			else if (isint(code[1]))
+			{
+				err(29);
+			}
+			else if (isvarok(code[1]))
+			{
+				switch (var_search(code[1]))
+				{
+				case 2:
+					s = var_value(code[1]);
+					break;
+
+				case 0:
+					err(10);
+					break;
+
+				default:
+					err(27);
+					break;
+				}
+			}
+			else
+			{
+				err(2);
+			}
+
+			if (index > -1 && index < s.size())
+			{
+				string tmp = {s.at(index)};
+				return tmp;
+			}
+			else
+			{
+				err(30);
+			}
 		}
 		else
 		{

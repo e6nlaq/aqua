@@ -1,4 +1,6 @@
 
+var string S
+set S "Hello, world!"
 
 outf :
-chr -65
+at "ABC" 3
