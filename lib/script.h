@@ -31,7 +31,7 @@ inline vector<string> scriptcut(string line)
 
 		if (c != ' ')
 		{
-			if (c != '\t' && (c == '\n' || c >= ' '))
+			if (c != '\t' && (c == '\n' || c >= ' ' || c < 0))
 				result[i] += c;
 			if (c == '\"')
 			{

@@ -1592,6 +1592,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			return to_string(s.size());
 		}
+		else if (func == "?")
+		{
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
@@ -1785,7 +1788,11 @@ int main(int argc, char const *argv[])
 
 	while (getline(file, read_file))
 	{
+#ifdef WINDOWS
+		lines.push_back(utf8_to_ansi(read_file));
+#else
 		lines.push_back(read_file);
+#endif
 	}
 
 	// インシデント対応

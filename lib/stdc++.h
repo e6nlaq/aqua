@@ -46,6 +46,10 @@
 // windows
 #include <windows.h>
 #include <conio.h>
+#include "./strconv.h"
+
+#define WINDOWS 1
+
 #else
 // linux
 #endif
