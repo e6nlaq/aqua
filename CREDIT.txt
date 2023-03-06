@@ -1,0 +1,14 @@
+
+Below is a list of the library creators involved in the creation of Aqua.
+
+
+Library
+
+strconv.h - https://github.com/javacommons/strconv
+@javacommons - https://github.com/javacommons
+
+
+Inspiration
+
+ruby - https://github.com/ruby/ruby
+@matz - https://github.com/matz
