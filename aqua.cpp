@@ -1550,6 +1550,48 @@ inline string aqua(string script, vector<string> line, int linenum)
 				err(30);
 			}
 		}
+		else if (func == "len")
+		{
+			// やっぱりPython((
+
+			string s = "";
+
+			if (isstring(code[1]))
+			{
+				s = cutstr(code[1]);
+			}
+			else if (isint(code[1]))
+			{
+				err(29);
+			}
+			else if (isvarok(code[1]))
+			{
+				switch (var_search(code[1]))
+				{
+				case 2:
+					s = var_value(code[1]);
+					break;
+
+				case 0:
+					err(10);
+					break;
+
+				default:
+					err(27);
+					break;
+				}
+			}
+			else if (code[1] == ":")
+			{
+				s = nx();
+			}
+			else
+			{
+				err(2);
+			}
+
+			return to_string(s.size());
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')

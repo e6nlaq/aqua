@@ -143,8 +143,8 @@ inline vector<string> incident(vector<string> s)
 			}
 			else
 			{
-				// XXX: なんか動いた。
-				if (c > 31)
+
+				if ((int)c > 31 || (int)c < 0)
 					a.push_back(c);
 			}
 		}
