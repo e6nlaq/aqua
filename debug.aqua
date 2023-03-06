@@ -1,2 +1,5 @@
 ﻿
-outf "ああ"
+var string S
+set S "マジ!?変数も!?(OWO)"
+
+outf S
