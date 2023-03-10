@@ -1,5 +1,13 @@
 ﻿
-var string S
-set S "マジ!?変数も!?(OWO)"
+# -> 65
+outf :
+ord "A"
 
-outf S
+# -> 10
+outf :
+ord "\n"
+
+# Note that characters longer than two bytes will return an error.
+# -> Error
+outf :
+ord "😔"

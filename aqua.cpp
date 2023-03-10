@@ -10,12 +10,9 @@
 
 *******************************************************/
 
-// やあ!このソースコードを見てるそこの君!
-// この難解なコードを読み解けるかな((
-
 // Include
 #include "./lib/all.h"
-using namespace std; // std?なにそれ
+using namespace std;
 
 // Macro
 #define co(x) cout << (x) << "\n"
@@ -1332,19 +1329,19 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "sum")
 		{
-			// 合計求めるよ～
+			// 合計
 
-			// 出力だよ～ 小数とかも考えてlong doubleだよ～
+			// 返り値
 			ld ans = 0;
 
-			// 配列内全部チェックするよ～
+			// 全探索。多分大丈夫
 			rep(i, argn)
 			{
 
-				// 仮置き場～
+				// 仮(tmp)
 				string s = code[i + 1];
 
-				if (isvarok(s)) // これは変数?
+				if (isvarok(s)) // 変数の場合
 				{
 					try
 					{
@@ -1352,15 +1349,14 @@ inline string aqua(string script, vector<string> line, int linenum)
 					}
 					catch (const exception &e)
 					{
-						err(20);
+						err(20); // stringとかの場合
 					}
 				}
-				else if (isstring(s)) // えっ、string!?
+				else if (isstring(s)) // あからさまにstring("")の場合
 				{
-					// stringはだめ!エラー投げる!
 					err(20);
 				}
-				else if (s == ":") // nextかぁ...
+				else if (s == ":")
 				{
 					try
 					{
@@ -1368,22 +1364,19 @@ inline string aqua(string script, vector<string> line, int linenum)
 					}
 					catch (const exception &e)
 					{
-						// まじで!?
-						err(20);
+						err(20); // 一応
 					}
 				}
 				else
-				{ // どれも違う?
-
-					// じゃあ数値でしょ!一応tryしとくけど...
+				{
+					// 多分数値だけど一応try
 					try
 					{
 						ans += stold(s);
 					}
 					catch (const exception &e)
 					{
-						// えぇ...
-						err(20);
+						err(20); // 察し((
 					}
 				}
 			}

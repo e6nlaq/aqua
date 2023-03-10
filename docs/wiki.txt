@@ -1,4 +1,10 @@
+Aqua Binary
+exit
 fibz
+flush
+len
+ln
+ord
 out
 outf
 sh
