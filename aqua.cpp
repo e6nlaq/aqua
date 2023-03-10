@@ -10,7 +10,7 @@
 
 *******************************************************/
 
-// I
+// Include
 #include "./lib/all.h"
 using namespace std;
 
