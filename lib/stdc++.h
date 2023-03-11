@@ -52,4 +52,5 @@
 
 #else
 // linux
+#define LINUX 1
 #endif
