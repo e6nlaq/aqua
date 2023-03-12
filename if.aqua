@@ -1,0 +1,10 @@
+
+if true
+    outf "A"
+else
+    if true
+        outf "B"
+    else
+        outf "C"
+    end if
+end if

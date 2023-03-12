@@ -1,3 +1,21 @@
 ﻿
-outf :
-outf "ABC"
+var ll i
+var ll j
+set i 0
+set j 0
+
+while :
+< i 5
+    ++ i
+    outf i
+
+   
+
+    if true
+        outf "A"
+    else
+    end if
+
+end while
+
+outf "Job Completed"

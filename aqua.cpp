@@ -43,6 +43,7 @@ map<string, ll> var_ll;
 map<string, ll> label_list;
 vector<string> lines;
 vector<int> sett;
+vector<ll> while_line;
 int linenume;
 bool runcode = true;
 int inc_now = 0;
@@ -52,6 +53,7 @@ ll code_line = 0;
 ll forever_line = -1;
 const string version = "1.5.0 Preview 3";
 ll if_count = 0;
+ll while_count = 0;
 bool isnx = false;
 
 // 事前宣言
@@ -274,6 +276,18 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Out of Range");
 		break;
 
+	case 31:
+		co("There is no if corresponding to this end if.");
+		break;
+
+	case 32:
+		co("There is no corresponding while for this end while.");
+		break;
+
+	case 33:
+		co("There is no if corresponding to this else.");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -335,7 +349,7 @@ inline void usinglog(int id)
 		cou("> ");
 
 		cin >> ans;
-		transform(all(ans), ans.begin(), ::tolower); // StackOverflow最強!
+		transform(all(ans), ans.begin(), ::tolower); // StackOverflowから
 	}
 
 	if (st_using_yes || ans == "y" || ans == "yes")
@@ -377,70 +391,70 @@ inline string f_math(int id, string s, string t)
 
 	switch (id)
 	{
-	case 1:
+	case 1: // +
 		return to_string(a + b);
 		break;
 
-	case 2:
+	case 2: // -
 		return to_string(a - b);
 		break;
 
-	case 3:
+	case 3: // *
 		return to_string(a * b);
 		break;
 
-	case 4:
+	case 4: // /
 		if (b != 0)
 			return to_string(a / b);
 		else
 			err(11);
 		break;
 
-	case 5:
+	case 5: // %
 		if (b != 0)
 			return to_string((ll)a % (ll)b);
 		else
 			err(11);
 		break;
 
-	case 6:
+	case 6: // ^
 		return to_string(pow(a, b));
 		break;
 
-	case 7:
+	case 7: // >
 		return to_string(a > b);
 		break;
 
-	case 8:
+	case 8: // <
 		return to_string(a < b);
 
 		break;
 
-	case 9:
+	case 9: // <=
 		return to_string(a <= b);
 		break;
 
-	case 10:
+	case 10: // >=
 		return to_string(a >= b);
 		break;
 
-	case 11:
+	case 11: // gcd
 		return to_string(a_gcd((ll)a, (ll)b));
 		break;
 
-	case 12:
+	case 12: // lcm
 		return to_string(a_lcm((ll)a, (ll)b));
 		break;
 
-	case 13:
+	case 13: // and
 		return to_string((ll)a & ll(b));
 		break;
 
-	case 14:
+	case 14: // or
 		return to_string((ll)a | ll(b));
 		break;
 
-	case 15:
+	case 15: // xor
 		return to_string((ll)a ^ ll(b));
 		break;
 
@@ -506,6 +520,23 @@ inline string f_trig(int id, string s)
 	}
 
 	return "";
+}
+
+inline bool to_bool(string s)
+{
+	bool ret;
+	if (isvarok(s))
+	{
+		ret = stob(var_value(s));
+	}
+	else if (s == ":")
+		ret = stob(nx());
+	else
+	{
+		ret = stob(s);
+	}
+
+	return ret;
 }
 
 inline string aqua(string script, vector<string> line, int linenum)
@@ -1026,9 +1057,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "end")
 		{
 
-			// インシデントチェック
-			if (inc_now == 0 && inc_code == 0)
-				err(19);
+			// // インシデントチェック
+			// if (inc_now == 0 && inc_code == 0)
+			// 	err(19);
 
 			if (code[1] == "forever")
 			{
@@ -1053,10 +1084,24 @@ inline string aqua(string script, vector<string> line, int linenum)
 				inc_now--;
 				inc_code--;
 			}
+			else if (code[1] == "while")
+			{
+				while_count--;
+
+				if (while_count < 0)
+				{
+					err(32);
+				}
+
+				inc_code--;
+				inc_now--;
+				code_line = while_line.back() - 1;
+				while_line.pop_back();
+			}
 		}
 		else if (func == "else")
 		{
-			if (runcode)
+			if (inc_code == inc_now)
 			{
 				inc_now--;
 				inc_code--;
@@ -1066,7 +1111,15 @@ inline string aqua(string script, vector<string> line, int linenum)
 				inc_now--;
 			}
 
+			if_count--;
+			if (if_count < 0)
+			{
+				err(33); // 対応するifがない
+			}
+
 			runcode = !runcode;
+
+			if_count++;
 
 			if (runcode)
 			{
@@ -1592,6 +1645,21 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "?")
 		{
 		}
+		else if (func == "while")
+		{
+			runcode = to_bool(code[1]);
+			while_count++;
+
+			if (runcode) // ifのやつを流用
+			{
+				inc_now++;
+				inc_code++;
+			}
+			else
+				inc_now++;
+
+			while_line.push_back(code_line);
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
@@ -1611,19 +1679,32 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			if (code[1] == "if")
 			{
-				if_count--;
 
 				// インシデントチェック
-				if (if_count < 0)
-					err(19);
+				if (if_count <= 0)
+					err(31);
+
+				// if_count--;
 
 				inc_now--;
 				if_count--;
 			}
+			else if (code[1] == "while")
+			{
+				while_count--;
+
+				if (while_count < 0)
+				{
+					err(32);
+				}
+
+				inc_now--;
+				while_line.pop_back();
+			}
 		}
 		else if (func == "else")
 		{
-			if (runcode)
+			if (inc_code == inc_now)
 			{
 				inc_now--;
 				inc_code--;
@@ -1636,7 +1717,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			if_count--;
 			if (if_count < 0)
 			{
-				err(19);
+				err(33); // 対応するifがない
 			}
 
 			runcode = !runcode;
@@ -1673,6 +1754,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else
 				inc_now++;
+		}
+		else if (func == "while")
+		{
+			while_count++;
+			while_line.push_back(code_line);
+
+			inc_now++;
 		}
 	}
 
@@ -1799,6 +1887,7 @@ int main(int argc, char const *argv[])
 	// Aqua実行
 	for (code_line = 0; code_line < lines.size(); code_line++)
 	{
+		// cout << inc_now << " " << inc_code << endl;
 		linenume = code_line;
 		aqua(lines[code_line], lines, code_line);
 
