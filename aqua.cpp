@@ -10,11 +10,14 @@
 
 *******************************************************/
 
-// Include
+// All comments are written in Japanese.
+// Please understand.
+
+// インクルード
 #include "./lib/all.h"
 using namespace std;
 
-// Macro
+// マクロ
 #define co(x) cout << (x) << "\n"
 #define cou(x) cout << (x)
 #define err(x) errorlog(lines, code_line, (x));
@@ -47,8 +50,9 @@ int inc_code = 0;
 bool iswin = true;
 ll code_line = 0;
 ll forever_line = -1;
-const string version = "1.5.0 Preview";
+const string version = "1.5.0 Preview 3";
 ll if_count = 0;
+bool isnx = false;
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -1672,7 +1676,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 	}
 
-	// 未定義だよ～
+	// 未定義を返す
 	return "undefined";
 }
 
@@ -1682,6 +1686,7 @@ inline string nx()
 	code_line++;
 	ans = aqua(lines[code_line], lines, code_line);
 	code_line--;
+	isnx = true;
 	return ans;
 }
 
@@ -1796,6 +1801,12 @@ int main(int argc, char const *argv[])
 	{
 		linenume = code_line;
 		aqua(lines[code_line], lines, code_line);
+
+		if (isnx) // :使ったら繰り越し
+		{
+			code_line++;
+			isnx = false;
+		}
 	}
 
 	if (op_stylereset && sett[0])
@@ -1809,7 +1820,7 @@ int main(int argc, char const *argv[])
 		aqua_get = getchar();
 	}
 
-	// しゅ～りょ～
+	// 終了
 
 	return 0;
 }
@@ -1818,6 +1829,6 @@ int ans;
 
 inline void inp()
 {
-	cou("\n> ");
+	cou("\n>>> ");
 	cin >> ans;
 }
