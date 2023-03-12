@@ -1,13 +1,3 @@
 ﻿
-# -> 65
 outf :
-ord "A"
-
-# -> 10
-outf :
-ord "\n"
-
-# Note that characters longer than two bytes will return an error.
-# -> Error
-outf :
-ord "😔"
+outf "A"
