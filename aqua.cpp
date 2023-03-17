@@ -16,6 +16,7 @@
 // インクルード
 #include "./lib/all.h"
 using namespace std;
+// namespace fs = std::filesystem;
 
 // マクロ
 #define co(x) cout << (x) << "\n"
@@ -31,6 +32,7 @@ bool op_stylereset = true;
 bool op_end_anykey = false;
 bool op_over_var = false;
 bool st_using_yes = false;
+bool st_style = true;
 bool us_shell = false;
 
 // 変数
@@ -1902,14 +1904,31 @@ int main(int argc, char const *argv[])
 
 	// コマンド引数適用
 	if (count(all(args), "--no-style"))
+	{
 		sett = {0};
+		st_style = false;
+	}
 	else
+	{
 		sett = {1};
-
+		st_style = true;
+	}
 	if (count(all(args), "--yes"))
 		st_using_yes = true;
 	else
 		st_using_yes = false;
+
+	// ファイル存在チェック
+	FILE *fp = fopen(args[1].c_str(), "r");
+	if (fp == NULL)
+	{
+		if (st_style)
+			co("\033[31m\033[1mFatal error\033[m: File does not exist or cannot be opened.");
+		else
+			co("Fatal error: File does not exist or cannot be opened.");
+		exit(1);
+	}
+	fclose(fp);
 
 	// ファイル読み込み
 	ifstream file;
