@@ -1,10 +1,14 @@
 
 if true
-    outf "A"
+    outf "Hello, world!"
 else
     if true
-        outf "B"
+        outf "Hey"
     else
-        outf "C"
+        if true
+            outf "?"
+        else
+            outf "!"
+        end if
     end if
 end if

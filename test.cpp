@@ -1,5 +1,5 @@
 ﻿
-#include "./lib/all.h"
+#include <bits/stdc++.h>
 using namespace std;
 
 #define co(x) cout << (x) << "\n"
@@ -7,7 +7,10 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 
-	// co("AA".at(1));
+	int a = 0, b = 0;
+
+	co(&a);
+	co(&b);
 
 	return 0;
 }

@@ -1081,8 +1081,15 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(19);
 				}
 
-				inc_now--;
-				inc_code--;
+				if (runcode)
+				{
+					inc_now--;
+					inc_code--;
+				}
+				else
+				{
+					inc_now--;
+				}
 			}
 			else if (code[1] == "while")
 			{
@@ -1101,7 +1108,31 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "else")
 		{
-			if (inc_code == inc_now)
+
+			// inc_now--;
+			// inc_code--;
+
+			// if_count--;
+			// if (if_count < 0)
+			// {
+			// 	err(33); // 対応するifがない
+			// }
+
+			// runcode = !runcode;
+
+			// if_count++;
+
+			// if (runcode)
+			// {
+			// 	inc_now++;
+			// 	inc_code++;
+			// }
+			// else
+			// 	inc_now++;
+
+			if_count++;
+
+			if (runcode)
 			{
 				inc_now--;
 				inc_code--;
@@ -1111,15 +1142,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 				inc_now--;
 			}
 
-			if_count--;
-			if (if_count < 0)
-			{
-				err(33); // 対応するifがない
-			}
-
 			runcode = !runcode;
-
-			if_count++;
 
 			if (runcode)
 			{
@@ -1684,10 +1707,17 @@ inline string aqua(string script, vector<string> line, int linenum)
 				if (if_count <= 0)
 					err(31);
 
-				// if_count--;
-
-				inc_now--;
 				if_count--;
+
+				if (runcode)
+				{
+					inc_now--;
+					inc_code--;
+				}
+				else
+				{
+					inc_now--;
+				}
 			}
 			else if (code[1] == "while")
 			{
@@ -1704,7 +1734,30 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "else")
 		{
-			if (inc_code == inc_now)
+
+			// inc_now--;
+
+			// if_count--;
+			// if (if_count < 0)
+			// {
+			// 	err(33); // 対応するifがない
+			// }
+
+			// runcode = !runcode;
+
+			// if_count++;
+
+			// if (runcode)
+			// {
+			// 	inc_now++;
+			// 	inc_code++;
+			// }
+			// else
+			// 	inc_now++;
+
+			if_count++;
+
+			if (runcode)
 			{
 				inc_now--;
 				inc_code--;
@@ -1714,15 +1767,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 				inc_now--;
 			}
 
-			if_count--;
-			if (if_count < 0)
-			{
-				err(33); // 対応するifがない
-			}
-
 			runcode = !runcode;
-
-			if_count++;
 
 			if (runcode)
 			{
