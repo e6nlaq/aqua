@@ -16,6 +16,8 @@ while :
     else
     end if
 
+    outf "??"
+
 end while
 
 outf "Job Completed"
