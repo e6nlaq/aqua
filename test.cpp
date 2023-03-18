@@ -1,5 +1,6 @@
 ﻿
 #include <bits/stdc++.h>
+#include "./lib/filename.h"
 using namespace std;
 
 #define co(x) cout << (x) << "\n"
@@ -7,10 +8,7 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 
-	int a = 0, b = 0;
-
-	co(&a);
-	co(&b);
+	co(get_filename("ttqua"));
 
 	return 0;
 }

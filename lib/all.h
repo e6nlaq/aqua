@@ -16,4 +16,5 @@
 #include "./stdc++.h"
 #include "./math.h"
 #include "./type.h"
-// #include "./strconv.h"
+#include "./filename.h"
+// strconv.hはstdc++.h内でインクルード

@@ -25,6 +25,7 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 #define rep(i, n) for (ll i = 0; i < (n); i++)
 #define sn(i) now(setting, (i));
+#define jnx() js_next(line, linenum)
 
 // optionの変数
 bool op_funcskip = false;
@@ -56,13 +57,15 @@ ll forever_line = -1;
 const string version = "1.5.0 Preview 3";
 ll if_count = 0;
 ll while_count = 0;
-bool isnx = false;
+int isnx = 0;
+int isjnx = 0;
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
 inline string nx();
 inline void aqua_setting();
 inline void cscle();
+inline string to_js(string script, vector<string> line, int linenum);
 
 inline bool dup_varname(string name)
 {
@@ -1815,13 +1818,118 @@ inline string aqua(string script, vector<string> line, int linenum)
 	return "undefined";
 }
 
+inline string js_next(vector<string> line, int linenum)
+{
+	isjnx++;
+	return to_js(line[linenum + 1], line, linenum + 1);
+}
+
+// JavaScriptコンパイラ
+inline string to_js(string script, vector<string> line, int linenum)
+{
+	// スペースごとに変換
+	vector<string> code = scriptcut(script);
+	string func = code[0];
+	string ans = "";
+	// bool sc = true;
+
+	ll argn = code.size() - 1;
+
+	rep(i, code.size())
+	{
+		if (code[i] == ":")
+			code[i] = jnx();
+	}
+
+	// 実行時エラー(忌まわしきSEGMENTATION FAULT)防止
+	for (int i = 0; i < 10; i++)
+	{
+		code.push_back("");
+	}
+
+	if (func == "outf")
+	{
+		ans += "console.log(" + code[1] + ")";
+	}
+	else if (func == "?" || func == "" || func == "﻿")
+	{
+		// sc = false;
+	}
+	else if (func == "out")
+	{
+		ans += "process.stdout.write(" + code[1] + ")";
+	}
+	else if (func == "var")
+	{
+		ans += "var " + code[2];
+	}
+	else if (func == "set")
+	{
+		ans += code[1] + " = " + code[2];
+	}
+	else if (func == "+")
+	{
+		ans += code[1] + " + " + code[2];
+	}
+	else if (func == "-")
+	{
+		ans += code[1] + " - " + code[2];
+	}
+	else if (func == "*")
+	{
+		ans += code[1] + " * " + code[2];
+	}
+	else if (func == "/")
+	{
+		ans += code[1] + " / " + code[2];
+	}
+	else if (func == "%")
+	{
+		ans += code[1] + " % " + code[2];
+	}
+	else if (func == "^")
+	{
+		ans += code[1] + " ** " + code[2];
+	}
+	else if (func == "if")
+	{
+		ans += "if(" + code[1] + "){";
+	}
+	else if (func == "else")
+	{
+		ans += "}else{";
+	}
+	else if (func == "end")
+	{
+		ans += "}";
+	}
+	else if (func == "#" || func == "comment")
+	{
+		ans += "// ";
+		rep(i, argn)
+		{
+			ans += code[i + 1] + " ";
+		}
+	}
+	else if (func == "!" || func == "not")
+	{
+		ans += "!" + code[1];
+	}
+	else
+	{
+		ans += "// Unknown function " + func;
+	}
+
+	return ans;
+}
+
 inline string nx()
 {
 	string ans;
 	code_line++;
 	ans = aqua(lines[code_line], lines, code_line);
 	code_line--;
-	isnx = true;
+	isnx++;
 	return ans;
 }
 
@@ -1843,6 +1951,8 @@ int main(int argc, char const *argv[])
 	var_bool["true"] = true;
 	var_bool["false"] = false;
 	var_int["null"] = (int)NULL;
+	var_int["nan"] = var_int["NaN"] = (int)NAN;
+	var_ll["infinity"] = var_ll["Infinity"] = (ll)INFINITY;
 	var_double["pi"] = acos(-1);
 	var_int["api_version"] = 20230204;
 	var_bool["api_systrue"] = true;
@@ -1948,6 +2058,51 @@ int main(int argc, char const *argv[])
 	// インシデント対応
 	lines = incident(lines);
 
+	// コンパイラ
+	if (count(all(args), "-c") || count(all(args), "--compile"))
+	{
+		co("----------------------------------------------------------------------");
+		co("Aqua JavaScript Compiler v" + version);
+		co("Copyright (C) 2023 e6nlaq");
+		co("----------------------------------------------------------------------");
+
+		co("Compiling... " + args[1]);
+
+		string jsfile;
+
+		if (argc == 3)
+		{
+			jsfile = get_filename(args[1]) + ".js";
+		}
+		else
+		{
+			jsfile = args[2];
+		}
+
+		ofstream js;
+		js.open(jsfile, ios::out);
+
+		js << "\n// Created with Aqua JavaScript compiler.\n"
+		   << endl;
+
+		for (code_line = 0; code_line < lines.size(); code_line++)
+		{
+			linenume = code_line;
+#ifdef WINDOWS
+			js << ansi_to_utf8(to_js(lines[code_line], lines, code_line)) << endl;
+#else
+			js << to_js(lines[code_line], lines, code_line) << endl;
+#endif
+			if (isjnx)
+			{
+				code_line += isjnx;
+				isjnx = 0;
+			}
+		}
+
+		exit(0);
+	}
+
 	// Aqua実行
 	for (code_line = 0; code_line < lines.size(); code_line++)
 	{
@@ -1957,8 +2112,8 @@ int main(int argc, char const *argv[])
 
 		if (isnx) // :使ったら繰り越し
 		{
-			code_line++;
-			isnx = false;
+			code_line += isnx;
+			isnx = 0;
 		}
 	}
 
