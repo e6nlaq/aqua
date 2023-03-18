@@ -1,0 +1,16 @@
+
+Aqua Development License
+Created by e6nlaq
+
+
+The license of Aqua is the MIT License.
+However, if you have any inconvenience with the MIT license, you are allowed to use Aqua under this license.
+
+All copyrights of programs made with Aqua belong to their creators.
+The same is true for programs (compilers, modules, etc.) created based on Aqua, but
+Please give us a copyright notice (credit).
+
+Please use e6nlaq or sakamotor as a copyright notice.
+Since Aqua is open source, All Rights Reserved is not required.
+
+The creator and related parties assume no responsibility for programs related to Aqua.
