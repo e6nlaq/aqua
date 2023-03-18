@@ -52,7 +52,7 @@ outf B
 outf b
 
 var string s
-set s "ABC!"\n\n\n\na"
+set s "ABC!"
 
 if :
 ! false

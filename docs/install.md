@@ -16,8 +16,6 @@
 
 ```bash
 # Please specify the version.
-$ wget https://github.com/e6nlaq/aqua/archive/refs/tags/vX.X.X.tar.gz
-$ tar -zxvf vX.X.X.tar.gz
+$ wget https://github.com/e6nlaq/aqua/releases/download/vX.X.X/install-linux.sh
+$ ./install-linux.sh
 ```
-
-2. Add `bin/x64` or `x86` folder to `PATH`
