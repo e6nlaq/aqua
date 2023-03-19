@@ -57,16 +57,16 @@ console.log(b)
 var s
 s = "ABC!"
 
-if(!false){
-console.log("true")
+if (!false) {
+    console.log("true")
 }
 
 // Unknown function ln
 
-if(false){
-console.log("NO")
-}else{
-console.log("YES")
+if (false) {
+    console.log("NO")
+} else {
+    console.log("YES")
 }
 
 
@@ -74,8 +74,8 @@ console.log(2 ** 5)
 
 console.log("おい!日本語対応してるか!")
 
-if(false){
+if (false) {
 
-}else{
+} else {
 
 }

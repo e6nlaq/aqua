@@ -67,6 +67,20 @@ inline void aqua_setting();
 inline void cscle();
 inline string to_js(string script, vector<string> line, int linenum);
 
+inline void warn(string s)
+{
+	if (st_style)
+	{
+		cout << "\033[33m\033[1mWarning\033[m: ";
+	}
+	else
+	{
+		cout << "Warning: ";
+	}
+
+	cout << s << "\n";
+}
+
 inline bool dup_varname(string name)
 {
 	if (var_int.count(name) || var_string.count(name) || var_bool.count(name) || var_double.count(name) || var_int64.count(name) || var_ll.count(name))
@@ -1915,6 +1929,20 @@ inline string to_js(string script, vector<string> line, int linenum)
 	{
 		ans += "!" + code[1];
 	}
+	else if (func == "forever")
+	{
+		ans += "while(true){";
+	}
+	else if (func == "break")
+	{
+		ans += "break";
+	}
+	else if (func == "style")
+	{
+		string s = "";
+
+		ans += "process.stdout.write(\"" + s + "\")";
+	}
 	else
 	{
 		ans += "// Unknown function " + func;
@@ -1962,8 +1990,34 @@ int main(int argc, char const *argv[])
 
 #pragma endregion
 
+#if defined(__unix__) || defined(__unix__)
+#define LINUX 1
+	iswin = false;
+#endif
+
 	// 引数をvector<string>に変換
 	vector<string> args(argv, argv + argc);
+
+	// 最優先オプション
+	if (count(all(args), "--win"))
+	{
+		if (!iswin)
+		{
+			iswin = true;
+		}
+		else
+			warn("It is already Windows.");
+	}
+
+	if (count(all(args), "--unix"))
+	{
+		if (iswin)
+		{
+			iswin = false;
+		}
+		else
+			warn("It is already UNIX.");
+	}
 
 	// 何もオプションがない場合
 
@@ -2008,7 +2062,7 @@ int main(int argc, char const *argv[])
 	}
 
 	// UNIXだったらfalse
-#if defined(__unix) || defined(__unix__)
+#ifdef LINUX
 	iswin = false;
 #endif
 
