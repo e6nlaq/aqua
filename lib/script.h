@@ -60,7 +60,6 @@ inline vector<string> scriptcut(string line)
 
 inline bool isvarok(string s)
 {
-
 	if (s == "")
 		return false;
 
@@ -92,26 +91,6 @@ inline string bond(string a, string b)
 	return a + b;
 }
 
-// string ret(string type, string value)
-// {
-// 	if (type == "int")
-// 	{
-// 		return bond("001", value);
-// 	}
-// 	else if (type == "string")
-// 	{
-// 		return bond("002", value);
-// 	}
-// 	else if (type == "bool")
-// 	{
-// 		return bond("003", value);
-// 	}
-// 	else if (type == "double")
-// 	{
-// 		return bond("004", value);
-// 	}
-// }
-
 inline string boty(string s)
 {
 	return s.substr(3);
@@ -141,7 +120,6 @@ inline vector<string> incident(vector<string> s)
 			}
 			else
 			{
-
 				if ((int)c > 31 || (int)c < 0)
 					a.push_back(c);
 			}

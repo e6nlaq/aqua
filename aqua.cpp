@@ -386,7 +386,6 @@ inline void usinglog(int id)
 
 inline string f_math(int id, string s, string t)
 {
-
 	// いろんな関数が使ってるやつ
 
 	ld a, b;
@@ -483,6 +482,7 @@ inline string f_math(int id, string s, string t)
 			swap(a, b);
 		}
 
+		// rand_r使えって言われるけどVC++で使えないから却下
 		return to_string(rand() % ((ll)b - (ll)a + 1LL) + (ll)a);
 		break;
 	}
@@ -589,7 +589,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "option")
 		{
-
 			// 大欠陥じゃねえかこれ
 			if (code[2] == "true" || code[2] == "false")
 			{
@@ -626,6 +625,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "outf")
 		{
+			// 改行付き出力。fついてるけどflushしない
+
 			if (isstring(code[1]))
 				outf(cutstr(code[1]));
 			else if (code[1] == ":")
@@ -645,8 +646,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "exit")
 		{
-
-			// exit. そのまま。
+			// 終了コード指定可exit
 
 			if (code[1] == "")
 			{
@@ -659,8 +659,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "throw")
 		{
-
-			// 使う人おるの?
+			// 例外を投げる
 
 			if (code[1] == "")
 			{
@@ -673,7 +672,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "var")
 		{
-
 			// 新しい型追加するときめんどくさい(((
 
 			if (isvarok(code[2]))
@@ -721,7 +719,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "ln")
 		{
-
 			// 改行。エスケープシーケンス対応したから多分もう使わない。
 
 			if (code[1] == "")
@@ -736,7 +733,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "style")
 		{
-
 			// \033のやつ。意味わからん
 
 			if (sett[0])
@@ -851,7 +847,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "in")
 		{
-
 			// 入力。型追加するときに忘れんな
 
 			switch (var_search(code[1]))

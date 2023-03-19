@@ -9,7 +9,6 @@ using ll = long long;
 
 int main(int argc, char const *argv[])
 {
-
 	rep(i, 10000)
 	{
 		if (is_prime(i + 1))

@@ -34,7 +34,6 @@ inline bool isint(string s)
 
 inline string cutstr(string cut)
 {
-
 	string ret = "", ans = "";
 
 	ret = cut.substr(1, cut.size() - 2);
@@ -50,7 +49,6 @@ inline string cutstr(string cut)
 				// 次の文字によって変える
 				switch (ret[i + 1])
 				{
-
 				case 'a':
 					ans.push_back('\a');
 					break;
@@ -122,7 +120,6 @@ inline string cutstr(string cut)
 
 inline bool stob(string s)
 {
-
 	if (s == "true")
 		return true;
 
