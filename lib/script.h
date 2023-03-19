@@ -17,7 +17,6 @@ using namespace std;
 
 inline vector<string> scriptcut(string line)
 {
-
 	vector<string> result(1, "");
 	string copystr = "";
 	bool isstr = false;
@@ -26,7 +25,6 @@ inline vector<string> scriptcut(string line)
 
 	for (long long j = 0; j < line.size(); j++)
 	{
-
 		char c = line[j];
 
 		if (c != ' ')

@@ -47,10 +47,11 @@
 #include <windows.h>
 #include <conio.h>
 #include "./strconv.h"
-
 #define WINDOWS 1
+#endif
 
-#else
-// linux
+#if defined(__unix) || defined(__unix__)
+// linux / unix
 #define LINUX 1
+#undef WINDOWS
 #endif
