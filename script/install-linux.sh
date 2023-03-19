@@ -3,7 +3,7 @@
 # This file is part of aqua.
 # Licensed under the MIT License.
 
-now=`pwd`
+now=$(pwd)
 mkdir temp
 cd temp
 tag="1.5.0-pre3"
