@@ -1,7 +1,5 @@
 # Aqua
 
-<!-- READMEソースを見てるそこの君! Aquaは、BasicとPythonとRubyを足して3で割ったような言語だぞ! -->
-
 <img src="./image/aqua-full.png" width="400px"></img>
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/e6nlaq/aqua?label=Repo%20Size&logo=github)
@@ -16,13 +14,11 @@
 
 Aqua is a fast, short, and easy programming language.
 
-Very simply, it is `(Basic + Ruby + Python) / 3`. (LOL)
-
 ## Operating Environment
 
 Operation has been verified in the following environments.
 
-- Windows11 22H2 (OS Build 22621.1265)
+- Windows11 22H2 (OS Build 22621.1413)
 - Ubuntu 22.04.1 LTS
 
 ## Install
