@@ -1,3 +1,6 @@
 ﻿
-outf :
-getline
+
+var int B 3
+
+var int A B
+outf A
