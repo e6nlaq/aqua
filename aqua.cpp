@@ -485,6 +485,14 @@ inline string f_math(int id, string s, string t)
 		// rand_r使えって言われるけどVC++で使えないから却下
 		return to_string(rand() % ((ll)b - (ll)a + 1LL) + (ll)a);
 		break;
+
+	case 17: // lsh
+		return to_string((ll)a << (ll)b);
+		break;
+
+	case 18: // rsh
+		return to_string((ll)a >> (ll)b);
+		break;
 	}
 
 	return "";
@@ -1720,6 +1728,14 @@ inline string aqua(string script, vector<string> line, int linenum)
 			string s = "undefined";
 			getline(cin, s);
 			return s;
+		}
+		else if (func == "lsh")
+		{
+			return f_math(17, code[1], code[2]);
+		}
+		else if (func == "rsh")
+		{
+			return f_math(18, code[1], code[2]);
 		}
 		else
 		{
