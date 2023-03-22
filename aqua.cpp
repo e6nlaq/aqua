@@ -672,7 +672,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "var")
 		{
-			// 新しい型追加するときめんどくさい(((
+			// 変数宣言
 
 			if (isvarok(code[2]))
 			{
@@ -1696,6 +1696,12 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			while_line.push_back(code_line);
 		}
+		else if (func == "getline")
+		{
+			string s = "undefined";
+			getline(cin, s);
+			return s;
+		}
 		else
 		{
 			if (!op_funcskip && func != "" && func[0] >= '0')
@@ -1747,27 +1753,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "else")
 		{
-
-			// inc_now--;
-
-			// if_count--;
-			// if (if_count < 0)
-			// {
-			// 	err(33); // 対応するifがない
-			// }
-
-			// runcode = !runcode;
-
-			// if_count++;
-
-			// if (runcode)
-			// {
-			// 	inc_now++;
-			// 	inc_code++;
-			// }
-			// else
-			// 	inc_now++;
-
 			if_count++;
 
 			if (runcode)
