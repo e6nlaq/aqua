@@ -1,6 +1,6 @@
 ﻿
+outf :
+lsh 3 7
 
-var int B 3
-
-var int A B
-outf A
+outf :
+rsh 888 1
