@@ -1,8 +1,4 @@
 ﻿
-var int i 0
-
-until :
->= i 10
-    ++ i
-    outf i
-end until
+var int A 10
+exit :
+- A 10

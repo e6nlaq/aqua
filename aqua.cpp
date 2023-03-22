@@ -572,6 +572,30 @@ inline bool to_bool(string s)
 	return ret;
 }
 
+inline ld to_num(string s)
+{
+	ld ret;
+	if (isvarok(s))
+	{
+		ret = stold(var_value(s));
+	}
+	else if (s == ":")
+		ret = stold(nx());
+	else
+	{
+		try
+		{
+			ret = stold(s);
+		}
+		catch (const std::exception &e)
+		{
+			err(20);
+		}
+	}
+
+	return ret;
+}
+
 inline string aqua(string script, vector<string> line, int linenum)
 {
 	// スペースごとに変換
@@ -592,49 +616,46 @@ inline string aqua(string script, vector<string> line, int linenum)
 		// 以下、関数記述
 		if (func == "out")
 		{
+			// 全ての始まり。改行なし出力
+
 			if (code[1][0] == '\"')
 				out(cutstr(code[1]));
 			else if (code[1] == ":")
 				out(nx());
-			else
+			else if (isvarok(code[1]))
 			{
 				out(var_value(code[1]));
 			}
+			else
+				err(2);
 		}
 		else if (func == "option")
 		{
-			// 大欠陥じゃねえかこれ
-			if (code[2] == "true" || code[2] == "false")
-			{
+			// オプション。色々。
 
-				if (code[1] == "function_skip")
-				{
-					op_funcskip = stob(code[2]);
-				}
-				else if (code[1] == "reset_style")
-				{
-					op_stylereset = stob(code[2]);
-				}
-				else if (code[1] == "end_anykey")
-				{
-					op_end_anykey = stob(code[2]);
-				}
-				else if (code[1] == "set_few")
-				{
-					cout << fixed << setprecision(stoi(code[2]));
-				}
-				else if (code[1] == "over_var")
-				{
-					op_over_var = stob(code[2]);
-				}
-				else
-				{
-					errorlog(line, linenum, 3);
-				}
+			if (code[1] == "function_skip")
+			{
+				op_funcskip = stob(code[2]);
+			}
+			else if (code[1] == "reset_style")
+			{
+				op_stylereset = stob(code[2]);
+			}
+			else if (code[1] == "end_anykey")
+			{
+				op_end_anykey = stob(code[2]);
+			}
+			else if (code[1] == "set_few")
+			{
+				cout << fixed << setprecision(stoi(code[2]));
+			}
+			else if (code[1] == "over_var")
+			{
+				op_over_var = stob(code[2]);
 			}
 			else
 			{
-				err(2);
+				err(3);
 			}
 		}
 		else if (func == "outf")
@@ -662,14 +683,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		{
 			// 終了コード指定可exit
 
-			if (code[1] == "")
-			{
-				exit(0);
-			}
-			else
-			{
-				exit(stoi(code[1]));
-			}
+			exit((ll)to_num(code[1]));
 		}
 		else if (func == "throw")
 		{
@@ -681,7 +695,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else
 			{
-				err(stoi(code[1]));
+				err((ll)to_num(code[1]));
 			}
 		}
 		else if (func == "var")
@@ -760,7 +774,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else
 			{
-				for (int i = 0; i < stoi(code[1]); i++) // rep使えよ
+				for (ll i = 0; i < (ll)to_num(code[1]); i++) // rep使えよ
 					cout << "\n";
 			}
 		}
@@ -880,7 +894,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "in")
 		{
-			// 入力。型追加するときに忘れんな
+			// 変数の空白区切り入力
 
 			switch (var_search(code[1]))
 			{
@@ -915,7 +929,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "set")
 		{
-			// 変数の中身を変更。上と同様
+			// 変数の中身を変更
 
 			switch (var_search(code[1]))
 			{
@@ -999,8 +1013,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "flush")
 		{
-
-			// いるか?
+			// 出力をフラッシュ
 
 			cout << flush;
 		}
@@ -1241,6 +1254,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "clear")
 		{
+			// 出力全クリア
+			// 動作は環境依存
+
 			cscle();
 		}
 		else if (func == "&")
@@ -1295,38 +1311,31 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			if (!isint(code[1]))
 			{
-				// あ～ね。ラベル系ね。
 				if (label_list.count(code[1]))
 				{
-					// あ～おｋ、そのラベルね
 					code_line = label_list[code[1]];
 				}
 				else
 				{
-					// そんなラベルねえよ。先にあるんじゃないの?
 					auto itr = find(all(lines), "label " + code[1]);
 
 					if (itr != lines.end())
 					{
-						// な～んだ。あるじゃねえか。
 						code_line = distance(lines.begin(), itr);
 					}
 					else
 					{
-						// マジでねえじゃねえか! おい! エラーぶん投げるぞ!
 						err(24);
 					}
 				}
 			}
 			else if (code[1] == ":")
 			{
-				// え? next?
 				code_line = stoll(nx());
 				code_line -= 2;
 			}
 			else
 			{
-				// 数値直接指定????まじ????
 				if (stoll(code[1]) < 1)
 					err(17);
 				code_line = stoll(code[1]);
@@ -1422,6 +1431,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "label")
 		{
+			// ラベル
+			// gotoと合わせて使用
 
 			// 形式検査
 			if (code[1] == "")
