@@ -9,10 +9,13 @@ using ll = long long;
 
 int main(int argc, char const *argv[])
 {
-	rep(i, 10000)
+	if (NULL)
 	{
-		if (is_prime(i + 1))
-			co(i + 1);
+		co("Yes");
+	}
+	else
+	{
+		co("No");
 	}
 
 	return 0;

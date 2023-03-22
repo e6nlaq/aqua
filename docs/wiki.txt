@@ -1,9 +1,12 @@
 Aqua Binary
+comment(#)
 exit
 fibz
 flush
+in
 len
 ln
+Math operators
 ord
 out
 outf
