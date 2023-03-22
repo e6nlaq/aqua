@@ -47,6 +47,7 @@ map<string, ll> label_list;
 vector<string> lines;
 vector<int> sett;
 vector<ll> while_line;
+vector<ll> until_line;
 int linenume;
 bool runcode = true;
 int inc_now = 0;
@@ -57,6 +58,7 @@ ll forever_line = -1;
 const string version = "1.5.0 Preview 3";
 ll if_count = 0;
 ll while_count = 0;
+ll until_count = 0;
 int isnx = 0;
 int isjnx = 0;
 
@@ -305,6 +307,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 33:
 		co("There is no if corresponding to this else.");
+		break;
+
+	case 34:
+		co("There is no corresponding while for this end until.");
 		break;
 
 	default:
@@ -1096,11 +1102,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "end")
 		{
-
-			// // インシデントチェック
-			// if (inc_now == 0 && inc_code == 0)
-			// 	err(19);
-
 			if (code[1] == "forever")
 			{
 				if (forever_line != -1)
@@ -1145,31 +1146,23 @@ inline string aqua(string script, vector<string> line, int linenum)
 				code_line = while_line.back() - 1;
 				while_line.pop_back();
 			}
+			else if (code[1] == "until")
+			{
+				until_count--;
+
+				if (until_count < 0)
+				{
+					err(32);
+				}
+
+				inc_code--;
+				inc_now--;
+				code_line = until_line.back() - 1;
+				until_line.pop_back();
+			}
 		}
 		else if (func == "else")
 		{
-
-			// inc_now--;
-			// inc_code--;
-
-			// if_count--;
-			// if (if_count < 0)
-			// {
-			// 	err(33); // 対応するifがない
-			// }
-
-			// runcode = !runcode;
-
-			// if_count++;
-
-			// if (runcode)
-			// {
-			// 	inc_now++;
-			// 	inc_code++;
-			// }
-			// else
-			// 	inc_now++;
-
 			if_count++;
 
 			if (runcode)
@@ -1723,6 +1716,21 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 			while_line.push_back(code_line);
 		}
+		else if (func == "until")
+		{
+			runcode = !to_bool(code[1]);
+			until_count++;
+
+			if (runcode)
+			{
+				inc_now++;
+				inc_code++;
+			}
+			else
+				inc_now++;
+
+			until_line.push_back(code_line);
+		}
 		else if (func == "getline")
 		{
 			string s = "undefined";
@@ -1785,6 +1793,18 @@ inline string aqua(string script, vector<string> line, int linenum)
 				inc_now--;
 				while_line.pop_back();
 			}
+			else if (code[1] == "until")
+			{
+				until_count--;
+
+				if (until_count < 0)
+				{
+					err(34);
+				}
+
+				inc_now--;
+				until_line.pop_back();
+			}
 		}
 		else if (func == "else")
 		{
@@ -1837,6 +1857,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 		{
 			while_count++;
 			while_line.push_back(code_line);
+
+			inc_now++;
+		}
+		else if (func == "until")
+		{
+			until_count++;
+			until_line.push_back(code_line);
 
 			inc_now++;
 		}

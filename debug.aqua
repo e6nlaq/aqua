@@ -1,6 +1,8 @@
 ﻿
-outf :
-lsh 3 7
+var int i 0
 
-outf :
-rsh 888 1
+until :
+>= i 10
+    ++ i
+    outf i
+end until
