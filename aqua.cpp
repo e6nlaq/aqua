@@ -674,33 +674,52 @@ inline string aqua(string script, vector<string> line, int linenum)
 		{
 			// 変数宣言
 
+			bool changed = false; // 初期値を自動的に変更したか否か
+
+			if (code[3] == "")
+			{
+				changed = true;
+				code[3] = "0";
+			}
+
+			if (isvarok(code[3]))
+			{
+				code[3] = var_value(code[3]);
+			}
+
 			if (isvarok(code[2]))
 			{
 				if (dup_varname(code[2]) || op_over_var)
 				{
 					if (code[1] == "int")
 					{
-						var_int[code[2]] = 0;
+						var_int[code[2]] = stoi(code[3]);
 					}
 					else if (code[1] == "string")
 					{
-						var_string[code[2]] = "";
+						if (changed)
+							var_string[code[2]] = "";
+						else
+							var_string[code[2]] = cutstr(code[3]);
 					}
 					else if (code[1] == "bool")
 					{
-						var_bool[code[2]] = true;
+						if (changed)
+							var_bool[code[2]] = true;
+						else
+							var_bool[code[2]] = stob(code[3]);
 					}
 					else if (code[1] == "double")
 					{
-						var_double[code[2]] = 0.0;
+						var_double[code[2]] = stod(code[3]);
 					}
 					else if (code[1] == "int64_t")
 					{
-						var_int64[code[2]] = 0;
+						var_int64[code[2]] = stoll(code[3]);
 					}
 					else if (code[1] == "longlong" || code[1] == "ll")
 					{
-						var_ll[code[2]] = 0ll;
+						var_ll[code[2]] = stoll(code[3]);
 					}
 					else
 					{

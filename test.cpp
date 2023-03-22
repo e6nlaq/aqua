@@ -9,14 +9,7 @@ using ll = long long;
 
 int main(int argc, char const *argv[])
 {
-	if (NULL)
-	{
-		co("Yes");
-	}
-	else
-	{
-		co("No");
-	}
+	co(stoi(""));
 
 	return 0;
 }
