@@ -1,7 +1,6 @@
 ﻿
-if
-
-end if
+if "A"
+    outf "AA"
 else
-
+    outf "VV"
 end if

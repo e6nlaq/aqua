@@ -118,6 +118,11 @@ inline string cutstr(string cut)
 	return ans;
 }
 
+inline bool isstring(string str)
+{
+	return str[0] == '\"' && str[str.size() - 1] == '\"';
+}
+
 inline bool stob(string s)
 {
 	if (s == "true")
@@ -128,11 +133,10 @@ inline bool stob(string s)
 		if (stoi(s) != 0)
 			return true;
 	}
+	if (isstring(s))
+	{
+		return true;
+	}
 
 	return false;
-}
-
-inline bool isstring(string str)
-{
-	return str[0] == '\"';
 }

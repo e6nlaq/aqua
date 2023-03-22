@@ -882,7 +882,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "set")
 		{
-
 			// 変数の中身を変更。上と同様
 
 			switch (var_search(code[1]))
