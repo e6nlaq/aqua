@@ -16,7 +16,6 @@
 // インクルード
 #include "./lib/all.h"
 using namespace std;
-// namespace fs = std::filesystem;
 
 // マクロ
 #define co(x) cout << (x) << "\n"
@@ -27,7 +26,7 @@ using namespace std;
 #define sn(i) now(setting, (i));
 #define jnx() js_next(line, linenum)
 
-// optionの変数
+// optionとかの変数
 bool op_funcskip = false;
 bool op_stylereset = true;
 bool op_end_anykey = false;
@@ -35,6 +34,9 @@ bool op_over_var = false;
 bool st_using_yes = false;
 bool st_style = true;
 bool us_shell = false;
+bool us_net = false;
+bool tooljs = false;
+bool toolpy = false;
 
 // 変数
 map<string, int> var_int;
@@ -55,7 +57,7 @@ int inc_code = 0;
 bool iswin = true;
 ll code_line = 0;
 ll forever_line = -1;
-const string version = "1.5.0 Preview 3";
+const string version = "1.5.0";
 ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
@@ -66,7 +68,6 @@ int isjnx = 0;
 inline void errorlog(vector<string> line, int linenum, int errorcode);
 inline string nx();
 inline void aqua_setting();
-inline void cscle();
 inline string to_js(string script, vector<string> line, int linenum);
 
 inline void warn(string s)
@@ -313,6 +314,22 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("There is no corresponding while for this end until.");
 		break;
 
+	case 35:
+		co("Aqua Tools does not exist");
+		break;
+
+	case 36:
+		co("Requires Aqua Tools to run.");
+		break;
+
+	case 37:
+		co("In JavaScript, you can use `http://... ` is not supported.");
+		break;
+
+	case 38:
+		co("Spaces are not allowed at the end of file or folder names.");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -345,7 +362,7 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 	{
 		co(to_string(linenum + 1) + "| " + line[linenum]);
 	}
-	exit(-1);
+	exit(1);
 
 #pragma endregion
 }
@@ -368,6 +385,10 @@ inline void usinglog(int id)
 			co("Shell");
 			co("All operations on this OS and PC");
 			break;
+
+		case 2:
+			co("Network");
+			co("Connect to the Internet and retrieve information");
 		}
 
 		co("\nAre you sure you want to do this? (Y/n)");
@@ -383,6 +404,11 @@ inline void usinglog(int id)
 		{
 		case 1:
 			us_shell = true;
+			break;
+
+		case 2:
+			us_net = true;
+			break;
 		}
 	}
 
@@ -596,12 +622,34 @@ inline ld to_num(string s)
 	return ret;
 }
 
+inline string get_str(string s)
+{
+	string ret;
+	if (isvarok(s))
+	{
+		ret = var_value(s);
+	}
+	else if (s == ":")
+		ret = nx();
+	else if (isstring(s))
+	{
+		ret = cutstr(s);
+	}
+	else
+	{
+		ret = s;
+	}
+
+	return ret;
+}
+
 inline string aqua(string script, vector<string> line, int linenum)
 {
 	// スペースごとに変換
 	vector<string> code = scriptcut(script);
 	string func = code[0];
 
+	// funcを含まない引数の数
 	ll argn = code.size() - 1;
 
 	// 実行時エラー(忌まわしきSEGMENTATION FAULT)防止
@@ -1420,9 +1468,49 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "using")
 		{
+			// 拡張機能的な何か
+			// 使用するたびに確認入る(aqua-toolsを除く)
 			if (code[1] == "sh" || code[1] == "shell")
 			{
 				usinglog(1);
+			}
+			else if (code[1] == "tools")
+			{
+				if (tool_ok())
+				{
+					tooljs = true;
+					toolpy = true;
+				}
+				else
+				{
+					err(35);
+				}
+			}
+			else if (code[1] == "tools-js")
+			{
+				if (tool_ok())
+				{
+					tooljs = true;
+				}
+				else
+				{
+					err(35);
+				}
+			}
+			else if (code[1] == "tools-py")
+			{
+				if (tool_ok())
+				{
+					toolpy = true;
+				}
+				else
+				{
+					err(35);
+				}
+			}
+			else if (code[1] == "network")
+			{
+				usinglog(2);
 			}
 			else
 			{
@@ -1458,11 +1546,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 			// 返り値
 			ld ans = 0;
 
-			// 全探索。多分大丈夫
+			// 全探索
 			rep(i, argn)
 			{
 
-				// 仮(tmp)
+				// 仮
 				string s = code[i + 1];
 
 				if (isvarok(s)) // 変数の場合
@@ -1744,6 +1832,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "getline")
 		{
+			// 入力を一行受け取ってそれを返す
+
 			string s = "undefined";
 			getline(cin, s);
 			return s;
@@ -1755,6 +1845,46 @@ inline string aqua(string script, vector<string> line, int linenum)
 		else if (func == "rsh")
 		{
 			return f_math(18, code[1], code[2]);
+		}
+		else if (func == "download")
+		{
+			if (us_net)
+			{
+				string url = get_str(code[1]), path = get_str(code[2]);
+
+				if (path[path.length() - 1] == ' ')
+				{
+					err(38);
+				}
+
+				if (tooljs)
+				{
+					if (url.substr(0, 5) == "https")
+					{
+						run("download.js", code[1], code[2]);
+					}
+					else if (toolpy)
+					{
+						run("download.py", code[1], code[2]);
+					}
+					else
+					{
+						err(37);
+					}
+				}
+				else if (toolpy)
+				{
+					run("download.py", code[1], code[2]);
+				}
+				else
+				{
+					err(36);
+				}
+			}
+			else
+			{
+				err(21);
+			}
 		}
 		else
 		{
@@ -2013,17 +2143,8 @@ inline string nx()
 	return ans;
 }
 
-inline void cscle()
-{
-	if (iswin)
-		system("cls");
-	else
-		system("clear");
-}
-
 int main(int argc, char const *argv[])
 {
-
 	// Aqua基本処理系
 
 #pragma region Aqua System Variables
@@ -2142,7 +2263,7 @@ int main(int argc, char const *argv[])
 			co("\033[31m\033[1mFatal error\033[m: File does not exist or cannot be opened.");
 		else
 			co("Fatal error: File does not exist or cannot be opened.");
-		exit(1);
+		exit(-1);
 	}
 	fclose(fp);
 

@@ -9,7 +9,7 @@ using ll = long long;
 
 int main(int argc, char const *argv[])
 {
-	// co(1.5 << 3.8);
+	co(system("pip install pyautogui"));
 
 	return 0;
 }

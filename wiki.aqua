@@ -1,24 +1,19 @@
 
-# 4.3
-outf :
-+ 1.2 3.1
-
+# ->
+# 2
 # 3
-outf :
-- 10 7
+# 5
+# 7
 
-# 10000
-outf :
-* 100 100
-
-# 1.5
-outf :
-/ 3 2
-
-# 1
-outf :
-% 3 2
-
-# Error
-outf :
-/ 1 0
+# Program to enumerate all prime numbers from 1~10
+var int N 0
+while :
+< N 10
+    if :
+    is_prime :
+    + N 1
+        outf :
+        + N 1
+    end if
+    ++ N
+end while

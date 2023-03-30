@@ -1,4 +1,5 @@
 ﻿
-var int A 10
-exit :
-- A 10
+using tools
+using network
+
+download "https://example.com/" "./test/ex.html"
