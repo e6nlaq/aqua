@@ -17,4 +17,6 @@
 #include "./math.h"
 #include "./type.h"
 #include "./filename.h"
+#include "./os.h"
+#include "./aqt.h"
 // strconv.hはstdc++.h内でインクルード

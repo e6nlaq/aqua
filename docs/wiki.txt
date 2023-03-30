@@ -1,9 +1,14 @@
 Aqua Binary
+chr
 comment(#)
+end
 exit
 fibz
 flush
+getline
+goto
 in
+is_prime
 len
 ln
 Math operators

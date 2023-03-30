@@ -13,6 +13,8 @@
 #include <string>
 using namespace std;
 
+#pragma once
+
 inline string get_filename(string s)
 {
 	long long at = 9999999999999LL;
@@ -26,4 +28,14 @@ inline string get_filename(string s)
 	}
 
 	return s.substr(0, at);
+}
+
+inline bool is_jsfile(string filename)
+{
+	if (filename.substr(filename.size() - 2) == "js")
+	{
+		return true;
+	}
+	else
+		return false;
 }
