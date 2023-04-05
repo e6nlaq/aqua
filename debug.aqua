@@ -1,5 +1,5 @@
 ﻿
 using tools
-using network
 
-download "https://example.com/" "./test/ex.html"
+outf :
+get_clip

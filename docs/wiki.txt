@@ -1,6 +1,7 @@
 Aqua Binary
 chr
 comment(#)
+download🛠️
 end
 exit
 fibz

@@ -35,6 +35,7 @@ bool st_using_yes = false;
 bool st_style = true;
 bool us_shell = false;
 bool us_net = false;
+bool us_clip = true;
 bool tooljs = false;
 bool toolpy = false;
 
@@ -330,6 +331,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Spaces are not allowed at the end of file or folder names.");
 		break;
 
+	case 39:
+		co("Python is required for execution.");
+		break;
+
 	default:
 		err(5);
 		return;
@@ -389,6 +394,12 @@ inline void usinglog(int id)
 		case 2:
 			co("Network");
 			co("Connect to the Internet and retrieve information");
+			break;
+
+		case 3:
+			co("Clipboard");
+			co("Writing to and reading from the clipboard");
+			break;
 		}
 
 		co("\nAre you sure you want to do this? (Y/n)");
@@ -408,6 +419,10 @@ inline void usinglog(int id)
 
 		case 2:
 			us_net = true;
+			break;
+
+		case 3:
+			us_clip = true;
 			break;
 		}
 	}
@@ -1468,7 +1483,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 		}
 		else if (func == "using")
 		{
-			// 拡張機能的な何か
+			// 高度なことをするのを宣言する
+			// モジュールとはまた違う
 			// 使用するたびに確認入る(aqua-toolsを除く)
 			if (code[1] == "sh" || code[1] == "shell")
 			{
@@ -1508,9 +1524,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(35);
 				}
 			}
-			else if (code[1] == "network")
+			else if (code[1] == "network" || code[1] == "net")
 			{
 				usinglog(2);
+			}
+			else if (code[1] == "clipboard" || code[1] == "clip")
+			{
+				usinglog(3);
 			}
 			else
 			{
@@ -1880,6 +1900,30 @@ inline string aqua(string script, vector<string> line, int linenum)
 				{
 					err(36);
 				}
+			}
+			else
+			{
+				err(21);
+			}
+		}
+		else if (func == "get_clip")
+		{
+			if (us_clip)
+			{
+				if (toolpy)
+				{
+					run("get_clip.py");
+				}
+				else if (tooljs)
+				{
+					err(39);
+				}
+				else
+				{
+					err(36);
+				}
+
+				return get_return();
 			}
 			else
 			{

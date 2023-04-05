@@ -82,5 +82,7 @@ inline string get_return()
 		ans += tmp + "\n";
 	}
 
+	ans = ans.substr(0, ans.size() - 1);
+
 	return ans;
 }
