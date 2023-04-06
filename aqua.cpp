@@ -35,7 +35,7 @@ bool st_using_yes = false;
 bool st_style = true;
 bool us_shell = false;
 bool us_net = false;
-bool us_clip = true;
+bool us_clip = false;
 bool tooljs = false;
 bool toolpy = false;
 
