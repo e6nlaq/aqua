@@ -51,6 +51,7 @@ vector<string> lines;
 vector<int> sett;
 vector<ll> while_line;
 vector<ll> until_line;
+unordered_set<ll> nx_line;
 int linenume;
 bool runcode = true;
 int inc_now = 0;
@@ -2221,7 +2222,9 @@ inline string nx()
 	code_line++;
 	ans = aqua(lines[code_line], lines, code_line);
 	code_line--;
-	isnx++;
+	if (!nx_line.count(code_line))
+		isnx++;
+	nx_line.insert(code_line);
 	return ans;
 }
 
