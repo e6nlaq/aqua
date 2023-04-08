@@ -177,162 +177,170 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 	{
 
 	case 0:
-		co("Example Error");
+		co("Example Error"); // 未使用
 		break;
 
 	case 1:
-		co("Invalid function passed.");
+		co("Invalid function passed."); // 存在しない関数
 		break;
 	case 2:
-		co("Invalid argument.");
+		co("Invalid argument."); // 無効な引数
 		break;
 
 	case 3:
-		co("Invalid option.");
+		co("Invalid option."); // 存在しないoption
 		break;
 
 	case 4:
-		co("User-defined exception thrown");
+		co("User-defined exception thrown"); // throwエラー
 		break;
 
 	case 5:
-		co("Invalid error code");
+		co("Invalid error code"); // 無効なエラーコード
 		break;
 
 	case 6:
-		co("invalid type");
+		co("invalid type"); // 無効な型
 		break;
 
 	case 7:
-		co("Invalid Style");
+		co("Invalid Style"); // 無効なスタイル
 		break;
 
 	case 8:
-		co("Invalid name");
+		co("Invalid name"); // 無効な変数名
 		break;
 
 	case 9:
-		co("Overlapping variables");
+		co("Overlapping variables"); // 重複している変数
 		break;
 
 	case 10:
-		co("Non-existent variable");
+		co("Non-existent variable"); // 存在しない変数
 		break;
 
 	case 11:
-		co("Division by zero is not allowed");
+		co("Division by zero is not allowed"); // ゼロ除算
 		break;
 
 	case 12:
-		co("There is no square root of a negative number");
+		co("There is no square root of a negative number"); // 負の数の平方根
 		break;
 
 	case 13:
-		co("Invalid Variable");
+		co("Invalid Variable"); // 無効な変数
 		break;
 
 	case 14:
-		co("Missing argument");
+		co("Missing argument"); // 引数が足りない
 		break;
 
 	case 15:
-		co("You can't use : here.");
+		co("You can't use : here."); // 無効な場所の:
 		break;
 
 	case 16:
-		co("You can't break here.");
+		co("You can't break here."); // 無効な場所のbreak
 		break;
 
 	case 17:
-		co("goto must be greater than or equal to 1");
+		co("goto must be greater than or equal to 1"); // 0以下の行数
 		break;
 
 	case 18:
-		co("This is only valid within the FOREVER");
+		co("This is only valid within the FOREVER"); // forever無いのにend forever
 		break;
 
 	case 19:
-		co("I can't find a sentence that fits the end");
+		co("I can't find a sentence that fits the end"); // 対応するendがない
 		break;
 
 	case 20:
-		co("Strings are invalid for this function.");
+		co("Strings are invalid for this function."); // 引数に文字列
 		break;
 
 	case 21:
-		co("No access rights");
+		co("No access rights"); // アクセス拒否
 		break;
 
 	case 22:
-		co("Duplicate labels");
+		co("Duplicate labels"); // ラベルの重複
 		break;
 
 	case 23:
-		co("Invalid label name");
+		co("Invalid label name"); // 無効なラベル名
 		break;
 
 	case 24:
-		co("nonexistent label");
+		co("nonexistent label"); // 存在しないラベル
 		break;
 
 	case 25:
-		co("Decimals not available");
+		co("Decimals not available"); // 利用できない小数
 		break;
 
 	case 26:
-		co("The value must be smaller on the left.");
+		co("The value must be smaller on the left."); // A>Bのとき
 		break;
 
 	case 27:
-		co("Variables of invalid type");
+		co("Variables of invalid type"); // 無効な引数の変数の型
 		break;
 
 	case 28:
-		co("The length of the string must be 1.");
+		co("The length of the string must be 1."); // 文字列の長さが1(char)ではないとき
 		break;
 
 	case 29:
-		co("Numerical values are invalid.");
+		co("Numerical values are invalid."); // 数値が無効
 		break;
 
 	case 30:
-		co("Out of Range");
+		co("Out of Range"); // 範囲外
 		break;
 
 	case 31:
-		co("There is no if corresponding to this end if.");
+		co("There is no if corresponding to this end if."); // ifがないのにend if
 		break;
 
 	case 32:
-		co("There is no corresponding while for this end while.");
+		co("There is no corresponding while for this end while."); // whileがないのにend while
 		break;
 
 	case 33:
-		co("There is no if corresponding to this else.");
+		co("There is no if corresponding to this else."); // ifがないのにelse
 		break;
 
 	case 34:
-		co("There is no corresponding while for this end until.");
+		co("There is no corresponding until for this end until."); // untilがないのにend until
 		break;
 
 	case 35:
-		co("Aqua Tools does not exist");
+		co("Aqua Tools does not exist"); // Aqua Toolsがない
 		break;
 
 	case 36:
-		co("Requires Aqua Tools to run.");
+		co("Requires Aqua Tools to run."); // Aqua Toolsが必要
 		break;
 
 	case 37:
-		co("In JavaScript, you can use `http://... ` is not supported.");
+		co("In JavaScript, you can use `http://... ` is not supported."); // Node.jsでhttpでの通信
 		break;
 
 	case 38:
-		co("Spaces are not allowed at the end of file or folder names.");
+		co("Spaces are not allowed at the end of file or folder names."); // ファイルまたはフォルダ名の末尾に空白
 		break;
 
 	case 39:
-		co("Python is required for execution.");
+		co("Python is required for execution."); // Pythonが必要
+		break;
+
+	case 40:
+		co("Node.js is required for execution."); // Node.jsが必要
+		break;
+
+	case 41:
+		co("C++ runtime error"); // C++実行時エラー
 		break;
 
 	default:
@@ -673,530 +681,576 @@ inline string aqua(string script, vector<string> line, int linenum)
 		code.push_back("");
 	}
 
-	// インシデントチェック
-	if (inc_code == inc_now)
+	try
 	{
-		// 以下、関数記述
-		if (func == "out")
+
+		// インシデントチェック
+		if (inc_code == inc_now)
 		{
-			// 全ての始まり。改行なし出力
+			// 以下、関数記述
+			if (func == "out")
+			{
+				// 全ての始まり。改行なし出力
 
-			if (code[1][0] == '\"')
-				out(cutstr(code[1]));
-			else if (code[1] == ":")
-				out(nx());
-			else if (isvarok(code[1]))
-			{
-				out(var_value(code[1]));
-			}
-			else
-				err(2);
-		}
-		else if (func == "option")
-		{
-			// オプション。色々。
-
-			if (code[1] == "function_skip")
-			{
-				op_funcskip = stob(code[2]);
-			}
-			else if (code[1] == "reset_style")
-			{
-				op_stylereset = stob(code[2]);
-			}
-			else if (code[1] == "end_anykey")
-			{
-				op_end_anykey = stob(code[2]);
-			}
-			else if (code[1] == "set_few")
-			{
-				cout << fixed << setprecision(stoi(code[2]));
-			}
-			else if (code[1] == "over_var")
-			{
-				op_over_var = stob(code[2]);
-			}
-			else
-			{
-				err(3);
-			}
-		}
-		else if (func == "outf")
-		{
-			// 改行付き出力。fついてるけどflushしない
-
-			if (isstring(code[1]))
-				outf(cutstr(code[1]));
-			else if (code[1] == ":")
-			{
-				outf(nx());
-			}
-			else if (isvarok(code[1]))
-			{
-				outf(var_value(code[1]));
-			}
-			else
-				err(2);
-		}
-		else if (func == "#" || func == "comment")
-		{
-			// 何もない。何もしない。
-		}
-		else if (func == "exit")
-		{
-			// 終了コード指定可exit
-
-			exit((ll)to_num(code[1]));
-		}
-		else if (func == "throw")
-		{
-			// 例外を投げる
-
-			if (code[1] == "")
-			{
-				err(4);
-			}
-			else
-			{
-				err((ll)to_num(code[1]));
-			}
-		}
-		else if (func == "var")
-		{
-			// 変数宣言
-
-			bool changed = false; // 初期値を自動的に変更したか否か
-
-			if (code[3] == "")
-			{
-				changed = true;
-				code[3] = "0";
-			}
-
-			if (isvarok(code[3]))
-			{
-				code[3] = var_value(code[3]);
-			}
-
-			if (isvarok(code[2]))
-			{
-				if (dup_varname(code[2]) || op_over_var)
+				if (code[1][0] == '\"')
+					out(cutstr(code[1]));
+				else if (code[1] == ":")
+					out(nx());
+				else if (isvarok(code[1]))
 				{
-					if (code[1] == "int")
-					{
-						var_int[code[2]] = stoi(code[3]);
-					}
-					else if (code[1] == "string")
-					{
-						if (changed)
-							var_string[code[2]] = "";
-						else
-							var_string[code[2]] = cutstr(code[3]);
-					}
-					else if (code[1] == "bool")
-					{
-						if (changed)
-							var_bool[code[2]] = true;
-						else
-							var_bool[code[2]] = stob(code[3]);
-					}
-					else if (code[1] == "double")
-					{
-						var_double[code[2]] = stod(code[3]);
-					}
-					else if (code[1] == "int64_t")
-					{
-						var_int64[code[2]] = stoll(code[3]);
-					}
-					else if (code[1] == "longlong" || code[1] == "ll")
-					{
-						var_ll[code[2]] = stoll(code[3]);
-					}
-					else
-					{
-						err(6); // 存在しない型の時
-					}
+					out(var_value(code[1]));
 				}
 				else
-				{
-					err(9); // 変数が重複しているとき。optionで制御可能
-				}
-			}
-			else
-			{
-				err(8); // やべえ名前の時
-			}
-		}
-		else if (func == "ln")
-		{
-			// 改行。エスケープシーケンス対応したから多分もう使わない。
-
-			if (code[1] == "")
-			{
-				cout << "\n";
-			}
-			else
-			{
-				for (ll i = 0; i < (ll)to_num(code[1]); i++) // rep使えよ
-					cout << "\n";
-			}
-		}
-		else if (func == "style")
-		{
-			// \033のやつ。意味わからん
-
-			if (sett[0])
-			{
-				if (code[1] == "text")
-				{
-					if (code[2] == "black")
-					{
-						cou("\033[30m");
-					}
-					else if (code[2] == "red")
-					{
-						cou("\033[31m");
-					}
-					else if (code[2] == "green")
-					{
-						cou("\033[32m");
-					}
-					else if (code[2] == "yellow")
-					{
-						cou("\033[33m");
-					}
-					else if (code[2] == "blue")
-					{
-						cou("\033[34m");
-					}
-					else if (code[2] == "magenta")
-					{
-						cou("\033[35m");
-					}
-					else if (code[2] == "cyan")
-					{
-						cou("\033[36m");
-					}
-					else if (code[2] == "white")
-					{
-						cou("\033[37m");
-					}
-					else if (code[2] == "bold")
-					{
-						cou("\033[1m");
-					}
-					else if (code[2] == "thinly")
-					{
-						cou("\033[2m");
-					}
-					else if (code[2] == "italic")
-					{
-						cou("\033[3m");
-					}
-					else if (code[2] == "underline")
-					{
-						cou("\033[4m");
-					}
-					else if (code[2] == "blink")
-					{
-						cou("\033[5m");
-					}
-					else if (code[2] == "fastblink")
-					{
-						cou("\033[6m");
-					}
-					else
-					{
-						err(7);
-					}
-				}
-				else if (code[1] == "reset")
-				{
-					cou("\033[m");
-				}
-				else if (code[1] == "background")
-				{
-					if (code[2] == "black")
-					{
-						cou("\033[40m");
-					}
-					else if (code[2] == "red")
-					{
-						cou("\033[41m");
-					}
-					else if (code[2] == "green")
-					{
-						cou("\033[42m");
-					}
-					else if (code[2] == "yellow")
-					{
-						cou("\033[43m");
-					}
-					else if (code[2] == "blue")
-					{
-						cou("\033[44m");
-					}
-					else if (code[2] == "magenta")
-					{
-						cou("\033[45m");
-					}
-					else if (code[2] == "cyan")
-					{
-						cou("\033[46m");
-					}
-					else if (code[2] == "white")
-					{
-						cou("\033[47m");
-					}
-				}
-				else
-				{
 					err(2);
+			}
+			else if (func == "option")
+			{
+				// オプション。色々。
+
+				if (code[1] == "function_skip")
+				{
+					op_funcskip = stob(code[2]);
+				}
+				else if (code[1] == "reset_style")
+				{
+					op_stylereset = stob(code[2]);
+				}
+				else if (code[1] == "end_anykey")
+				{
+					op_end_anykey = stob(code[2]);
+				}
+				else if (code[1] == "set_few")
+				{
+					cout << fixed << setprecision(stoi(code[2]));
+				}
+				else if (code[1] == "over_var")
+				{
+					op_over_var = stob(code[2]);
+				}
+				else
+				{
+					err(3);
 				}
 			}
-		}
-		else if (func == "in")
-		{
-			// 変数の空白区切り入力
-
-			switch (var_search(code[1]))
+			else if (func == "outf")
 			{
-			case 1:
-				cin >> var_int[code[1]];
-				break;
+				// 改行付き出力。fついてるけどflushしない
 
-			case 2:
-				cin >> var_string[code[1]];
-				break;
-
-			case 3:
-				cin >> var_bool[code[1]];
-				break;
-
-			case 4:
-				cin >> var_double[code[1]];
-				break;
-
-			case 5:
-				cin >> var_int64[code[1]];
-				break;
-
-			case 6:
-				cin >> var_ll[code[1]];
-				break;
-
-			default:
-				err(10);
-				break;
+				if (isstring(code[1]))
+					outf(cutstr(code[1]));
+				else if (code[1] == ":")
+				{
+					outf(nx());
+				}
+				else if (isvarok(code[1]))
+				{
+					outf(var_value(code[1]));
+				}
+				else
+					err(2);
 			}
-		}
-		else if (func == "set")
-		{
-			// 変数の中身を変更
-
-			switch (var_search(code[1]))
+			else if (func == "#" || func == "comment")
 			{
-			case 1:
+				// 何もない。何もしない。
+			}
+			else if (func == "exit")
+			{
+				// 終了コード指定可exit
+
+				exit((ll)to_num(code[1]));
+			}
+			else if (func == "throw")
+			{
+				// 例外を投げる
+
+				if (code[1] == "")
+				{
+					err(4);
+				}
+				else
+				{
+					err((ll)to_num(code[1]));
+				}
+			}
+			else if (func == "var")
+			{
+				// 変数宣言
+
+				bool changed = false; // 初期値を自動的に変更したか否か
+
+				if (code[3] == "")
+				{
+					changed = true;
+					code[3] = "0";
+				}
+
+				if (isvarok(code[3]))
+				{
+					code[3] = var_value(code[3]);
+				}
+
 				if (isvarok(code[2]))
-					var_int[code[1]] = stoi(var_value(code[2]));
-				else if (code[2] == ":")
-					var_int[code[1]] = stoi(nx());
-				else if (isstring(code[2]))
 				{
-					err(20);
-				}
-				else
-					var_int[code[1]] = stoi(code[2]);
-				break;
-
-			case 2:
-				if (code[2][0] == '\"')
-					var_string[code[1]] = cutstr(code[2]);
-				else if (code[2] == ":")
-					var_string[code[1]] = nx();
-				else
-					var_string[code[1]] = var_value(code[2]);
-				break;
-
-			case 3:
-				if (isvarok(code[2]))
-					var_bool[code[1]] = stob(var_value(code[2]));
-				else if (code[2] == ":")
-					var_bool[code[1]] = stob(nx());
-				else if (isstring(code[2]))
-				{
-					err(20);
-				}
-				else
-					var_bool[code[1]] = stob(var_value(code[2]));
-
-			case 4:
-				if (isvarok(code[2]))
-					var_double[code[1]] = stod(var_value(code[2]));
-				else if (code[2] == ":")
-					var_double[code[1]] = stod(nx());
-				else if (isstring(code[2]))
-				{
-					err(20);
-				}
-				else
-					var_double[code[1]] = stod(code[2]);
-				break;
-
-			case 5:
-				if (isvarok(code[2]))
-					var_int64[code[1]] = stoll(var_value(code[2]));
-				else if (code[2] == ":")
-					var_int64[code[1]] = stoll(nx());
-				else if (isstring(code[2]))
-				{
-					err(20);
-				}
-				else
-					var_int64[code[1]] = stoll(code[2]);
-				break;
-
-			case 6:
-				if (isvarok(code[2]))
-					var_ll[code[1]] = stoll(var_value(code[2]));
-				else if (code[2] == ":")
-					var_ll[code[1]] = stoll(nx());
-				else if (isstring(code[2]))
-				{
-					err(20);
-				}
-				else
-					var_ll[code[1]] = stoll(code[2]);
-				break;
-
-			default:
-				err(10);
-				break;
-			}
-		}
-		else if (func == "flush")
-		{
-			// 出力をフラッシュ
-
-			cout << flush;
-		}
-		else if (func == "+")
-		{
-			return f_math(1, code[1], code[2]);
-		}
-		else if (func == "-")
-		{
-			return f_math(2, code[1], code[2]);
-		}
-		else if (func == "*")
-		{
-			return f_math(3, code[1], code[2]);
-		}
-		else if (func == "/")
-		{
-			return f_math(4, code[1], code[2]);
-		}
-		else if (func == "%")
-		{
-			return f_math(5, code[1], code[2]);
-		}
-		else if (func == "abs")
-		{
-			return f_trig(1, code[1]);
-		}
-		else if (func == "sqrt")
-		{
-			return f_trig(2, code[1]);
-		}
-		else if (func == "sin")
-		{
-			return f_trig(3, code[1]);
-		}
-		else if (func == "cos")
-		{
-			return f_trig(4, code[1]);
-		}
-		else if (func == "tan")
-		{
-			return f_trig(5, code[1]);
-		}
-		else if (func == "++")
-		{
-			if (m_numt(code[1]))
-			{
-				if (var_search(code[1]) == 1)
-				{
-					var_int[code[1]]++;
+					if (dup_varname(code[2]) || op_over_var)
+					{
+						if (code[1] == "int")
+						{
+							var_int[code[2]] = stoi(code[3]);
+						}
+						else if (code[1] == "string")
+						{
+							if (changed)
+								var_string[code[2]] = "";
+							else
+								var_string[code[2]] = cutstr(code[3]);
+						}
+						else if (code[1] == "bool")
+						{
+							if (changed)
+								var_bool[code[2]] = true;
+							else
+								var_bool[code[2]] = stob(code[3]);
+						}
+						else if (code[1] == "double")
+						{
+							var_double[code[2]] = stod(code[3]);
+						}
+						else if (code[1] == "int64_t")
+						{
+							var_int64[code[2]] = stoll(code[3]);
+						}
+						else if (code[1] == "longlong" || code[1] == "ll")
+						{
+							var_ll[code[2]] = stoll(code[3]);
+						}
+						else
+						{
+							err(6); // 存在しない型の時
+						}
+					}
+					else
+					{
+						err(9); // 変数が重複しているとき。optionで制御可能
+					}
 				}
 				else
 				{
-					var_int[code[1]]++;
+					err(8); // やべえ名前の時
 				}
 			}
-			else
-				err(13);
-		}
-		else if (func == "--")
-		{
-			if (m_numt(code[1]))
+			else if (func == "ln")
 			{
-				if (var_search(code[1]) == 1)
+				// 改行。エスケープシーケンス対応したから多分もう使わない。
+
+				if (code[1] == "")
 				{
-					var_int[code[1]]--;
+					cout << "\n";
 				}
 				else
 				{
-					var_int[code[1]]--;
+					for (ll i = 0; i < (ll)to_num(code[1]); i++) // rep使えよ
+						cout << "\n";
 				}
 			}
-			else
-				err(13);
-		}
-		else if (func == "if")
-		{
+			else if (func == "style")
+			{
+				// \033のやつ。意味わからん
 
-			if_count++;
-
-			if (isvarok(code[1]))
-			{
-				runcode = stob(var_value(code[1]));
-			}
-			else if (code[1] == ":")
-				runcode = stob(nx());
-			else
-			{
-				runcode = stob(code[1]);
-			}
-
-			if (runcode)
-			{
-				inc_now++;
-				inc_code++;
-			}
-			else
-				inc_now++;
-		}
-		else if (func == "end")
-		{
-			if (code[1] == "forever")
-			{
-				if (forever_line != -1)
+				if (sett[0])
 				{
-					code_line = forever_line;
+					if (code[1] == "text")
+					{
+						if (code[2] == "black")
+						{
+							cou("\033[30m");
+						}
+						else if (code[2] == "red")
+						{
+							cou("\033[31m");
+						}
+						else if (code[2] == "green")
+						{
+							cou("\033[32m");
+						}
+						else if (code[2] == "yellow")
+						{
+							cou("\033[33m");
+						}
+						else if (code[2] == "blue")
+						{
+							cou("\033[34m");
+						}
+						else if (code[2] == "magenta")
+						{
+							cou("\033[35m");
+						}
+						else if (code[2] == "cyan")
+						{
+							cou("\033[36m");
+						}
+						else if (code[2] == "white")
+						{
+							cou("\033[37m");
+						}
+						else if (code[2] == "bold")
+						{
+							cou("\033[1m");
+						}
+						else if (code[2] == "thinly")
+						{
+							cou("\033[2m");
+						}
+						else if (code[2] == "italic")
+						{
+							cou("\033[3m");
+						}
+						else if (code[2] == "underline")
+						{
+							cou("\033[4m");
+						}
+						else if (code[2] == "blink")
+						{
+							cou("\033[5m");
+						}
+						else if (code[2] == "fastblink")
+						{
+							cou("\033[6m");
+						}
+						else
+						{
+							err(7);
+						}
+					}
+					else if (code[1] == "reset")
+					{
+						cou("\033[m");
+					}
+					else if (code[1] == "background")
+					{
+						if (code[2] == "black")
+						{
+							cou("\033[40m");
+						}
+						else if (code[2] == "red")
+						{
+							cou("\033[41m");
+						}
+						else if (code[2] == "green")
+						{
+							cou("\033[42m");
+						}
+						else if (code[2] == "yellow")
+						{
+							cou("\033[43m");
+						}
+						else if (code[2] == "blue")
+						{
+							cou("\033[44m");
+						}
+						else if (code[2] == "magenta")
+						{
+							cou("\033[45m");
+						}
+						else if (code[2] == "cyan")
+						{
+							cou("\033[46m");
+						}
+						else if (code[2] == "white")
+						{
+							cou("\033[47m");
+						}
+					}
+					else
+					{
+						err(2);
+					}
+				}
+			}
+			else if (func == "in")
+			{
+				// 変数の空白区切り入力
+
+				switch (var_search(code[1]))
+				{
+				case 1:
+					cin >> var_int[code[1]];
+					break;
+
+				case 2:
+					cin >> var_string[code[1]];
+					break;
+
+				case 3:
+					cin >> var_bool[code[1]];
+					break;
+
+				case 4:
+					cin >> var_double[code[1]];
+					break;
+
+				case 5:
+					cin >> var_int64[code[1]];
+					break;
+
+				case 6:
+					cin >> var_ll[code[1]];
+					break;
+
+				default:
+					err(10);
+					break;
+				}
+			}
+			else if (func == "set")
+			{
+				// 変数の中身を変更
+
+				switch (var_search(code[1]))
+				{
+				case 1:
+					if (isvarok(code[2]))
+						var_int[code[1]] = stoi(var_value(code[2]));
+					else if (code[2] == ":")
+						var_int[code[1]] = stoi(nx());
+					else if (isstring(code[2]))
+					{
+						err(20);
+					}
+					else
+						var_int[code[1]] = stoi(code[2]);
+					break;
+
+				case 2:
+					if (code[2][0] == '\"')
+						var_string[code[1]] = cutstr(code[2]);
+					else if (code[2] == ":")
+						var_string[code[1]] = nx();
+					else
+						var_string[code[1]] = var_value(code[2]);
+					break;
+
+				case 3:
+					if (isvarok(code[2]))
+						var_bool[code[1]] = stob(var_value(code[2]));
+					else if (code[2] == ":")
+						var_bool[code[1]] = stob(nx());
+					else if (isstring(code[2]))
+					{
+						err(20);
+					}
+					else
+						var_bool[code[1]] = stob(var_value(code[2]));
+
+				case 4:
+					if (isvarok(code[2]))
+						var_double[code[1]] = stod(var_value(code[2]));
+					else if (code[2] == ":")
+						var_double[code[1]] = stod(nx());
+					else if (isstring(code[2]))
+					{
+						err(20);
+					}
+					else
+						var_double[code[1]] = stod(code[2]);
+					break;
+
+				case 5:
+					if (isvarok(code[2]))
+						var_int64[code[1]] = stoll(var_value(code[2]));
+					else if (code[2] == ":")
+						var_int64[code[1]] = stoll(nx());
+					else if (isstring(code[2]))
+					{
+						err(20);
+					}
+					else
+						var_int64[code[1]] = stoll(code[2]);
+					break;
+
+				case 6:
+					if (isvarok(code[2]))
+						var_ll[code[1]] = stoll(var_value(code[2]));
+					else if (code[2] == ":")
+						var_ll[code[1]] = stoll(nx());
+					else if (isstring(code[2]))
+					{
+						err(20);
+					}
+					else
+						var_ll[code[1]] = stoll(code[2]);
+					break;
+
+				default:
+					err(10);
+					break;
+				}
+			}
+			else if (func == "flush")
+			{
+				// 出力をフラッシュ
+
+				cout << flush;
+			}
+			else if (func == "+")
+			{
+				return f_math(1, code[1], code[2]);
+			}
+			else if (func == "-")
+			{
+				return f_math(2, code[1], code[2]);
+			}
+			else if (func == "*")
+			{
+				return f_math(3, code[1], code[2]);
+			}
+			else if (func == "/")
+			{
+				return f_math(4, code[1], code[2]);
+			}
+			else if (func == "%")
+			{
+				return f_math(5, code[1], code[2]);
+			}
+			else if (func == "abs")
+			{
+				return f_trig(1, code[1]);
+			}
+			else if (func == "sqrt")
+			{
+				return f_trig(2, code[1]);
+			}
+			else if (func == "sin")
+			{
+				return f_trig(3, code[1]);
+			}
+			else if (func == "cos")
+			{
+				return f_trig(4, code[1]);
+			}
+			else if (func == "tan")
+			{
+				return f_trig(5, code[1]);
+			}
+			else if (func == "++")
+			{
+				if (m_numt(code[1]))
+				{
+					if (var_search(code[1]) == 1)
+					{
+						var_int[code[1]]++;
+					}
+					else
+					{
+						var_int[code[1]]++;
+					}
 				}
 				else
+					err(13);
+			}
+			else if (func == "--")
+			{
+				if (m_numt(code[1]))
 				{
-					err(18);
+					if (var_search(code[1]) == 1)
+					{
+						var_int[code[1]]--;
+					}
+					else
+					{
+						var_int[code[1]]--;
+					}
+				}
+				else
+					err(13);
+			}
+			else if (func == "if")
+			{
+
+				if_count++;
+
+				if (isvarok(code[1]))
+				{
+					runcode = stob(var_value(code[1]));
+				}
+				else if (code[1] == ":")
+					runcode = stob(nx());
+				else
+				{
+					runcode = stob(code[1]);
+				}
+
+				if (runcode)
+				{
+					inc_now++;
+					inc_code++;
+				}
+				else
+					inc_now++;
+			}
+			else if (func == "end")
+			{
+				if (code[1] == "forever")
+				{
+					if (forever_line != -1)
+					{
+						code_line = forever_line;
+					}
+					else
+					{
+						err(18);
+					}
+				}
+				else if (code[1] == "if")
+				{
+					if_count--;
+
+					if (if_count < 0)
+					{
+						err(19);
+					}
+
+					if (runcode)
+					{
+						inc_now--;
+						inc_code--;
+					}
+					else
+					{
+						inc_now--;
+					}
+				}
+				else if (code[1] == "while")
+				{
+					while_count--;
+
+					if (while_count < 0)
+					{
+						err(32);
+					}
+
+					inc_code--;
+					inc_now--;
+					code_line = while_line.back() - 1;
+					while_line.pop_back();
+				}
+				else if (code[1] == "until")
+				{
+					until_count--;
+
+					if (until_count < 0)
+					{
+						err(32);
+					}
+
+					inc_code--;
+					inc_now--;
+					code_line = until_line.back() - 1;
+					until_line.pop_back();
 				}
 			}
-			else if (code[1] == "if")
+			else if (func == "else")
 			{
-				if_count--;
-
-				if (if_count < 0)
-				{
-					err(19);
-				}
+				if_count++;
 
 				if (runcode)
 				{
@@ -1207,681 +1261,647 @@ inline string aqua(string script, vector<string> line, int linenum)
 				{
 					inc_now--;
 				}
-			}
-			else if (code[1] == "while")
-			{
-				while_count--;
 
-				if (while_count < 0)
+				runcode = !runcode;
+
+				if (runcode)
 				{
-					err(32);
-				}
-
-				inc_code--;
-				inc_now--;
-				code_line = while_line.back() - 1;
-				while_line.pop_back();
-			}
-			else if (code[1] == "until")
-			{
-				until_count--;
-
-				if (until_count < 0)
-				{
-					err(32);
-				}
-
-				inc_code--;
-				inc_now--;
-				code_line = until_line.back() - 1;
-				until_line.pop_back();
-			}
-		}
-		else if (func == "else")
-		{
-			if_count++;
-
-			if (runcode)
-			{
-				inc_now--;
-				inc_code--;
-			}
-			else
-			{
-				inc_now--;
-			}
-
-			runcode = !runcode;
-
-			if (runcode)
-			{
-				inc_now++;
-				inc_code++;
-			}
-			else
-				inc_now++;
-		}
-		else if (func == "and")
-		{
-			return f_math(13, code[1], code[2]);
-		}
-		else if (func == "or")
-		{
-			return f_math(14, code[1], code[2]);
-		}
-		else if (func == "xor")
-		{
-			return f_math(15, code[1], code[2]);
-		}
-		else if (func == "not" || func == "!")
-		{
-			return f_trig(7, code[1]);
-		}
-		else if (func == "is")
-		{
-			string a, b;
-
-			if (isvarok(code[1]))
-			{
-				a = var_value(code[1]);
-			}
-			else if (code[1] == ":")
-				a = nx();
-			else
-			{
-				if (code[1][0] == '\"')
-				{
-					a = cutstr(code[1]);
+					inc_now++;
+					inc_code++;
 				}
 				else
-					a = code[1];
+					inc_now++;
 			}
+			else if (func == "and")
+			{
+				return f_math(13, code[1], code[2]);
+			}
+			else if (func == "or")
+			{
+				return f_math(14, code[1], code[2]);
+			}
+			else if (func == "xor")
+			{
+				return f_math(15, code[1], code[2]);
+			}
+			else if (func == "not" || func == "!")
+			{
+				return f_trig(7, code[1]);
+			}
+			else if (func == "is")
+			{
+				string a, b;
 
-			if (isvarok(code[2]))
-			{
-				b = var_value(code[2]);
-			}
-			else if (code[2] == ":")
-				b = nx();
-			else
-			{
-				if (code[1][0] == '\"')
+				if (isvarok(code[1]))
 				{
-					b = cutstr(code[1]);
+					a = var_value(code[1]);
+				}
+				else if (code[1] == ":")
+					a = nx();
+				else
+				{
+					if (code[1][0] == '\"')
+					{
+						a = cutstr(code[1]);
+					}
+					else
+						a = code[1];
+				}
+
+				if (isvarok(code[2]))
+				{
+					b = var_value(code[2]);
+				}
+				else if (code[2] == ":")
+					b = nx();
+				else
+				{
+					if (code[1][0] == '\"')
+					{
+						b = cutstr(code[1]);
+					}
+					else
+						b = code[1];
+				}
+
+				return to_string(a == b);
+			}
+			else if (func == "clear")
+			{
+				// 出力全クリア
+				// 動作は環境依存
+
+				cscle();
+			}
+			else if (func == "&")
+			{
+				string ans = "";
+
+				if (code.size() < 3)
+					err(14);
+
+				rep(i, code.size())
+				{
+					if (i == 0)
+						continue;
+
+					string arg = code[i];
+					if (arg == "")
+						continue;
+
+					if (isstring(arg))
+					{
+						ans += cutstr(arg);
+					}
+					else if (isvarok(arg))
+					{
+						ans += var_value(arg);
+					}
+					else if (arg == ":")
+					{
+						err(15);
+					}
+					else
+					{
+						err(2);
+					}
+				}
+
+				return ans;
+			}
+			else if (func == "break")
+			{
+				if (inc_code == 0 && inc_now == 0)
+					err(16);
+
+				if (inc_code == inc_now)
+				{
+					inc_now++;
+					runcode = false;
+				}
+			}
+			else if (func == "goto")
+			{
+
+				if (!isint(code[1]))
+				{
+					if (label_list.count(code[1]))
+					{
+						code_line = label_list[code[1]];
+					}
+					else
+					{
+						auto itr = find(all(lines), "label " + code[1]);
+
+						if (itr != lines.end())
+						{
+							code_line = distance(lines.begin(), itr);
+						}
+						else
+						{
+							err(24);
+						}
+					}
+				}
+				else if (code[1] == ":")
+				{
+					code_line = stoll(nx());
+					code_line -= 2;
 				}
 				else
-					b = code[1];
+				{
+					if (stoll(code[1]) < 1)
+						err(17);
+					code_line = stoll(code[1]);
+
+					code_line -= 2;
+				}
 			}
-
-			return to_string(a == b);
-		}
-		else if (func == "clear")
-		{
-			// 出力全クリア
-			// 動作は環境依存
-
-			cscle();
-		}
-		else if (func == "&")
-		{
-			string ans = "";
-
-			if (code.size() < 3)
-				err(14);
-
-			rep(i, code.size())
+			else if (func == "^")
 			{
-				if (i == 0)
-					continue;
+				return f_math(6, code[1], code[2]);
+			}
+			else if (func == "sh")
+			{
 
-				string arg = code[i];
-				if (arg == "")
-					continue;
+				if (!us_shell)
+					err(21);
 
-				if (isstring(arg))
+				if (isvarok(code[1]))
 				{
-					ans += cutstr(arg);
+					system(var_value(code[1]).c_str());
 				}
-				else if (isvarok(arg))
+				else if (isstring(code[1]))
 				{
-					ans += var_value(arg);
+					system(cutstr(code[1]).c_str());
 				}
-				else if (arg == ":")
+				else if (code[1] == ":")
 				{
-					err(15);
+					system(nx().c_str());
 				}
 				else
 				{
 					err(2);
 				}
 			}
-
-			return ans;
-		}
-		else if (func == "break")
-		{
-			if (inc_code == 0 && inc_now == 0)
-				err(16);
-
-			if (inc_code == inc_now)
+			else if (func == "forever")
 			{
+				forever_line = code_line;
+				inc_code++;
 				inc_now++;
-				runcode = false;
 			}
-		}
-		else if (func == "goto")
-		{
+			else if (func == "fibz")
+			{
+				ll a = 0;
 
-			if (!isint(code[1]))
-			{
-				if (label_list.count(code[1]))
-				{
-					code_line = label_list[code[1]];
-				}
-				else
-				{
-					auto itr = find(all(lines), "label " + code[1]);
-
-					if (itr != lines.end())
-					{
-						code_line = distance(lines.begin(), itr);
-					}
-					else
-					{
-						err(24);
-					}
-				}
-			}
-			else if (code[1] == ":")
-			{
-				code_line = stoll(nx());
-				code_line -= 2;
-			}
-			else
-			{
-				if (stoll(code[1]) < 1)
-					err(17);
-				code_line = stoll(code[1]);
-
-				code_line -= 2;
-			}
-		}
-		else if (func == "^")
-		{
-			return f_math(6, code[1], code[2]);
-		}
-		else if (func == "sh")
-		{
-
-			if (!us_shell)
-				err(21);
-
-			if (isvarok(code[1]))
-			{
-				system(var_value(code[1]).c_str());
-			}
-			else if (isstring(code[1]))
-			{
-				system(cutstr(code[1]).c_str());
-			}
-			else if (code[1] == ":")
-			{
-				system(nx().c_str());
-			}
-			else
-			{
-				err(2);
-			}
-		}
-		else if (func == "forever")
-		{
-			forever_line = code_line;
-			inc_code++;
-			inc_now++;
-		}
-		else if (func == "fibz")
-		{
-			ll a = 0;
-
-			if (isstring(code[1]))
-			{
-				err(20);
-			}
-			else if (isvarok(code[1]))
-			{
-				a = stoll(var_value(code[1]));
-			}
-			else
-			{
-				a = stoll(code[1]);
-			}
-
-			if (a % 3 == 0 && a % 5 == 0)
-				return "FizzBuzz";
-			else if (a % 3 == 0)
-				return "Fizz";
-			else if (a % 5 == 0)
-				return "Buzz";
-			else
-				return to_string(a);
-		}
-		else if (func == ">")
-		{
-			return f_math(7, code[1], code[2]);
-		}
-		else if (func == "<")
-		{
-			return f_math(8, code[1], code[2]);
-		}
-		else if (func == "<=")
-		{
-			return f_math(9, code[1], code[2]);
-		}
-		else if (func == ">=")
-		{
-			return f_math(10, code[1], code[2]);
-		}
-		else if (func == "using")
-		{
-			// 高度なことをするのを宣言する
-			// モジュールとはまた違う
-			// 使用するたびに確認入る(aqua-toolsを除く)
-			if (code[1] == "sh" || code[1] == "shell")
-			{
-				usinglog(1);
-			}
-			else if (code[1] == "tools")
-			{
-				if (tool_ok())
-				{
-					tooljs = true;
-					toolpy = true;
-				}
-				else
-				{
-					err(35);
-				}
-			}
-			else if (code[1] == "tools-js")
-			{
-				if (tool_ok())
-				{
-					tooljs = true;
-				}
-				else
-				{
-					err(35);
-				}
-			}
-			else if (code[1] == "tools-py")
-			{
-				if (tool_ok())
-				{
-					toolpy = true;
-				}
-				else
-				{
-					err(35);
-				}
-			}
-			else if (code[1] == "network" || code[1] == "net")
-			{
-				usinglog(2);
-			}
-			else if (code[1] == "clipboard" || code[1] == "clip")
-			{
-				usinglog(3);
-			}
-			else
-			{
-				err(2);
-			}
-		}
-		else if (func == "label")
-		{
-			// ラベル
-			// gotoと合わせて使用
-
-			// 形式検査
-			if (code[1] == "")
-				err(2);
-			if (code[1] == ":")
-				err(15);
-			if (!isvarok(code[1]))
-				err(23);
-
-			if (label_list.count(code[1]))
-			{
-				err(22);
-			}
-			else
-			{
-				label_list[code[1]] = code_line;
-			}
-		}
-		else if (func == "sum")
-		{
-			// 合計
-
-			// 返り値
-			ld ans = 0;
-
-			// 全探索
-			rep(i, argn)
-			{
-
-				// 仮
-				string s = code[i + 1];
-
-				if (isvarok(s)) // 変数の場合
-				{
-					try
-					{
-						ans += stold(var_value(s));
-					}
-					catch (const exception &e)
-					{
-						err(20); // stringとかの場合
-					}
-				}
-				else if (isstring(s)) // あからさまにstring("")の場合
+				if (isstring(code[1]))
 				{
 					err(20);
 				}
-				else if (s == ":")
+				else if (isvarok(code[1]))
 				{
-					try
-					{
-						ans += stold(nx());
-					}
-					catch (const exception &e)
-					{
-						err(20); // 一応
-					}
+					a = stoll(var_value(code[1]));
 				}
 				else
 				{
-					// 多分数値だけど一応try
-					try
+					a = stoll(code[1]);
+				}
+
+				if (a % 3 == 0 && a % 5 == 0)
+					return "FizzBuzz";
+				else if (a % 3 == 0)
+					return "Fizz";
+				else if (a % 5 == 0)
+					return "Buzz";
+				else
+					return to_string(a);
+			}
+			else if (func == ">")
+			{
+				return f_math(7, code[1], code[2]);
+			}
+			else if (func == "<")
+			{
+				return f_math(8, code[1], code[2]);
+			}
+			else if (func == "<=")
+			{
+				return f_math(9, code[1], code[2]);
+			}
+			else if (func == ">=")
+			{
+				return f_math(10, code[1], code[2]);
+			}
+			else if (func == "using")
+			{
+				// 高度なことをするのを宣言する
+				// モジュールとはまた違う
+				// 使用するたびに確認入る(aqua-toolsを除く)
+				if (code[1] == "sh" || code[1] == "shell")
+				{
+					usinglog(1);
+				}
+				else if (code[1] == "tools")
+				{
+					if (tool_ok())
 					{
-						ans += stold(s);
+						tooljs = true;
+						toolpy = true;
 					}
-					catch (const exception &e)
+					else
 					{
-						err(20); // 察し((
+						err(35);
 					}
 				}
-			}
-
-			// 全部終わり! じゃあね!
-			return to_string(ans);
-		}
-		else if (func == "gcd")
-		{
-			if (argn != 2)
-				err(2);
-
-			return f_math(11, code[1], code[2]);
-		}
-		else if (func == "lcm")
-		{
-			if (argn != 2)
-				err(2);
-
-			return f_math(12, code[1], code[2]);
-		}
-		else if (func == "is_prime")
-		{
-			return f_trig(6, code[1]);
-		}
-		else if (func == "rand")
-		{
-			// code[1]~code[2]までの乱数
-			return f_math(16, code[1], code[2]);
-		}
-		else if (func == "set_rand")
-		{
-			srand(time(NULL)); // 魔法の言葉
-		}
-		else if (func == "ord")
-		{
-			// Pythonのordと一緒
-
-			string s = "";
-
-			if (isstring(code[1]))
-			{
-				s = cutstr(code[1]);
-			}
-			else if (isvarok(code[1]))
-			{
-				switch (var_search(code[1]))
+				else if (code[1] == "tools-js")
 				{
-				case 3:
-					s = var_value(code[1]);
-					break;
-
-				case 0:
-					err(10);
-					break;
-
-				default:
-					err(27);
-					break;
-				}
-			}
-			else if (code[1] == ":")
-			{
-				s = nx();
-			}
-			else
-			{
-				err(2);
-			}
-
-			if (s.size() != 1)
-			{
-				err(28);
-			}
-
-			return to_string((int)s[0]);
-		}
-		else if (func == "chr")
-		{
-			return f_trig(8, code[1]);
-		}
-		else if (func == "at")
-		{
-			ll index = 0;
-			if (isstring(code[2]))
-			{
-				err(20);
-			}
-			else if (isvarok(code[2]))
-			{
-				switch (var_search(code[2]))
-				{
-				case 2:
-				case 3:
-				case 4:
-					err(27);
-					break;
-
-				case 0:
-					err(10);
-					break;
-
-				default:
-					index = stoll(var_value(code[2]));
-					break;
-				}
-			}
-			else if (isint(code[2]))
-			{
-				index = stoll(code[2]);
-			}
-			else if (code[2] == ":")
-			{
-				index = stoll(nx());
-			}
-			else
-			{
-				err(2);
-			}
-
-			string s = "";
-
-			if (isstring(code[1]))
-			{
-				s = cutstr(code[1]);
-			}
-			else if (isint(code[1]))
-			{
-				err(29);
-			}
-			else if (isvarok(code[1]))
-			{
-				switch (var_search(code[1]))
-				{
-				case 2:
-					s = var_value(code[1]);
-					break;
-
-				case 0:
-					err(10);
-					break;
-
-				default:
-					err(27);
-					break;
-				}
-			}
-			else if (code[1] == ":")
-			{
-				s = nx();
-			}
-			else
-			{
-				err(2);
-			}
-
-			if (index > -1 && index < s.size())
-			{
-				string tmp = {s.at(index)};
-				return tmp;
-			}
-			else
-			{
-				err(30);
-			}
-		}
-		else if (func == "len")
-		{
-			// やっぱりPython((
-
-			string s = "";
-
-			if (isstring(code[1]))
-			{
-				s = cutstr(code[1]);
-			}
-			else if (isint(code[1]))
-			{
-				err(29);
-			}
-			else if (isvarok(code[1]))
-			{
-				switch (var_search(code[1]))
-				{
-				case 2:
-					s = var_value(code[1]);
-					break;
-
-				case 0:
-					err(10);
-					break;
-
-				default:
-					err(27);
-					break;
-				}
-			}
-			else if (code[1] == ":")
-			{
-				s = nx();
-			}
-			else
-			{
-				err(2);
-			}
-
-			return to_string(s.size());
-		}
-		else if (func == "?")
-		{
-		}
-		else if (func == "while")
-		{
-			runcode = to_bool(code[1]);
-			while_count++;
-
-			if (runcode) // ifのやつを流用
-			{
-				inc_now++;
-				inc_code++;
-			}
-			else
-				inc_now++;
-
-			while_line.push_back(code_line);
-		}
-		else if (func == "until")
-		{
-			runcode = !to_bool(code[1]);
-			until_count++;
-
-			if (runcode)
-			{
-				inc_now++;
-				inc_code++;
-			}
-			else
-				inc_now++;
-
-			until_line.push_back(code_line);
-		}
-		else if (func == "getline")
-		{
-			// 入力を一行受け取ってそれを返す
-
-			string s = "undefined";
-			getline(cin, s);
-			return s;
-		}
-		else if (func == "lsh")
-		{
-			return f_math(17, code[1], code[2]);
-		}
-		else if (func == "rsh")
-		{
-			return f_math(18, code[1], code[2]);
-		}
-		else if (func == "download")
-		{
-			if (us_net)
-			{
-				string url = get_str(code[1]), path = get_str(code[2]);
-
-				if (path[path.length() - 1] == ' ')
-				{
-					err(38);
-				}
-
-				if (tooljs)
-				{
-					if (url.substr(0, 5) == "https")
+					if (tool_ok())
 					{
-						run("download.js", code[1], code[2]);
+						tooljs = true;
+					}
+					else
+					{
+						err(35);
+					}
+				}
+				else if (code[1] == "tools-py")
+				{
+					if (tool_ok())
+					{
+						toolpy = true;
+					}
+					else
+					{
+						err(35);
+					}
+				}
+				else if (code[1] == "network" || code[1] == "net")
+				{
+					usinglog(2);
+				}
+				else if (code[1] == "clipboard" || code[1] == "clip")
+				{
+					usinglog(3);
+				}
+				else
+				{
+					err(2);
+				}
+			}
+			else if (func == "label")
+			{
+				// ラベル
+				// gotoと合わせて使用
+
+				// 形式検査
+				if (code[1] == "")
+					err(2);
+				if (code[1] == ":")
+					err(15);
+				if (!isvarok(code[1]))
+					err(23);
+
+				if (label_list.count(code[1]))
+				{
+					err(22);
+				}
+				else
+				{
+					label_list[code[1]] = code_line;
+				}
+			}
+			else if (func == "sum")
+			{
+				// 合計
+
+				// 返り値
+				ld ans = 0;
+
+				// 全探索
+				rep(i, argn)
+				{
+
+					// 仮
+					string s = code[i + 1];
+
+					if (isvarok(s)) // 変数の場合
+					{
+						try
+						{
+							ans += stold(var_value(s));
+						}
+						catch (const exception &e)
+						{
+							err(20); // stringとかの場合
+						}
+					}
+					else if (isstring(s)) // あからさまにstring("")の場合
+					{
+						err(20);
+					}
+					else if (s == ":")
+					{
+						try
+						{
+							ans += stold(nx());
+						}
+						catch (const exception &e)
+						{
+							err(20); // 一応
+						}
+					}
+					else
+					{
+						// 多分数値だけど一応try
+						try
+						{
+							ans += stold(s);
+						}
+						catch (const exception &e)
+						{
+							err(20); // 察し((
+						}
+					}
+				}
+
+				// 全部終わり! じゃあね!
+				return to_string(ans);
+			}
+			else if (func == "gcd")
+			{
+				if (argn != 2)
+					err(2);
+
+				return f_math(11, code[1], code[2]);
+			}
+			else if (func == "lcm")
+			{
+				if (argn != 2)
+					err(2);
+
+				return f_math(12, code[1], code[2]);
+			}
+			else if (func == "is_prime")
+			{
+				return f_trig(6, code[1]);
+			}
+			else if (func == "rand")
+			{
+				// code[1]~code[2]までの乱数
+				return f_math(16, code[1], code[2]);
+			}
+			else if (func == "set_rand")
+			{
+				srand(time(NULL)); // 魔法の言葉
+			}
+			else if (func == "ord")
+			{
+				// Pythonのordと一緒
+
+				string s = "";
+
+				if (isstring(code[1]))
+				{
+					s = cutstr(code[1]);
+				}
+				else if (isvarok(code[1]))
+				{
+					switch (var_search(code[1]))
+					{
+					case 3:
+						s = var_value(code[1]);
+						break;
+
+					case 0:
+						err(10);
+						break;
+
+					default:
+						err(27);
+						break;
+					}
+				}
+				else if (code[1] == ":")
+				{
+					s = nx();
+				}
+				else
+				{
+					err(2);
+				}
+
+				if (s.size() != 1)
+				{
+					err(28);
+				}
+
+				return to_string((int)s[0]);
+			}
+			else if (func == "chr")
+			{
+				return f_trig(8, code[1]);
+			}
+			else if (func == "at")
+			{
+				ll index = 0;
+				if (isstring(code[2]))
+				{
+					err(20);
+				}
+				else if (isvarok(code[2]))
+				{
+					switch (var_search(code[2]))
+					{
+					case 2:
+					case 3:
+					case 4:
+						err(27);
+						break;
+
+					case 0:
+						err(10);
+						break;
+
+					default:
+						index = stoll(var_value(code[2]));
+						break;
+					}
+				}
+				else if (isint(code[2]))
+				{
+					index = stoll(code[2]);
+				}
+				else if (code[2] == ":")
+				{
+					index = stoll(nx());
+				}
+				else
+				{
+					err(2);
+				}
+
+				string s = "";
+
+				if (isstring(code[1]))
+				{
+					s = cutstr(code[1]);
+				}
+				else if (isint(code[1]))
+				{
+					err(29);
+				}
+				else if (isvarok(code[1]))
+				{
+					switch (var_search(code[1]))
+					{
+					case 2:
+						s = var_value(code[1]);
+						break;
+
+					case 0:
+						err(10);
+						break;
+
+					default:
+						err(27);
+						break;
+					}
+				}
+				else if (code[1] == ":")
+				{
+					s = nx();
+				}
+				else
+				{
+					err(2);
+				}
+
+				if (index > -1 && index < s.size())
+				{
+					string tmp = {s.at(index)};
+					return tmp;
+				}
+				else
+				{
+					err(30);
+				}
+			}
+			else if (func == "len")
+			{
+				// やっぱりPython((
+
+				string s = "";
+
+				if (isstring(code[1]))
+				{
+					s = cutstr(code[1]);
+				}
+				else if (isint(code[1]))
+				{
+					err(29);
+				}
+				else if (isvarok(code[1]))
+				{
+					switch (var_search(code[1]))
+					{
+					case 2:
+						s = var_value(code[1]);
+						break;
+
+					case 0:
+						err(10);
+						break;
+
+					default:
+						err(27);
+						break;
+					}
+				}
+				else if (code[1] == ":")
+				{
+					s = nx();
+				}
+				else
+				{
+					err(2);
+				}
+
+				return to_string(s.size());
+			}
+			else if (func == "?")
+			{
+			}
+			else if (func == "while")
+			{
+				runcode = to_bool(code[1]);
+				while_count++;
+
+				if (runcode) // ifのやつを流用
+				{
+					inc_now++;
+					inc_code++;
+				}
+				else
+					inc_now++;
+
+				while_line.push_back(code_line);
+			}
+			else if (func == "until")
+			{
+				runcode = !to_bool(code[1]);
+				until_count++;
+
+				if (runcode)
+				{
+					inc_now++;
+					inc_code++;
+				}
+				else
+					inc_now++;
+
+				until_line.push_back(code_line);
+			}
+			else if (func == "getline")
+			{
+				// 入力を一行受け取ってそれを返す
+
+				string s = "undefined";
+				getline(cin, s);
+				return s;
+			}
+			else if (func == "lsh")
+			{
+				return f_math(17, code[1], code[2]);
+			}
+			else if (func == "rsh")
+			{
+				return f_math(18, code[1], code[2]);
+			}
+			else if (func == "download")
+			{
+				if (us_net)
+				{
+					string url = get_str(code[1]), path = get_str(code[2]);
+
+					if (path[path.length() - 1] == ' ')
+					{
+						err(38);
+					}
+
+					if (tooljs)
+					{
+						if (url.substr(0, 5) == "https")
+						{
+							run("download.js", code[1], code[2]);
+						}
+						else if (toolpy)
+						{
+							run("download.py", code[1], code[2]);
+						}
+						else
+						{
+							err(37);
+						}
 					}
 					else if (toolpy)
 					{
@@ -1889,72 +1909,124 @@ inline string aqua(string script, vector<string> line, int linenum)
 					}
 					else
 					{
-						err(37);
+						err(36);
 					}
 				}
-				else if (toolpy)
+				else
 				{
-					run("download.py", code[1], code[2]);
+					err(21);
+				}
+			}
+			else if (func == "get_clip")
+			{
+				if (us_clip)
+				{
+					if (toolpy)
+					{
+						run("get_clip.py");
+					}
+					else if (tooljs)
+					{
+						err(39);
+					}
+					else
+					{
+						err(36);
+					}
+
+					return get_return();
 				}
 				else
 				{
-					err(36);
+					err(21);
+				}
+			}
+			else if (func == "copy_clip")
+			{
+				if (us_clip)
+				{
+					if (toolpy)
+					{
+						run("copy_clip.py", get_str(code[1]));
+					}
+					else if (tooljs)
+					{
+						err(39);
+					}
+					else
+					{
+						err(36);
+					}
+				}
+				else
+				{
+					err(21);
 				}
 			}
 			else
 			{
-				err(21);
-			}
-		}
-		else if (func == "get_clip")
-		{
-			if (us_clip)
-			{
-				if (toolpy)
+				if (!op_funcskip && func != "" && func[0] >= '0')
 				{
-					run("get_clip.py");
-				}
-				else if (tooljs)
-				{
-					err(39);
-				}
-				else
-				{
-					err(36);
-				}
-
-				return get_return();
-			}
-			else
-			{
-				err(21);
-			}
-		}
-		else
-		{
-			if (!op_funcskip && func != "" && func[0] >= '0')
-			{
-				if (inc_now == inc_code)
-				{
-					co(func.size());
-					errorlog(line, linenum, 1);
+					if (inc_now == inc_code)
+					{
+						co(func.size());
+						errorlog(line, linenum, 1);
+					}
 				}
 			}
 		}
-	}
-	else // インシデントが違うとき
-	{
-		if (func == "end")
+		else // インシデントが違うとき
 		{
-
-			if (code[1] == "if")
+			if (func == "end")
 			{
 
-				// インシデントチェック
-				if (if_count <= 0)
-					err(31);
+				if (code[1] == "if")
+				{
 
-				if_count--;
+					// インシデントチェック
+					if (if_count <= 0)
+						err(31);
+
+					if_count--;
+
+					if (runcode)
+					{
+						inc_now--;
+						inc_code--;
+					}
+					else
+					{
+						inc_now--;
+					}
+				}
+				else if (code[1] == "while")
+				{
+					while_count--;
+
+					if (while_count < 0)
+					{
+						err(32);
+					}
+
+					inc_now--;
+					while_line.pop_back();
+				}
+				else if (code[1] == "until")
+				{
+					until_count--;
+
+					if (until_count < 0)
+					{
+						err(34);
+					}
+
+					inc_now--;
+					until_line.pop_back();
+				}
+			}
+			else if (func == "else")
+			{
+				if_count++;
 
 				if (runcode)
 				{
@@ -1965,93 +2037,59 @@ inline string aqua(string script, vector<string> line, int linenum)
 				{
 					inc_now--;
 				}
-			}
-			else if (code[1] == "while")
-			{
-				while_count--;
 
-				if (while_count < 0)
+				runcode = !runcode;
+
+				if (runcode)
 				{
-					err(32);
+					inc_now++;
+					inc_code++;
+				}
+				else
+					inc_now++;
+			}
+			else if (func == "if")
+			{
+				if (isvarok(code[1]))
+				{
+					runcode = stob(var_value(code[1]));
+				}
+				else if (code[1] == ":")
+					runcode = stob(nx());
+				else
+				{
+					runcode = stob(code[1]);
 				}
 
-				inc_now--;
-				while_line.pop_back();
-			}
-			else if (code[1] == "until")
-			{
-				until_count--;
+				if_count++;
 
-				if (until_count < 0)
+				if (runcode)
 				{
-					err(34);
+					inc_now++;
+					inc_code++;
 				}
-
-				inc_now--;
-				until_line.pop_back();
+				else
+					inc_now++;
 			}
-		}
-		else if (func == "else")
-		{
-			if_count++;
-
-			if (runcode)
+			else if (func == "while")
 			{
-				inc_now--;
-				inc_code--;
-			}
-			else
-			{
-				inc_now--;
-			}
+				while_count++;
+				while_line.push_back(code_line);
 
-			runcode = !runcode;
-
-			if (runcode)
-			{
 				inc_now++;
-				inc_code++;
 			}
-			else
-				inc_now++;
-		}
-		else if (func == "if")
-		{
-			if (isvarok(code[1]))
+			else if (func == "until")
 			{
-				runcode = stob(var_value(code[1]));
-			}
-			else if (code[1] == ":")
-				runcode = stob(nx());
-			else
-			{
-				runcode = stob(code[1]);
-			}
+				until_count++;
+				until_line.push_back(code_line);
 
-			if_count++;
-
-			if (runcode)
-			{
 				inc_now++;
-				inc_code++;
 			}
-			else
-				inc_now++;
 		}
-		else if (func == "while")
-		{
-			while_count++;
-			while_line.push_back(code_line);
-
-			inc_now++;
-		}
-		else if (func == "until")
-		{
-			until_count++;
-			until_line.push_back(code_line);
-
-			inc_now++;
-		}
+	}
+	catch (exception &e)
+	{
+		err(41);
 	}
 
 	// 未定義を返す
