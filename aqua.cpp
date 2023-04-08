@@ -36,6 +36,7 @@ bool st_style = true;
 bool us_shell = false;
 bool us_net = false;
 bool us_clip = false;
+bool us_sound = false;
 bool tooljs = false;
 bool toolpy = false;
 
@@ -409,6 +410,11 @@ inline void usinglog(int id)
 			co("Clipboard");
 			co("Writing to and reading from the clipboard");
 			break;
+
+		case 4:
+			co("Sound");
+			co("Sound reproduction");
+			break;
 		}
 
 		co("\nAre you sure you want to do this? (Y/n)");
@@ -432,6 +438,10 @@ inline void usinglog(int id)
 
 		case 3:
 			us_clip = true;
+			break;
+
+		case 4:
+			us_sound = true;
 			break;
 		}
 	}
@@ -682,9 +692,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 		code.push_back("");
 	}
 
+	// 謎のエラー防止
 	try
 	{
-
 		// インシデントチェック
 		if (inc_code == inc_now)
 		{
@@ -1544,6 +1554,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 				{
 					usinglog(3);
 				}
+				else if (code[1] == "sound")
+				{
+					usinglog(4);
+				}
 				else
 				{
 					err(2);
@@ -1964,6 +1978,28 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(21);
 				}
 			}
+			else if (func == "play")
+			{
+				if (us_sound)
+				{
+					if (toolpy)
+					{
+						run("play.py", get_str(code[1]));
+					}
+					else if (tooljs)
+					{
+						err(39);
+					}
+					else
+					{
+						err(36);
+					}
+				}
+				else
+				{
+					err(21);
+				}
+			}
 			else
 			{
 				if (!op_funcskip && func != "" && func[0] >= '0')
@@ -2335,7 +2371,7 @@ int main(int argc, char const *argv[])
 		sett = {1};
 		st_style = true;
 	}
-	if (count(all(args), "--yes"))
+	if (count(all(args), "--yes") || count(all(args), "-y"))
 		st_using_yes = true;
 	else
 		st_using_yes = false;
