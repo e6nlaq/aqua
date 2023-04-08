@@ -48,24 +48,24 @@ unordered_map<string, double> var_double;
 unordered_map<string, int64_t> var_int64;
 unordered_map<string, ll> var_ll;
 unordered_map<string, ll> label_list;
+unordered_set<ll> nx_line;
 vector<string> lines;
 vector<int> sett;
 vector<ll> while_line;
 vector<ll> until_line;
-unordered_set<ll> nx_line;
-int linenume;
 bool runcode = true;
+bool iswin = true;
+int linenume;
 int inc_now = 0;
 int inc_code = 0;
-bool iswin = true;
+int isnx = 0;
+int isjnx = 0;
 ll code_line = 0;
 ll forever_line = -1;
-const string version = "1.5.0";
 ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
-int isnx = 0;
-int isjnx = 0;
+const double version = 1.601;
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -2410,7 +2410,7 @@ int main(int argc, char const *argv[])
 	if (count(all(args), "-c") || count(all(args), "--compile"))
 	{
 		co("----------------------------------------------------------------------");
-		co("Aqua JavaScript Compiler v" + version);
+		co("Aqua JavaScript Compiler Build" + to_string(version));
 		co("Copyright (C) 2023 e6nlaq");
 		co("----------------------------------------------------------------------");
 
