@@ -40,13 +40,13 @@ bool tooljs = false;
 bool toolpy = false;
 
 // 変数
-map<string, int> var_int;
-map<string, string> var_string;
-map<string, bool> var_bool;
-map<string, double> var_double;
-map<string, int64_t> var_int64;
-map<string, ll> var_ll;
-map<string, ll> label_list;
+unordered_map<string, int> var_int;
+unordered_map<string, string> var_string;
+unordered_map<string, bool> var_bool;
+unordered_map<string, double> var_double;
+unordered_map<string, int64_t> var_int64;
+unordered_map<string, ll> var_ll;
+unordered_map<string, ll> label_list;
 vector<string> lines;
 vector<int> sett;
 vector<ll> while_line;
