@@ -1,17 +1,5 @@
 ﻿
-var int A
-var int B
-var int C
-var int D
-var int E
-var int F
+using tools
+using sound
 
-set A 0
-set B 1
-set C 2
-set D 3
-set E 4
-set F 5
-
-outf :
-sum A B C D E F
+play "./rap.mp3"
