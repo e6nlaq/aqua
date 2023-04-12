@@ -2000,6 +2000,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(21);
 				}
 			}
+			else if (func == "cin")
+			{
+				string S;
+				cin >> S;
+
+				return S;
+			}
 			else
 			{
 				if (!op_funcskip && func != "" && func[0] >= '0')
