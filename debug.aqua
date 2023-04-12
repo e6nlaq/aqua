@@ -1,5 +1,6 @@
 ﻿
-using tools
-using sound
+var string s
+set s :
+cin
 
-play "./rap.mp3"
+outf s
