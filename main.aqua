@@ -76,5 +76,6 @@ outf "おい!日本語対応してるか!"
 if false
 
 else
+# a
 
 end if
