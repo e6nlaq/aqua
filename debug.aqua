@@ -1,6 +1,0 @@
-﻿
-var string s
-set s :
-cin
-
-outf s
