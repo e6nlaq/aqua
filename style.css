@@ -85,3 +85,19 @@ button.btn {
 a {
 	color: aqua;
 }
+
+table.center {
+	margin: auto;
+}
+
+th,
+td {
+	border: solid 1px;
+	padding: 7px;
+	/* 枠線指定 */
+}
+
+table {
+	border-collapse: collapse;
+	/* セルの線を重ねる */
+}
