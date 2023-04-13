@@ -1,63 +1,87 @@
 body {
-    background-color: #150915;
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #150915;
+	color: white;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .center {
-    text-align: center;
+	text-align: center;
 }
 
 .btn--orange,
 a.btn--orange {
-    color: #fff;
-    background-color: #d75cd7;
+	color: #fff;
+	background-color: #d75cd7;
 }
 
 .btn--orange:hover,
 a.btn--orange:hover {
-    color: #fff;
-    background: #d75cd7;
+	color: #fff;
+	background: #d75cd7;
+}
+
+.btn--latest,
+a.btn--latest {
+	color: #fff;
+	background-color: #3FB941;
+}
+
+.btn--latest:hover,
+a.btn--latest:hover {
+	color: #fff;
+	background: #3FB941;
+}
+
+.btn--preview,
+a.btn--preview {
+	color: #fff;
+	background-color: #C69922;
+}
+
+.btn--preview:hover,
+a.btn--preview:hover {
+	color: #fff;
+	background: #C69922;
 }
 
 *,
 *:before,
 *:after {
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit;
+	-webkit-box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 html {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    /* font-size: 62.5%; */
-    /*rem算出をしやすくするために*/
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	/* font-size: 62.5%; */
+	/*rem算出をしやすくするために*/
 }
 
 .btn,
 a.btn,
 button.btn {
-    font-size: 1.6rem;
-    font-weight: 700;
-    line-height: 1.5;
-    position: relative;
-    display: inline-block;
-    padding: 1rem 4rem;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-    text-align: center;
-    vertical-align: middle;
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    color: #212529;
-    border-radius: 0.5rem;
+	font-size: 1.6rem;
+	font-weight: 700;
+	line-height: 1.5;
+	position: relative;
+	display: inline-block;
+	padding: 1rem 4rem;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+	letter-spacing: 0.1em;
+	color: #212529;
+	border-radius: 0.5rem;
 }
 
 a {
-    color: aqua;
+	color: aqua;
 }
