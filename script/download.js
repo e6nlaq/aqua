@@ -61,11 +61,11 @@ window.onload = async function () {
 
 async function download_latest() {
 	window.location.href = latest_url;
-	setTimeout('window.location.href="../thanks.html"', 1000);
+	setTimeout('window.location.href="./thanks.html"', 1000);
 }
 
 function download_preview() {
 	window.location.href = preview_url;
-	setTimeout('window.location.href="../thanks.html"', 1000);
+	setTimeout('window.location.href="./thanks.html"', 1000);
 }
 
