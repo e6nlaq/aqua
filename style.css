@@ -44,6 +44,18 @@ a.btn--preview:hover {
 	background: #C69922;
 }
 
+.btn--github,
+a.btn--github {
+	color: #fff;
+	background-color: #E6EDF3;
+}
+
+.btn--github:hover,
+a.btn--github:hover {
+	color: #fff;
+	background: #1F2328;
+}
+
 *,
 *:before,
 *:after {
@@ -100,4 +112,10 @@ td {
 table {
 	border-collapse: collapse;
 	/* セルの線を重ねる */
+}
+
+textarea.try_output {
+	font-family: monospace;
+	color: white;
+	background-color: #1F2328;
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Aceを使用 -->
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Try Aqua</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="shortcut icon" href="image/aqua.svg" type="image/x-icon">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.17.0/ace.js"></script>
+	<script src="script/try.js"></script>
+</head>
+
+<body>
+	<h1 class="center">Try Aqua</h1>
+	<h3 class="center">Write your Aqua code here!</h3>
+
+	<div id="editor" style="height: 600px"></div>
+
+	<br>
+
+	<div class="center">
+		<a onclick="run(editor.getValue());" class="btn btn--orange">Run</a>
+		<br><br>
+		<textarea id="output" cols="100" rows="20" class="try_output" readonly>(Output shown here)</textarea>
+	</div>
+
+	<script>
+		var editor = ace.edit("editor");
+		editor.setValue('# This is a Hello, world program.\noutf "Hello, world!"');
+		editor.setTheme("ace/theme/one_dark");
+		editor.session.setMode("ace/mode/ruby");
+		editor.setOption("showPrintMargin", false)
+	</script>
+</body>
+
+</html>
