@@ -51,18 +51,19 @@ function aqua(script) {
 }
 
 function run(script_full) {
+	output = [];
+	let out = document.getElementById("output");
 	let script = script_full.split("\n");
 
 	for (let i = 0; i < script.length; i++) {
-		// try {
-		aqua(script[i]);
-		// } catch (error) {
-		// output = ["<Error>"];
-		// }
+		try {
+			aqua(script[i]);
+		} catch (error) {
+			output = ["<Error>"];
+		}
 
 	}
 
-	let out = document.getElementById("output");
 	out.textContent = "";
 	output.forEach(function (line) {
 		out.textContent += line;
