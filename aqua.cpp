@@ -2320,6 +2320,12 @@ int main(int argc, char const *argv[])
 			warn("It is already UNIX.");
 	}
 
+	if (count(all(args), "--version") || count(all(args), "-v"))
+	{
+		co(to_string(version));
+		exit(0);
+	}
+
 	// 何もオプションがない場合
 
 	if (argc == 1)
