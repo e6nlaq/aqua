@@ -69,15 +69,14 @@ inline bool isvarok(string s)
 	if (s[0] == '\"')
 		return false;
 
+	if (isdigit(s[0]))
+		return false;
+
 	for (char c : s)
 	{
-		if (!isdigit(c))
+		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_' || (c >= '0' && c <= '9'))
 		{
-			if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_')
-			{
-			}
-			else
-				return false;
+			// 何もしない
 		}
 		else
 			return false;
