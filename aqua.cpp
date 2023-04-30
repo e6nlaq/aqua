@@ -2020,7 +2020,6 @@ inline string aqua(string script, vector<string> line, int linenum)
 				{
 					if (inc_now == inc_code)
 					{
-						co(func.size());
 						errorlog(line, linenum, 1);
 					}
 				}
@@ -2387,7 +2386,7 @@ int main(int argc, char const *argv[])
 
 		ll pyinc = 0;
 		bool nxrun = false; // falseの時そのまま実行 trueの時もう一度入力
-		const unordered_set<string> inc_plus_func = {"if", "while", "until"};
+		const unordered_set<string> inc_plus_func = {"if", "while", "until", "forever"};
 
 		while (true)
 		{
