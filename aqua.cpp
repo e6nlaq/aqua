@@ -55,6 +55,7 @@ vector<ll> while_line;
 vector<ll> until_line;
 bool runcode = true;
 bool iswin = true;
+bool clirun = false;
 int linenume;
 int inc_now = 0;
 int inc_code = 0;
@@ -377,7 +378,9 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 	{
 		co(to_string(linenum + 1) + "| " + line[linenum]);
 	}
-	exit(1);
+
+	if (!clirun)
+		exit(1);
 
 #pragma endregion
 }
@@ -768,7 +771,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				// 終了コード指定可exit
 
-				exit((ll)to_num(code[1]));
+				if (code[1] == "")
+					exit(0);
+				else
+					exit((ll)to_num(code[1]));
 			}
 			else if (func == "throw")
 			{
@@ -1220,7 +1226,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 						err(19);
 					}
 
-					if (runcode)
+					if (inc_now == inc_code)
 					{
 						inc_now--;
 						inc_code--;
@@ -2034,7 +2040,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 					if_count--;
 
-					if (runcode)
+					if (inc_code == inc_now)
 					{
 						inc_now--;
 						inc_code--;
@@ -2274,6 +2280,31 @@ inline string nx()
 
 int main(int argc, char const *argv[])
 {
+	// OS取得
+	string os = "Unknown";
+	bool os_win64 = false;
+
+#ifdef _WIN64
+	var_string["api_os"] = "win64";
+	os_win64 = true;
+	iswin = true;
+	os = "Windows 64bit";
+#endif
+
+#ifdef _WIN32
+	if (!os_win64)
+	{
+		var_string["api_os"] = "win32";
+		os = "Windows 32bit";
+	}
+	iswin = true;
+#endif
+
+#if defined(__unix) || defined(__unix__)
+	var_string["api_os"] = "unix";
+	os = "Unix OS";
+#endif
+
 	// Aqua基本処理系
 
 #pragma region Aqua System Variables
@@ -2321,60 +2352,12 @@ int main(int argc, char const *argv[])
 			warn("It is already UNIX.");
 	}
 
+	// 引数
 	if (count(all(args), "--version") || count(all(args), "-v"))
 	{
 		co(to_string(version));
 		exit(0);
 	}
-
-	// 何もオプションがない場合
-
-	if (argc == 1)
-	{
-		co("----------------------------------------------------------------------");
-		cou("Welcome to Aqua For ");
-
-		// OS
-
-		bool os_win64 = false;
-
-#ifdef _WIN64
-		cou("Windows 64bit");
-		var_string["api_os"] = "win64";
-		os_win64 = true;
-		iswin = true;
-#endif
-
-#ifdef _WIN32
-		if (!os_win64)
-		{
-			cou("Windows 32bit");
-			var_string["api_os"] = "win32";
-		}
-		iswin = true;
-#endif
-
-#if defined(__unix) || defined(__unix__)
-		cou("UNIX");
-		var_string["api_os"] = "unix";
-#endif
-
-		co("!");
-		co("\nAqua helps to solve a very small problem");
-		co("Let's specify the Aqua script as the first argument!");
-		co("----------------------------------------------------------------------");
-		co("\nTo exit, press Enter key.");
-		int i = getchar();
-
-		return 0;
-	}
-
-	// UNIXだったらfalse
-#ifdef LINUX
-	iswin = false;
-#endif
-
-	// コマンド引数適用
 	if (count(all(args), "--no-style"))
 	{
 		sett = {0};
@@ -2389,6 +2372,64 @@ int main(int argc, char const *argv[])
 		st_using_yes = true;
 	else
 		st_using_yes = false;
+
+	// 何もオプションがない場合
+
+	if (argc == 1 || (argc == 2 && !st_style))
+	{
+		clirun = true;
+		co("--------------------------------------------------------------------------");
+		co("Aqua / Build " + to_string(version) + " [" + os + "]");
+		co("Bugs and feedback can be sent to `https://github.com/e6nlaq/aqua/issues`");
+		co("--------------------------------------------------------------------------\n");
+
+		ll pyinc = 0;
+		bool nxrun = false; // falseの時そのまま実行 trueの時もう一度入力
+		const unordered_set<string> inc_plus_func = {"if", "while", "until"};
+
+		while (true)
+		{
+			// cout << pyinc << " " << nxrun << endl;
+			cou((pyinc > 0 || nxrun ? "... " : ">>> "));
+			string inp;
+			getline(cin, inp);
+			nxrun = false;
+
+			lines.push_back(inp);
+
+			string func = scriptcut(incident(vector<string>{inp})[0])[0];
+			if (func == "end")
+			{
+				pyinc--;
+			}
+			else if (inc_plus_func.count(func))
+				pyinc++;
+			else if (count(all(inp), ':'))
+				nxrun = true;
+
+			if (pyinc <= 0 && !nxrun)
+			{
+				for (code_line = 0; code_line < lines.size(); code_line++)
+				{
+					aqua(lines[code_line], lines, code_line);
+
+					if (isnx) // :使ったら繰り越し
+					{
+						code_line += isnx;
+						isnx = 0;
+					}
+				}
+				lines.clear();
+			}
+		}
+
+		return 0;
+	}
+
+	// UNIXだったらfalse
+#ifdef LINUX
+	iswin = false;
+#endif
 
 	// ファイル存在チェック
 	FILE *fp = fopen(args[1].c_str(), "r");
@@ -2477,6 +2518,7 @@ int main(int argc, char const *argv[])
 			code_line += isnx;
 			isnx = 0;
 		}
+		// cout << inc_code << " " << inc_now << endl;
 	}
 
 	if (op_stylereset && sett[0])

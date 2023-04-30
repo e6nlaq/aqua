@@ -1,11 +1,10 @@
 
-var string s
-set s :
-cin
-
-if :
-is s "abc"
-    outf "Yes"
+if true
 else
-    outf "No"
+    if false
+    else
+    end if
 end if
+
+outf "a"
+exit
