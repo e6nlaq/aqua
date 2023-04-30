@@ -706,7 +706,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				// 全ての始まり。改行なし出力
 
-				if (code[1][0] == '\"')
+				if (isstring(code[1]))
 					out(cutstr(code[1]));
 				else if (code[1] == ":")
 					out(nx());
@@ -1038,7 +1038,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					break;
 
 				case 2:
-					if (code[2][0] == '\"')
+					if (isstring(code[2]))
 						var_string[code[1]] = cutstr(code[2]);
 					else if (code[2] == ":")
 						var_string[code[1]] = nx();
@@ -1318,7 +1318,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					a = nx();
 				else
 				{
-					if (code[1][0] == '\"')
+					if (isstring(code[1]))
 					{
 						a = cutstr(code[1]);
 					}
@@ -1334,7 +1334,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					b = nx();
 				else
 				{
-					if (code[2][0] == '\"')
+					if (isstring(code[2]))
 					{
 						b = cutstr(code[2]);
 					}

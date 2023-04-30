@@ -1,10 +1,15 @@
 
-if true
-else
-    if false
-    else
-    end if
-end if
+# It can be used for any variable type.
+var int int
+var string str
 
-outf "a"
-exit
+set int :
+cin
+
+set str :
+cin
+
+# function directly.
+outf :
++ 1 :
+cin
