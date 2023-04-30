@@ -12,7 +12,8 @@
                 "${fileDirname}\\bin\\x64\\${fileBasenameNoExtension}.exe",
                 "-O3",
                 "-static",
-                "-lstdc++"
+                "-lstdc++",
+                "--std=c++17"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -20,10 +21,7 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "detail": "デバッガーによって生成されたタスク。"
         },
         {
@@ -43,11 +41,31 @@
             "problemMatcher": [
                 "$gcc"
             ],
+            "group": "build",
+            "detail": "コンパイラ: C:/mingw64/bin/g++.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: cpp.exe アクティブなファイルのビルド",
+            "command": "C:\\mingw64\\bin\\cpp.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "コンパイラ: C:/mingw64/bin/g++.exe"
+            "detail": "デバッガーによって生成されたタスク。"
         }
     ],
     "version": "2.0.0"

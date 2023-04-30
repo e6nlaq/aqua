@@ -1,0 +1,11 @@
+
+var string s
+set s :
+cin
+
+if :
+is s "abc"
+    outf "Yes"
+else
+    outf "No"
+end if
