@@ -120,7 +120,7 @@ inline string cutstr(string cut)
 
 inline bool isstring(string str)
 {
-	return str[0] == '\"' && str[str.size() - 1] == '\"';
+	return (str[0] == '\"' && str[str.size() - 1] == '\"') || (str[0] == '\'' && str[str.size() - 1] == '\'');
 }
 
 inline bool stob(string s)
