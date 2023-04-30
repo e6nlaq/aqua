@@ -8,3 +8,5 @@ test/
 *.obj
 *.out
 test.*
+!main.aqua
+!debug.aqua

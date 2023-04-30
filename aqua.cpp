@@ -1301,6 +1301,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else if (func == "is")
 			{
+				// 一緒かどうか調べる
 				string a, b;
 
 				if (isvarok(code[1]))
@@ -1327,12 +1328,12 @@ inline string aqua(string script, vector<string> line, int linenum)
 					b = nx();
 				else
 				{
-					if (code[1][0] == '\"')
+					if (code[2][0] == '\"')
 					{
-						b = cutstr(code[1]);
+						b = cutstr(code[2]);
 					}
 					else
-						b = code[1];
+						b = code[2];
 				}
 
 				return to_string(a == b);
