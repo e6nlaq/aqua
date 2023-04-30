@@ -66,7 +66,7 @@ ll forever_line = -1;
 ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
-const double version = 1.602;
+const double version = 1.603;
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -2381,6 +2381,8 @@ int main(int argc, char const *argv[])
 		co("--------------------------------------------------------------------------");
 		co("Aqua / Build " + to_string(version) + " [" + os + "]");
 		co("Bugs and feedback can be sent to `https://github.com/e6nlaq/aqua/issues`");
+		if (os == "Unix OS")
+			warn("In the case of Unix, the arrow keys may not respond. Our apologies.");
 		co("--------------------------------------------------------------------------\n");
 
 		ll pyinc = 0;
