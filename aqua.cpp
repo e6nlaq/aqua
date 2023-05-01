@@ -2373,7 +2373,7 @@ int main(int argc, char const *argv[])
 		st_using_yes = false;
 
 	// 何もオプションがない場合
-
+	// Pythonみたいな感じでCUIで実行できるようにする
 	if (argc == 1 || (argc == 2 && !st_style))
 	{
 		clirun = true;
@@ -2398,14 +2398,15 @@ int main(int argc, char const *argv[])
 
 			lines.push_back(inp);
 
-			string func = scriptcut(incident(vector<string>{inp})[0])[0];
+			vector<string> code_tmp = scriptcut(incident(vector<string>{inp})[0]);
+			string func = code_tmp[0];
 			if (func == "end")
 			{
 				pyinc--;
 			}
 			else if (inc_plus_func.count(func))
 				pyinc++;
-			else if (count(all(inp), ':'))
+			else if (count(all(code_tmp), ":"))
 				nxrun = true;
 
 			if (pyinc <= 0 && !nxrun)
