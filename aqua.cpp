@@ -55,6 +55,7 @@ vector<int> sett;
 vector<ll> while_line;
 vector<ll> until_line;
 bool runcode = true;
+bool comment = false;
 bool iswin = true;
 bool clirun = false;
 int linenume;
@@ -723,7 +724,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 	try
 	{
 		// インシデントチェック
-		if (inc_code == inc_now)
+		if (inc_code == inc_now && !comment)
 		{
 			// 以下、関数記述
 			if (func == "out")
@@ -2077,6 +2078,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(43);
 				}
 			}
+			else if (func == "\"\"\"")
+			{
+				comment = true;
+			}
 			else
 			{
 				if (!op_funcskip && func != "" && func[0] >= '0')
@@ -2086,6 +2091,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 						errorlog(line, linenum, 1);
 					}
 				}
+			}
+		}
+		else if (comment)
+		{
+			if (func == "\"\"\"")
+			{
+				comment = false;
 			}
 		}
 		else // インシデントが違うとき
