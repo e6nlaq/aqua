@@ -1305,44 +1305,25 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				return f_trig(7, code[1]);
 			}
-			else if (func == "is")
+			else if (func == "is" || func == "==")
 			{
 				// 一緒かどうか調べる
 				string a, b;
 
-				if (isvarok(code[1]))
-				{
-					a = var_value(code[1]);
-				}
-				else if (code[1] == ":")
-					a = nx();
-				else
-				{
-					if (isstring(code[1]))
-					{
-						a = cutstr(code[1]);
-					}
-					else
-						a = code[1];
-				}
-
-				if (isvarok(code[2]))
-				{
-					b = var_value(code[2]);
-				}
-				else if (code[2] == ":")
-					b = nx();
-				else
-				{
-					if (isstring(code[2]))
-					{
-						b = cutstr(code[2]);
-					}
-					else
-						b = code[2];
-				}
+				a = get_str(code[1]);
+				b = get_str(code[2]);
 
 				return to_string(a == b);
+			}
+			else if (func == "nis" || func == "!=")
+			{
+				// 一緒かどうか調べる
+				string a, b;
+
+				a = get_str(code[1]);
+				b = get_str(code[2]);
+
+				return to_string(a != b);
 			}
 			else if (func == "clear")
 			{

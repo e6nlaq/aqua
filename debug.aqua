@@ -1,15 +1,12 @@
 
-# It can be used for any variable type.
-var int int
-var string str
-
-set int :
-cin
-
-set str :
-cin
-
-# function directly.
 outf :
-+ 1 :
-cin
+is 3 3
+
+outf :
+is "A" "a"
+
+outf :
+nis 3 3
+
+outf :
+nis "A" "a"
