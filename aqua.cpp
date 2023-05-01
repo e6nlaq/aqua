@@ -1981,6 +1981,26 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 				return S;
 			}
+			else if (func == "max")
+			{
+				ld ans = LDBL_MIN;
+				for (ll i = 0; i < argn; i++)
+				{
+					chmax(ans, to_num(code[i + 1]));
+				}
+
+				return to_string(ans);
+			}
+			else if (func == "min")
+			{
+				ld ans = LDBL_MAX;
+				for (ll i = 0; i < argn; i++)
+				{
+					chmin(ans, to_num(code[i + 1]));
+				}
+
+				return to_string(ans);
+			}
 			else
 			{
 				if (!op_funcskip && func != "" && func[0] >= '0')
