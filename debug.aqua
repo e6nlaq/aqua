@@ -1,12 +1,5 @@
 
-outf :
-is 3 3
+var string S "ABACK"
 
 outf :
-is "A" "a"
-
-outf :
-nis 3 3
-
-outf :
-nis "A" "a"
+rfind "DIAIVRMAIEO" "AB"
