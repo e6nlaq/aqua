@@ -47,6 +47,7 @@ unordered_map<string, bool> var_bool;
 unordered_map<string, double> var_double;
 unordered_map<string, int64_t> var_int64;
 unordered_map<string, ll> var_ll;
+unordered_map<string, unsigned int> var_uint;
 unordered_map<string, ll> label_list;
 unordered_set<ll> nx_line;
 vector<string> lines;
@@ -124,6 +125,10 @@ inline int var_search(string name)
 	{
 		return 6;
 	}
+	else if (var_uint.count(name))
+	{
+		return 7;
+	}
 	else
 	{
 		return 0;
@@ -162,6 +167,10 @@ inline string var_value(string name)
 
 	case 6:
 		return to_string(var_ll[name]);
+		break;
+
+	case 7:
+		return to_string(var_uint[name]);
 		break;
 
 	default:
@@ -346,6 +355,10 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("C++ runtime error"); // C++実行時エラー
 		break;
 
+	case 42:
+		co("Negative numbers are not allowed."); // 負の数は使用できません
+		break;
+
 	default:
 		err(5);
 		return;
@@ -359,7 +372,6 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 	co("Error location\n");
 
 	// エラーの周りの行を表示するやつ
-	// なんて親切((
 	if (sett[0])
 	{
 		if (linenum > 1)
@@ -840,6 +852,17 @@ inline string aqua(string script, vector<string> line, int linenum)
 						{
 							var_ll[code[2]] = stoll(code[3]);
 						}
+						else if (code[1] == "uint")
+						{
+							if (stoll(code[3]) < 0)
+							{
+								err(42);
+							}
+							else
+							{
+								var_uint[code[2]] = stoul(code[3]);
+							}
+						}
 						else
 						{
 							err(6); // 存在しない型の時
@@ -1025,16 +1048,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 				switch (var_search(code[1]))
 				{
 				case 1:
-					if (isvarok(code[2]))
-						var_int[code[1]] = stoi(var_value(code[2]));
-					else if (code[2] == ":")
-						var_int[code[1]] = stoi(nx());
-					else if (isstring(code[2]))
-					{
-						err(20);
-					}
-					else
-						var_int[code[1]] = stoi(code[2]);
+					var_int[code[1]] = to_num(code[2]);
 					break;
 
 				case 2:
@@ -1047,54 +1061,26 @@ inline string aqua(string script, vector<string> line, int linenum)
 					break;
 
 				case 3:
-					if (isvarok(code[2]))
-						var_bool[code[1]] = stob(var_value(code[2]));
-					else if (code[2] == ":")
-						var_bool[code[1]] = stob(nx());
-					else if (isstring(code[2]))
-					{
-						err(20);
-					}
-					else
-						var_bool[code[1]] = stob(var_value(code[2]));
+					var_bool[code[1]] = to_num(code[2]);
+					break;
 
 				case 4:
-					if (isvarok(code[2]))
-						var_double[code[1]] = stod(var_value(code[2]));
-					else if (code[2] == ":")
-						var_double[code[1]] = stod(nx());
-					else if (isstring(code[2]))
-					{
-						err(20);
-					}
-					else
-						var_double[code[1]] = stod(code[2]);
+					var_double[code[1]] = to_num(code[2]);
 					break;
 
 				case 5:
-					if (isvarok(code[2]))
-						var_int64[code[1]] = stoll(var_value(code[2]));
-					else if (code[2] == ":")
-						var_int64[code[1]] = stoll(nx());
-					else if (isstring(code[2]))
-					{
-						err(20);
-					}
-					else
-						var_int64[code[1]] = stoll(code[2]);
+					var_int64[code[1]] = to_num(code[2]);
 					break;
 
 				case 6:
-					if (isvarok(code[2]))
-						var_ll[code[1]] = stoll(var_value(code[2]));
-					else if (code[2] == ":")
-						var_ll[code[1]] = stoll(nx());
-					else if (isstring(code[2]))
-					{
-						err(20);
-					}
-					else
-						var_ll[code[1]] = stoll(code[2]);
+					var_ll[code[1]] = to_num(code[2]);
+					break;
+
+				case 7:
+					if (stoll(code[2]) < 0)
+						err(42);
+
+					var_uint[code[1]] = to_num(code[2]);
 					break;
 
 				default:
