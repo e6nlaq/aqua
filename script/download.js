@@ -57,6 +57,13 @@ window.onload = async function () {
 
 	document.getElementById('latest').textContent = latest_version;
 	document.getElementById('preview').textContent = preview_version;
+
+	if (latest_version == preview_version) {
+		let delpre = document.getElementById("preview");
+		let delp1 = document.getElementById("delp1");
+		let delp2 = document.getElementById("delp2");
+		delpre.remove(); delp1.remove(); delp2.remove();
+	}
 };
 
 async function download_latest() {
