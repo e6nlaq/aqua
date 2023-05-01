@@ -1,5 +1,8 @@
 
-var string S "ABACK"
+"""
+comment
+何でも書き放題!
+やっふー!
+"""
 
-outf :
-rfind "DIAIVRMAIEO" "AB"
+outf "コメントに戻して..."
