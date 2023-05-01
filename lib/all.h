@@ -19,4 +19,5 @@
 #include "./filename.h"
 #include "./os.h"
 #include "./aqt.h"
+#include "./ojf.h"
 // strconv.hはstdc++.h内でインクルード

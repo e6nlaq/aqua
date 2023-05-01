@@ -41,6 +41,9 @@
 #include <time.h>
 #include <chrono>
 // #include <filesystem>
+#include <limits.h>
+#include <float.h>
+#include <stdint.h>
 
 #if defined(_WIN32) || defined(_WIN64)
 // windows
