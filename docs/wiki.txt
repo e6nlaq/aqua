@@ -1,5 +1,6 @@
 Aqua Binary
 chr
+cin
 comment(#)
 download🛠️
 end

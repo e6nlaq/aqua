@@ -359,6 +359,14 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		co("Negative numbers are not allowed."); // 負の数は使用できません
 		break;
 
+	case 43:
+		co("Must be a string or array."); // 文字列又は配列である必要があります。
+		break;
+
+	case 44:
+		co("Argument must be a variable"); // 引数は変数である必要があります
+		break;
+
 	default:
 		err(5);
 		return;
@@ -2004,6 +2012,70 @@ inline string aqua(string script, vector<string> line, int linenum)
 				}
 
 				return to_string(ans);
+			}
+			else if (func == "find")
+			{
+				// if (!isvarok(code[1]))
+				// 	err(44);
+
+				int var_pos = var_search(code[1]);
+				bool val_str = isstring(code[1]);
+				code[1] = get_str(code[1]);
+				code[2] = get_str(code[2]);
+				if (var_pos == 2 || val_str)
+				{
+					if (code[2].size() != 1)
+					{
+						err(28);
+					}
+
+					char find_check = code[2][0];
+					for (ll i = 0; i < code[1].size(); i++)
+					{
+						if (code[1][i] == find_check)
+						{
+							return to_string(i);
+						}
+					}
+
+					return "-1";
+				}
+				else
+				{
+					err(43);
+				}
+			}
+			else if (func == "rfind")
+			{
+				// if (!isvarok(code[1]))
+				// 	err(44);
+
+				int var_pos = var_search(code[1]);
+				bool val_str = isstring(code[1]);
+				code[1] = get_str(code[1]);
+				code[2] = get_str(code[2]);
+				if (var_pos == 2 || val_str)
+				{
+					if (code[2].size() != 1)
+					{
+						err(28);
+					}
+
+					char find_check = code[2][0];
+					for (ll i = code[1].size() - 1; i >= 0; i--)
+					{
+						if (code[1][i] == find_check)
+						{
+							return to_string(i);
+						}
+					}
+
+					return "-1";
+				}
+				else
+				{
+					err(43);
+				}
 			}
 			else
 			{
