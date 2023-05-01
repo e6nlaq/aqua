@@ -696,6 +696,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 {
 	// スペースごとに変換
 	vector<string> code = scriptcut(script);
+	if (code[code.size() - 1].back() == ';')
+	{
+		code[code.size() - 1] = code[code.size() - 1].substr(0, code[code.size() - 1].size() - 1);
+	}
 	string func = code[0];
 
 	// funcを含まない引数の数
