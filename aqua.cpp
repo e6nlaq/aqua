@@ -68,7 +68,7 @@ ll forever_line = -1;
 ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
-const double version = 1.603;
+const double version = 1.6031;
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
