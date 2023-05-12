@@ -56,5 +56,4 @@
 #if defined(__unix) || defined(__unix__)
 // linux / unix
 #define LINUX 1
-#undef WINDOWS
 #endif
