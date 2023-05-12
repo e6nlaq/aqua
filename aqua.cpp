@@ -520,7 +520,7 @@ inline string f_math(int id, string s, string t)
 
 	case 5: // %
 		if (b != 0)
-			return to_string((ll)a % (ll)b);
+			return to_string(fmodl(a, b));
 		else
 			err(11);
 		break;
@@ -1338,31 +1338,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 				if (code.size() < 3)
 					err(14);
 
-				rep(i, code.size())
+				rep(i, argn)
 				{
-					if (i == 0)
-						continue;
+					string arg = code[i + 1];
 
-					string arg = code[i];
-					if (arg == "")
-						continue;
-
-					if (isstring(arg))
-					{
-						ans += cutstr(arg);
-					}
-					else if (isvarok(arg))
-					{
-						ans += var_value(arg);
-					}
-					else if (arg == ":")
-					{
-						err(15);
-					}
-					else
-					{
-						err(2);
-					}
+					ans += get_str(arg);
 				}
 
 				return ans;
