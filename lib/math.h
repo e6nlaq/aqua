@@ -54,3 +54,18 @@ inline bool is_prime(const ll num)
 	// 素数である
 	return true;
 }
+
+inline ll fact(ll x)
+{
+	ll ret = 1;
+	for (ll i = 1; i <= x; i++)
+	{
+		ret *= i;
+	}
+	return ret;
+}
+
+inline ld log_a(ld x, ld b)
+{
+	return log10l(x) / log10l(b);
+}
