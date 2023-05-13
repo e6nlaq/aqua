@@ -1,5 +1,11 @@
 
-var string S "123"
+var int i 1
+
+while :
+nis : 0
+fact i
+    ++ i
+end while
 
 outf :
-+ S 3
+- i 1

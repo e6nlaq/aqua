@@ -68,12 +68,11 @@ ll forever_line = -1;
 ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
-const double version = 1.6031;
+const double version = 1.701;
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
 inline string nx();
-inline void aqua_setting();
 inline string to_js(string script, vector<string> line, int linenum);
 
 inline void warn(string s)
@@ -583,6 +582,13 @@ inline string f_math(int id, string s, string t)
 	case 18: // rsh
 		return to_string((ll)a >> (ll)b);
 		break;
+
+	case 19: // log
+		if (a < 0 || b < 0)
+			err(12);
+
+		return to_string(log_a(a, b));
+		break;
 	}
 
 	return "";
@@ -598,41 +604,50 @@ inline string f_trig(int id, string s)
 	else
 		a = stold(s);
 
+	string k;
+
 	switch (id)
 	{
-	case 1:
+	case 1: // abs
 		return to_string(abs(a));
 		break;
 
-	case 2:
+	case 2: // sqrt
 		if (a < 0)
 			err(12);
 		return to_string(sqrtl(a));
 		break;
 
-	case 3:
+	case 3: // sin
 		return to_string(sinl(a));
 		break;
 
-	case 4:
+	case 4: // cos
 		return to_string(cosl(a));
 		break;
 
-	case 5:
+	case 5: // tan
 		return to_string(tanl(a));
 		break;
 
-	case 6:
+	case 6: // is_prime
 		return to_string(is_prime((ll)a));
 		break;
 
-	case 7:
+	case 7: // not
 		return to_string(!a);
 		break;
 
-	case 8:
-		string k = {(char)a};
+	case 8: // chr
+		k = {(char)a};
 		return k;
+		break;
+
+	case 9: // fact
+		if (a < 0)
+			err(12);
+
+		return to_string(fact((ll)a));
 		break;
 	}
 
@@ -1683,6 +1698,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				return f_trig(8, code[1]);
 			}
+			else if (func == "fact")
+			{
+				return f_trig(9, code[1]);
+			}
 			else if (func == "at")
 			{
 				ll index = 0;
@@ -1858,6 +1877,10 @@ inline string aqua(string script, vector<string> line, int linenum)
 			else if (func == "rsh")
 			{
 				return f_math(18, code[1], code[2]);
+			}
+			else if (func == "log")
+			{
+				return f_math(19, code[1], code[2]);
 			}
 			else if (func == "download")
 			{
