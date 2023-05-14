@@ -1,11 +1,6 @@
 
-var int i 1
+var int $a 334
 
-while :
-nis : 0
-fact i
-    ++ i
-end while
+outf a
 
-outf :
-- i 1
+in a 990
