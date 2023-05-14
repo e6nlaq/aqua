@@ -10,3 +10,4 @@ test/
 test.*
 !main.aqua
 !debug.aqua
+.vscode/

@@ -50,6 +50,7 @@ unordered_map<string, ll> var_ll;
 unordered_map<string, unsigned int> var_uint;
 unordered_map<string, ll> label_list;
 unordered_set<ll> nx_line;
+unordered_set<string> const_var;
 vector<string> lines;
 vector<int> sett;
 vector<ll> while_line;
@@ -365,6 +366,14 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 	case 44:
 		co("Argument must be a variable"); // 引数は変数である必要があります
+		break;
+
+	case 45:
+		co("Initial value of const not set"); // constの初期値未設定
+		break;
+
+	case 46:
+		co("Change of const.");
 		break;
 
 	default:
@@ -834,6 +843,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 				// 変数宣言
 
 				bool changed = false; // 初期値を自動的に変更したか否か
+				bool isconst = false; // 定数か否か
 
 				if (code[3] == "")
 				{
@@ -846,7 +856,17 @@ inline string aqua(string script, vector<string> line, int linenum)
 					code[3] = var_value(code[3]);
 				}
 
-				if (isvarok(code[2]))
+				if (code[2][0] == '$')
+				{
+					isconst = true;
+					code[2] = code[2].substr(1);
+					const_var.insert(code[2]);
+
+					if (changed) // なんで動くのか不明
+						err(45);
+				}
+
+				if (isvardecok(code[2]))
 				{
 					if (dup_varname(code[2]) || op_over_var)
 					{
@@ -1038,6 +1058,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				// 変数の空白区切り入力
 
+				if (const_var.count(code[1]))
+				{
+					err(46);
+				}
+
 				switch (var_search(code[1]))
 				{
 				case 1:
@@ -1072,6 +1097,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 			else if (func == "set")
 			{
 				// 変数の中身を変更
+
+				if (const_var.count(code[1]))
+				{
+					err(46);
+				}
 
 				switch (var_search(code[1]))
 				{

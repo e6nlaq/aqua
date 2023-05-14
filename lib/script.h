@@ -74,6 +74,37 @@ inline bool isvarok(string s)
 
 	for (char c : s)
 	{
+		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_' || c == ':' || (c >= '0' && c <= '9'))
+		{
+			// 何もしない
+		}
+		else
+			return false;
+	}
+
+	return true;
+}
+
+inline bool isvardecok(string s)
+{
+	if (s == "")
+		return false;
+
+	if (s == ":")
+		return false;
+
+	if (s[0] == '\"')
+		return false;
+
+	if (isdigit(s[0]))
+		return false;
+
+	for (ll i = 0; i < s.size(); i++)
+	{
+		char c = s[i];
+		if (c == '$')
+			continue;
+
 		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_' || (c >= '0' && c <= '9'))
 		{
 			// 何もしない

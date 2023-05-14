@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\mingw64\\lib"
+                "C:\\mingw64\\lib",
+                "D:\\Boost\\include"
             ],
             "defines": [
                 "_DEBUG",
