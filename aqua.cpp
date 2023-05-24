@@ -69,7 +69,7 @@ ll forever_line = -1;
 ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
-const double version = 1.701;
+const string version = "1.7.0 Preview 1";
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -2464,7 +2464,7 @@ int main(int argc, char const *argv[])
 	// 引数
 	if (count(all(args), "--version") || count(all(args), "-v"))
 	{
-		co(to_string(version));
+		co("Aqua " + version);
 		exit(0);
 	}
 	if (count(all(args), "--no-style"))
@@ -2488,7 +2488,7 @@ int main(int argc, char const *argv[])
 	{
 		clirun = true;
 		co("--------------------------------------------------------------------------");
-		co("Aqua / Build " + to_string(version) + " [" + os + "]");
+		co("Aqua " + version + " / " + os);
 		co("Bugs and feedback can be sent to `https://github.com/e6nlaq/aqua/issues`");
 		if (os == "Unix OS")
 			warn("In the case of Unix, the arrow keys may not respond. Our apologies.");
@@ -2577,7 +2577,7 @@ int main(int argc, char const *argv[])
 	if (count(all(args), "-c") || count(all(args), "--compile"))
 	{
 		co("----------------------------------------------------------------------");
-		co("Aqua JavaScript Compiler Build" + to_string(version));
+		co("Aqua JavaScript Compiler " + version);
 		co("Copyright (C) 2023 e6nlaq");
 		co("----------------------------------------------------------------------");
 
