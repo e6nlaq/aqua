@@ -50,7 +50,7 @@ unordered_map<string, ll> var_ll;
 unordered_map<string, unsigned int> var_uint;
 unordered_map<string, ll> label_list;
 unordered_set<ll> nx_line;
-unordered_set<string> const_var;
+unordered_set<string> const_var = {"true", "false", "True", "False"};
 vector<string> lines;
 vector<int> sett;
 vector<ll> while_line;
@@ -2417,7 +2417,9 @@ int main(int argc, char const *argv[])
 #pragma region Aqua System Variables
 
 	var_bool["true"] = true;
+	var_bool["True"] = true;
 	var_bool["false"] = false;
+	var_bool["False"] = false;
 	var_int["null"] = (int)NULL;
 	var_int["nan"] = var_int["NaN"] = (int)NAN;
 	var_ll["infinity"] = var_ll["Infinity"] = (ll)INFINITY;
