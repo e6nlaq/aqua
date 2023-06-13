@@ -2648,11 +2648,3 @@ int main(int argc, char const *argv[])
 
 	return 0;
 }
-
-int ans;
-
-inline void inp()
-{
-	cou("\n>>> ");
-	cin >> ans;
-}

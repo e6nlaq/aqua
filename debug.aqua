@@ -1,6 +1,13 @@
+var string emoji
 
-var int $a 334
+in emoji
 
-outf a
+outf emoji
 
-in a 990
+outf :
+ord :
+at emoji 0
+
+outf :
+ord :
+at emoji 1
