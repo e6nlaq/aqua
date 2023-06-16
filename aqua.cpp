@@ -70,6 +70,7 @@ ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
 const string version = "1.7.0 Preview 1";
+wstring_convert<codecvt_utf8<char32_t>, char32_t> utf32conv;
 
 // 事前宣言
 inline void errorlog(vector<string> line, int linenum, int errorcode);
@@ -1809,8 +1810,18 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 				if (index > -1 && index < s.size())
 				{
-					string tmp = {s.at(index)};
-					return tmp;
+#ifdef WINDOWS
+					u32string at = utf32conv.from_bytes(ansi_to_utf8(s));
+#else
+					u32string at = utf32conv.from_bytes(s);
+#endif
+					u32string a = u32string{at[index]};
+
+#ifdef WINDOWS
+					return utf8_to_ansi(utf32conv.to_bytes(a));
+#else
+					return utf32conv.to_bytes(a);
+#endif
 				}
 				else
 				{
@@ -2247,6 +2258,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 	}
 	catch (exception &e)
 	{
+		cerr << e.what() << endl;
 		err(41);
 	}
 

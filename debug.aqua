@@ -1,13 +1,2 @@
-var string emoji
-
-in emoji
-
-outf emoji
-
 outf :
-ord :
-at emoji 0
-
-outf :
-ord :
-at emoji 1
+at "漢字も?🤔" 0
