@@ -18,7 +18,7 @@ Aqua is a fast, short, and easy programming language.
 
 Operation has been verified in the following environments.
 
-- Windows11 22H2 (OS Build 22621.1413)
+- Windows 10/11
 - Ubuntu 22.04.1 LTS
 
 ## Install
