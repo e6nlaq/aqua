@@ -614,7 +614,7 @@ inline string f_trig(int id, string s)
 	else
 		a = stold(s);
 
-	string k;
+	u32string k;
 
 	switch (id)
 	{
@@ -649,8 +649,13 @@ inline string f_trig(int id, string s)
 		break;
 
 	case 8: // chr
-		k = {(char)a};
-		return k;
+		k = {(char32_t)a};
+
+#ifdef WINDOWS
+		return utf8_to_ansi(utf32conv.to_bytes(k));
+#else
+		return utf32conv.to_bytes(k);
+#endif
 		break;
 
 	case 9: // fact
@@ -1718,12 +1723,18 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(2);
 				}
 
-				if (s.size() != 1)
+#ifdef WINDOWS
+				u32string x = utf32conv.from_bytes(ansi_to_utf8(s));
+#else
+				u32string x = utf32conv.from_bytes(s);
+#endif
+
+				if (x.size() != 1)
 				{
 					err(28);
 				}
 
-				return to_string((int)s[0]);
+				return to_string((int)x[0]);
 			}
 			else if (func == "chr")
 			{
