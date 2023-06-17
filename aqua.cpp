@@ -1819,15 +1819,15 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(2);
 				}
 
-				if (index > -1 && index < s.size())
+#ifdef WINDOWS
+				u32string at = utf32conv.from_bytes(ansi_to_utf8(s));
+#else
+				u32string at = utf32conv.from_bytes(s);
+#endif
+				if (index > -1 && index < at.size())
 				{
 					// 日本語対応部分
 					// WindowsはUTF-8に直してやる
-#ifdef WINDOWS
-					u32string at = utf32conv.from_bytes(ansi_to_utf8(s));
-#else
-					u32string at = utf32conv.from_bytes(s);
-#endif
 					u32string a = u32string{at[index]};
 
 #ifdef WINDOWS
