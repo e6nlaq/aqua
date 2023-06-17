@@ -1810,6 +1810,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 				if (index > -1 && index < s.size())
 				{
+					// 日本語対応部分
+					// WindowsはUTF-8に直してやる
 #ifdef WINDOWS
 					u32string at = utf32conv.from_bytes(ansi_to_utf8(s));
 #else
@@ -1830,7 +1832,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else if (func == "len")
 			{
-				// やっぱりPython((
+				// Pythonみたいに長さはかるやつ
 
 				string s = "";
 
@@ -1868,7 +1870,13 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(2);
 				}
 
-				return to_string(s.size());
+#ifdef WINDOWS
+				u32string len = utf32conv.from_bytes(ansi_to_utf8(s));
+#else
+				u32string len = utf32conv.from_bytes(s);
+#endif
+
+				return to_string(len.size());
 			}
 			else if (func == "?")
 			{
