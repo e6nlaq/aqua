@@ -8,15 +8,34 @@
 	<title>Thank you!</title>
 	<link rel="stylesheet" href="style.css">
 	<link rel="shortcut icon" href="image/aqua.svg" type="image/x-icon">
-	<script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<div class="center">
+	<div class="raku light-raku" id="raku_div">
 		<h1 style="font-size: 90px;">🙇‍♂️</h1>
 		<h1>Thanks for installing Aqua!</h1>
 		<p>Could not install? Please <a href="index.html">try again</a>.</p>
 	</div>
+
+	<script>
+		let theme = (x) => {
+			const body = document.body;
+			const raku = document.getElementById("raku_div");
+			if (x) {
+				body.classList.remove("light-body");
+				raku.classList.remove("light-raku");
+				body.classList.add("dark-body");
+				raku.classList.add("dark-raku");
+			} else {
+				body.classList.remove("dark-body");
+				raku.classList.remove("dark-raku");
+				body.classList.add("light-body");
+				raku.classList.add("light-raku");
+			}
+		}
+
+		theme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+	</script>
 </body>
 
 </html>

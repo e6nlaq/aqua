@@ -1,11 +1,14 @@
 body {
-	background-color: #150915;
-	color: white;
+	background-color: #f7f7f7;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .center {
+	background-color: #d3d3d3;
 	text-align: center;
+	border-radius: 16px;
+	margin: 32px;
+	padding: 16px;
 }
 
 .btn--orange,
@@ -94,8 +97,88 @@ button.btn {
 	border-radius: 0.5rem;
 }
 
+.raku {
+	text-align: center;
+	margin: 50px;
+	margin-top: 20px;
+	padding: 50px;
+	/* background-color: #d4d4d4; */
+	border-radius: 30px;
+}
+
 a {
-	color: aqua;
+	color: #59acff;
+}
+
+@keyframes light-body {
+	0% {
+		background-color: #282828;
+		color: white;
+	}
+
+
+	100% {
+		background-color: #efefef;
+		color: black;
+	}
+}
+
+@keyframes dark-body {
+
+	0% {
+		background-color: #efefef;
+		color: black;
+	}
+
+
+	100% {
+		background-color: #282828;
+		color: white;
+	}
+
+
+}
+
+@keyframes light-raku {
+	0% {
+		background-color: #565656;
+	}
+
+	100% {
+		background-color: #d4d4d4;
+	}
+}
+
+@keyframes dark-raku {
+	0% {
+		background-color: #d4d4d4;
+	}
+
+	100% {
+		background-color: #565656;
+	}
+}
+
+.dark-body {
+	animation: dark-body 0.3s;
+	background-color: #282828;
+	color: white;
+}
+
+.light-body {
+	animation: light-body 0.3s;
+	background-color: #efefef;
+	color: black;
+}
+
+.light-raku {
+	animation: light-raku 0.3s;
+	background-color: #d4d4d4;
+}
+
+.dark-raku {
+	animation: dark-raku 0.3s;
+	background-color: #565656;
 }
 
 table.center {
@@ -118,4 +201,56 @@ textarea.try_output {
 	font-family: monospace;
 	color: white;
 	background-color: #1F2328;
+}
+
+/* トグルボタン */
+.toggle_input {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.toggle_label {
+	width: 75px;
+	height: 35px;
+	background: #ccc;
+	position: relative;
+	display: inline-block;
+	border-radius: 40px;
+	transition: 0.4s;
+	box-sizing: border-box;
+}
+
+.toggle_label:after {
+	content: "";
+	position: absolute;
+	width: 35px;
+	height: 35px;
+	border-radius: 100%;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	background: #fff;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	transition: 0.4s;
+}
+
+.toggle_input:checked+.toggle_label {
+	background-color: #4BD865;
+}
+
+.toggle_input:checked+.toggle_label:after {
+	left: 40px;
+}
+
+.toggle_button {
+	position: relative;
+	width: 75px;
+	height: 35px;
+	margin-left: 90%;
 }

@@ -14,23 +14,49 @@
 </head>
 
 <body>
+	<div class="toggle_button">
+		<input id="toggle" class="toggle_input" type='checkbox' />
+		<label for="toggle" class="toggle_label"></label>
+	</div>
 	<br>
-	<div class="center">
+	<div class="raku light-raku" id="raku_div">
 		<h1 style="font-size: 50px;">Aqua</h1>
 		<img src="image/aqua.svg" alt="Aqua Logo">
 		<p>Fast short and easy.</p>
 		<br>
-		<a href="try.html" class="btn btn--orange">Try it online</a>
 		<h1>Download</h1>
 		<h3 id="download_file"></h3>
 		<a onclick="download_latest()" class="btn btn--latest" id="latest">Loading...</a>
 		<br id="delp1"><br id="delp2">
 		<a onclick="download_preview()" class="btn btn--preview" id="preview">Loading...</a>
 		<br><br>
-		<a href="https://github.com/e6nlaq/aqua" class="btn btn--github">Github Source</a>
-		<h4><a href="download.html">More?</a></h4>
 	</div>
 
+	<script>
+		const ModeChange = document.getElementById("toggle");
+		let theme = () => {
+			const body = document.body;
+			const raku = document.getElementById("raku_div");
+			if (ModeChange.checked) {
+				body.classList.remove("light-body");
+				raku.classList.remove("light-raku");
+				body.classList.add("dark-body");
+				raku.classList.add("dark-raku");
+			} else {
+				body.classList.remove("dark-body");
+				raku.classList.remove("dark-raku");
+				body.classList.add("light-body");
+				raku.classList.add("light-raku");
+			}
+		}
+
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			ModeChange.checked = true;
+			theme();
+		}
+
+		ModeChange.addEventListener("change", theme);
+	</script>
 </body>
 
 </html>
