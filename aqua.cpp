@@ -69,7 +69,7 @@ ll forever_line = -1;
 ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
-const string version = "1.7.0 Preview 1";
+const string version = "1.7.0 Preview 2";
 wstring_convert<codecvt_utf8<char32_t>, char32_t> utf32conv;
 
 // 事前宣言
