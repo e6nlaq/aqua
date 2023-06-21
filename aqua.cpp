@@ -2541,7 +2541,6 @@ int main(int argc, char const *argv[])
 
 		while (true)
 		{
-			// cout << pyinc << " " << nxrun << endl;
 			cou((pyinc > 0 || nxrun ? "... " : ">>> "));
 			string inp;
 			getline(cin, inp);
@@ -2564,7 +2563,10 @@ int main(int argc, char const *argv[])
 			{
 				for (code_line = 0; code_line < lines.size(); code_line++)
 				{
-					aqua(lines[code_line], lines, code_line);
+					if (st_style)
+						cout << "\033[2m" << aqua(lines[code_line], lines, code_line) << "\033[m\n";
+					else
+						cout << "(" << aqua(lines[code_line], lines, code_line) << ")\n";
 
 					if (isnx) // :使ったら繰り越し
 					{

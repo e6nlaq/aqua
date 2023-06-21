@@ -1,11 +1,19 @@
-﻿
-#include <bits/stdc++.h>
-#include "lib/strconv.h"
+﻿#include <iostream>
+#include <locale>
+
 using namespace std;
+
+string getOSLanguage()
+{
+	locale loc("ja_JP.UTF-8");
+	auto a = &loc;
+	string language = a->name();
+	return language;
+}
 
 int main()
 {
-	wstring_convert<codecvt_utf8<char32_t>, char32_t> utf32conv;
-
-	cout << utf8_to_ansi(utf32conv.to_bytes(u32string{12354})) << endl;
+	string language = getOSLanguage();
+	cout << "OSの言語は" << language << "です。" << endl;
+	return 0;
 }

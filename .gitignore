@@ -11,3 +11,4 @@ test.*
 !main.aqua
 !debug.aqua
 .vscode/
+build.sh
