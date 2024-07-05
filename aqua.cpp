@@ -2328,7 +2328,7 @@ inline string to_js(string script, vector<string> line, int linenum)
 	{
 		ans += "console.log(" + code[1] + ")";
 	}
-	else if (func == "?" || func == "" || func == "﻿")
+	else if (func == "?" || func == "" || func == "\uFEFF")
 	{
 		// sc = false;
 	}
