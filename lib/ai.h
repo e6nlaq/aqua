@@ -7,7 +7,6 @@
 
 #include <string>
 #include <stack>
-using namespace std;
 
 inline int precedence(char op)
 {
@@ -26,11 +25,11 @@ inline int precedence(char op)
 	}
 }
 
-long double calculate(string expression)
+long double calculate(std::string expression)
 {
 	// Create a stack to store the operands and operators.
-	stack<int> operands;
-	stack<char> operators;
+	std::stack<int> operands;
+	std::stack<char> operators;
 
 	// Iterate over the expression.
 	for (int i = 0; i < expression.length(); i++)

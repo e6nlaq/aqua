@@ -15,11 +15,10 @@
 
 // インクルード
 #include "./lib/all.h"
-using namespace std;
 
 // マクロ
-#define co(x) cout << (x) << "\n"
-#define cou(x) cout << (x)
+#define co(x) std::cout << (x) << "\n"
+#define cou(x) std::cout << (x)
 #define err(x) errorlog(lines, code_line, (x));
 #define all(x) x.begin(), x.end()
 #define rep(i, n) for (ll i = 0; i < (n); i++)
@@ -41,20 +40,20 @@ bool tooljs = false;
 bool toolpy = false;
 
 // 変数
-unordered_map<string, int> var_int;
-unordered_map<string, string> var_string;
-unordered_map<string, bool> var_bool;
-unordered_map<string, double> var_double;
-unordered_map<string, int64_t> var_int64;
-unordered_map<string, ll> var_ll;
-unordered_map<string, unsigned int> var_uint;
-unordered_map<string, ll> label_list;
-unordered_set<ll> nx_line;
-unordered_set<string> const_var = {"true", "false", "True", "False"};
-vector<string> lines;
-vector<int> sett;
-vector<ll> while_line;
-vector<ll> until_line;
+std::unordered_map<std::string, int> var_int;
+std::unordered_map<std::string, std::string> var_string;
+std::unordered_map<std::string, bool> var_bool;
+std::unordered_map<std::string, double> var_double;
+std::unordered_map<std::string, int64_t> var_int64;
+std::unordered_map<std::string, ll> var_ll;
+std::unordered_map<std::string, unsigned int> var_uint;
+std::unordered_map<std::string, ll> label_list;
+std::unordered_set<ll> nx_line;
+std::unordered_set<std::string> const_var = {"true", "false", "True", "False"};
+std::vector<std::string> lines;
+std::vector<int> sett;
+std::vector<ll> while_line;
+std::vector<ll> until_line;
 bool runcode = true;
 bool comment = false;
 bool iswin = true;
@@ -69,29 +68,29 @@ ll forever_line = -1;
 ll if_count = 0;
 ll while_count = 0;
 ll until_count = 0;
-const string version = "1.7.0 Preview 2";
-wstring_convert<codecvt_utf8<char32_t>, char32_t> utf32conv;
+const std::string version = "1.7.0 Preview 2";
+std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> utf32conv;
 
 // 事前宣言
-inline void errorlog(vector<string> line, int linenum, int errorcode);
-inline string nx();
-inline string to_js(string script, vector<string> line, int linenum);
+inline void errorlog(std::vector<std::string> line, int linenum, int errorcode);
+inline std::string nx();
+inline std::string to_js(std::string script, std::vector<std::string> line, int linenum);
 
-inline void warn(string s)
+inline void warn(std::string s)
 {
 	if (st_style)
 	{
-		cout << "\033[33m\033[1mWarning\033[m: ";
+		std::cout << "\033[33m\033[1mWarning\033[m: ";
 	}
 	else
 	{
-		cout << "Warning: ";
+		std::cout << "Warning: ";
 	}
 
-	cout << s << "\n";
+	std::cout << s << "\n";
 }
 
-inline bool dup_varname(string name)
+inline bool dup_varname(std::string name)
 {
 	if (var_int.count(name) || var_string.count(name) || var_bool.count(name) || var_double.count(name) || var_int64.count(name) || var_ll.count(name))
 	{
@@ -101,7 +100,7 @@ inline bool dup_varname(string name)
 	return true;
 }
 
-inline int var_search(string name)
+inline int var_search(std::string name)
 {
 	if (var_int.count(name))
 	{
@@ -137,18 +136,18 @@ inline int var_search(string name)
 	}
 }
 
-inline bool m_numt(string name)
+inline bool m_numt(std::string name)
 {
 	const int tmp = var_search(name);
 	return (tmp == 1 || tmp == 4 || tmp == 5 || tmp == 6);
 }
 
-inline string var_value(string name)
+inline std::string var_value(std::string name)
 {
 	switch (var_search(name))
 	{
 	case 1:
-		return to_string(var_int[name]);
+		return std::to_string(var_int[name]);
 		break;
 
 	case 2:
@@ -156,23 +155,23 @@ inline string var_value(string name)
 		break;
 
 	case 3:
-		return to_string(var_bool[name]);
+		return std::to_string(var_bool[name]);
 		break;
 
 	case 4:
-		return to_string(var_double[name]);
+		return std::to_string(var_double[name]);
 		break;
 
 	case 5:
-		return to_string(var_int64[name]);
+		return std::to_string(var_int64[name]);
 		break;
 
 	case 6:
-		return to_string(var_ll[name]);
+		return std::to_string(var_ll[name]);
 		break;
 
 	case 7:
-		return to_string(var_uint[name]);
+		return std::to_string(var_uint[name]);
 		break;
 
 	default:
@@ -184,9 +183,9 @@ inline string var_value(string name)
 }
 
 // エラー
-inline void errorlog(vector<string> line, int linenum, int errorcode)
+inline void errorlog(std::vector<std::string> line, int linenum, int errorcode)
 {
-	cout << "\n\nError: ";
+	std::cout << "\n\nError: ";
 	switch (errorcode)
 	{
 
@@ -270,7 +269,7 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		break;
 
 	case 20:
-		co("Strings are invalid for this function."); // 引数に文字列
+		co("std::strings are invalid for this function."); // 引数に文字列
 		break;
 
 	case 21:
@@ -302,7 +301,7 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		break;
 
 	case 28:
-		co("The length of the string must be 1."); // 文字列の長さが1(char)ではないとき
+		co("The length of the std::string must be 1."); // 文字列の長さが1(char)ではないとき
 		break;
 
 	case 29:
@@ -362,7 +361,7 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 		break;
 
 	case 43:
-		co("Must be a string or array."); // 文字列又は配列である必要があります。
+		co("Must be a std::string or array."); // 文字列又は配列である必要があります。
 		break;
 
 	case 44:
@@ -385,28 +384,28 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 
 #pragma region Error Messages
 
-	co("The program ended with code " + to_string(errorcode));
-	co("Line " + to_string(linenum + 1));
+	co("The program ended with code " + std::to_string(errorcode));
+	co("Line " + std::to_string(linenum + 1));
 	co("Error location\n");
 
 	// エラーの周りの行を表示するやつ
 	if (sett[0])
 	{
 		if (linenum > 1)
-			co(to_string(linenum - 1) + "| " + line[linenum - 2]);
+			co(std::to_string(linenum - 1) + "| " + line[linenum - 2]);
 		if (linenum > 0)
-			co(to_string(linenum) + "| " + line[linenum - 1]);
+			co(std::to_string(linenum) + "| " + line[linenum - 1]);
 
-		co(to_string(linenum + 1) + "| \033[1m\033[31m\033[4m" + line[linenum] + "\033[m");
+		co(std::to_string(linenum + 1) + "| \033[1m\033[31m\033[4m" + line[linenum] + "\033[m");
 		if (linenum != line.size() - 1)
-			co(to_string(linenum + 2) + "| " + line[linenum + 1]);
+			co(std::to_string(linenum + 2) + "| " + line[linenum + 1]);
 
 		if (linenum + 2 < line.size())
-			co(to_string(linenum + 3) + "| " + line[linenum + 2]);
+			co(std::to_string(linenum + 3) + "| " + line[linenum + 2]);
 	}
 	else
 	{
-		co(to_string(linenum + 1) + "| " + line[linenum]);
+		co(std::to_string(linenum + 1) + "| " + line[linenum]);
 	}
 
 	if (!clirun)
@@ -418,7 +417,7 @@ inline void errorlog(vector<string> line, int linenum, int errorcode)
 inline void usinglog(int id)
 {
 	// usingのやつ
-	string ans = "";
+	std::string ans = "";
 	if (!st_using_yes)
 	{
 		cscle();
@@ -453,7 +452,7 @@ inline void usinglog(int id)
 		co("\nAre you sure you want to do this? (Y/n)");
 		cou("> ");
 
-		cin >> ans;
+		std::cin >> ans;
 		transform(all(ans), ans.begin(), ::tolower); // StackOverflowから
 	}
 
@@ -483,7 +482,7 @@ inline void usinglog(int id)
 		cscle();
 }
 
-inline string f_math(int id, string s, string t)
+inline std::string f_math(int id, std::string s, std::string t)
 {
 	// いろんな関数が使ってるやつ
 
@@ -509,102 +508,102 @@ inline string f_math(int id, string s, string t)
 	switch (id)
 	{
 	case 1: // +
-		return to_string(a + b);
+		return std::to_string(a + b);
 		break;
 
 	case 2: // -
-		return to_string(a - b);
+		return std::to_string(a - b);
 		break;
 
 	case 3: // *
-		return to_string(a * b);
+		return std::to_string(a * b);
 		break;
 
 	case 4: // /
 		if (b != 0)
-			return to_string(a / b);
+			return std::to_string(a / b);
 		else
 			err(11);
 		break;
 
 	case 5: // %
 		if (b != 0)
-			return to_string(fmodl(a, b));
+			return std::to_string(fmodl(a, b));
 		else
 			err(11);
 		break;
 
 	case 6: // ^
-		return to_string(pow(a, b));
+		return std::to_string(pow(a, b));
 		break;
 
 	case 7: // >
-		return to_string(a > b);
+		return std::to_string(a > b);
 		break;
 
 	case 8: // <
-		return to_string(a < b);
+		return std::to_string(a < b);
 
 		break;
 
 	case 9: // <=
-		return to_string(a <= b);
+		return std::to_string(a <= b);
 		break;
 
 	case 10: // >=
-		return to_string(a >= b);
+		return std::to_string(a >= b);
 		break;
 
 	case 11: // gcd
-		return to_string(a_gcd((ll)a, (ll)b));
+		return std::to_string(a_gcd((ll)a, (ll)b));
 		break;
 
 	case 12: // lcm
-		return to_string(a_lcm((ll)a, (ll)b));
+		return std::to_string(a_lcm((ll)a, (ll)b));
 		break;
 
 	case 13: // and
-		return to_string((ll)a & ll(b));
+		return std::to_string((ll)a & ll(b));
 		break;
 
 	case 14: // or
-		return to_string((ll)a | ll(b));
+		return std::to_string((ll)a | ll(b));
 		break;
 
 	case 15: // xor
-		return to_string((ll)a ^ ll(b));
+		return std::to_string((ll)a ^ ll(b));
 		break;
 
 	case 16: // rand
 		if (a > b)
 		{
-			swap(a, b);
+			std::swap(a, b);
 		}
 
 		// rand_r使えって言われるけどVC++で使えないから却下
-		return to_string(rand() % ((ll)b - (ll)a + 1LL) + (ll)a);
+		return std::to_string(rand() % ((ll)b - (ll)a + 1LL) + (ll)a);
 		break;
 
 	case 17: // lsh
-		return to_string((ll)a << (ll)b);
+		return std::to_string((ll)a << (ll)b);
 		break;
 
 	case 18: // rsh
-		return to_string((ll)a >> (ll)b);
+		return std::to_string((ll)a >> (ll)b);
 		break;
 
 	case 19: // log
 		if (a < 0 || b < 0)
 			err(12);
 
-		return to_string(log_a(a, b));
+		return std::to_string(log_a(a, b));
 		break;
 	}
 
 	return "";
 }
 
-inline string f_trig(int id, string s)
+inline std::string f_trig(int id, std::string s)
 {
 	ld a;
 	if (isvarok(s))
@@ -614,38 +613,38 @@ inline string f_trig(int id, string s)
 	else
 		a = stold(s);
 
-	u32string k;
+	std::u32string k;
 
 	switch (id)
 	{
 	case 1: // abs
-		return to_string(abs(a));
+		return std::to_string(abs(a));
 		break;
 
 	case 2: // sqrt
 		if (a < 0)
 			err(12);
-		return to_string(sqrtl(a));
+		return std::to_string(sqrtl(a));
 		break;
 
 	case 3: // sin
-		return to_string(sinl(a));
+		return std::to_string(sinl(a));
 		break;
 
 	case 4: // cos
-		return to_string(cosl(a));
+		return std::to_string(cosl(a));
 		break;
 
 	case 5: // tan
-		return to_string(tanl(a));
+		return std::to_string(tanl(a));
 		break;
 
 	case 6: // is_prime
-		return to_string(is_prime((ll)a));
+		return std::to_string(is_prime((ll)a));
 		break;
 
 	case 7: // not
-		return to_string(!a);
+		return std::to_string(!a);
 		break;
 
 	case 8: // chr
@@ -662,14 +661,14 @@ inline string f_trig(int id, string s)
 		if (a < 0)
 			err(12);
 
-		return to_string(fact((ll)a));
+		return std::to_string(fact((ll)a));
 		break;
 	}
 
 	return "";
 }
 
-inline bool to_bool(string s)
+inline bool to_bool(std::string s)
 {
 	bool ret;
 	if (isvarok(s))
@@ -686,7 +685,7 @@ inline bool to_bool(string s)
 	return ret;
 }
 
-inline ld to_num(string s)
+inline ld to_num(std::string s)
 {
 	ld ret;
 	if (isvarok(s))
@@ -710,9 +709,9 @@ inline ld to_num(string s)
 	return ret;
 }
 
-inline string get_str(string s)
+inline std::string get_str(std::string s)
 {
-	string ret;
+	std::string ret;
 	if (isvarok(s))
 	{
 		ret = var_value(s);
@@ -731,15 +730,15 @@ inline string get_str(string s)
 	return ret;
 }
 
-inline string aqua(string script, vector<string> line, int linenum)
+inline std::string aqua(std::string script, std::vector<std::string> line, int linenum)
 {
 	// スペースごとに変換
-	vector<string> code = scriptcut(script);
+	std::vector<std::string> code = scriptcut(script);
 	if (code[code.size() - 1].back() == ';')
 	{
 		code[code.size() - 1] = code[code.size() - 1].substr(0, code[code.size() - 1].size() - 1);
 	}
-	string func = code[0];
+	std::string func = code[0];
 
 	// funcを含まない引数の数
 	ll argn = code.size() - 1;
@@ -790,7 +789,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 				}
 				else if (code[1] == "set_few")
 				{
-					cout << fixed << setprecision(stoi(code[2]));
+					std::cout << std::fixed << std::setprecision(stoi(code[2]));
 				}
 				else if (code[1] == "over_var")
 				{
@@ -880,7 +879,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 						{
 							var_int[code[2]] = stoi(code[3]);
 						}
-						else if (code[1] == "string")
+						else if (code[1] == "std::string")
 						{
 							if (changed)
 								var_string[code[2]] = "";
@@ -938,12 +937,12 @@ inline string aqua(string script, vector<string> line, int linenum)
 
 				if (code[1] == "")
 				{
-					cout << "\n";
+					std::cout << "\n";
 				}
 				else
 				{
 					for (ll i = 0; i < (ll)to_num(code[1]); i++) // rep使えよ
-						cout << "\n";
+						std::cout << "\n";
 				}
 			}
 			else if (func == "style")
@@ -1072,27 +1071,27 @@ inline string aqua(string script, vector<string> line, int linenum)
 				switch (var_search(code[1]))
 				{
 				case 1:
-					cin >> var_int[code[1]];
+					std::cin >> var_int[code[1]];
 					break;
 
 				case 2:
-					cin >> var_string[code[1]];
+					std::cin >> var_string[code[1]];
 					break;
 
 				case 3:
-					cin >> var_bool[code[1]];
+					std::cin >> var_bool[code[1]];
 					break;
 
 				case 4:
-					cin >> var_double[code[1]];
+					std::cin >> var_double[code[1]];
 					break;
 
 				case 5:
-					cin >> var_int64[code[1]];
+					std::cin >> var_int64[code[1]];
 					break;
 
 				case 6:
-					cin >> var_ll[code[1]];
+					std::cin >> var_ll[code[1]];
 					break;
 
 				default:
@@ -1156,7 +1155,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				// 出力をフラッシュ
 
-				cout << flush;
+				std::cout << std::flush;
 			}
 			else if (func == "+")
 			{
@@ -1358,22 +1357,22 @@ inline string aqua(string script, vector<string> line, int linenum)
 			else if (func == "is" || func == "==")
 			{
 				// 一緒かどうか調べる
-				string a, b;
+				std::string a, b;
 
 				a = get_str(code[1]);
 				b = get_str(code[2]);
 
-				return to_string(a == b);
+				return std::to_string(a == b);
 			}
 			else if (func == "nis" || func == "!=")
 			{
 				// 一緒かどうか調べる
-				string a, b;
+				std::string a, b;
 
 				a = get_str(code[1]);
 				b = get_str(code[2]);
 
-				return to_string(a != b);
+				return std::to_string(a != b);
 			}
 			else if (func == "clear")
 			{
@@ -1384,14 +1383,14 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else if (func == "&")
 			{
-				string ans = "";
+				std::string ans = "";
 
 				if (code.size() < 3)
 					err(14);
 
 				rep(i, argn)
 				{
-					string arg = code[i + 1];
+					std::string arg = code[i + 1];
 
 					ans += get_str(arg);
 				}
@@ -1503,7 +1502,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 				else if (a % 5 == 0)
 					return "Buzz";
 				else
-					return to_string(a);
+					return std::to_string(a);
 			}
 			else if (func == ">")
 			{
@@ -1615,7 +1614,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 				{
 
 					// 仮
-					string s = code[i + 1];
+					std::string s = code[i + 1];
 
 					if (isvarok(s)) // 変数の場合
 					{
@@ -1623,12 +1622,12 @@ inline string aqua(string script, vector<string> line, int linenum)
 						{
 							ans += stold(var_value(s));
 						}
-						catch (const exception &e)
+						catch (const std::exception &e)
 						{
-							err(20); // stringとかの場合
+							err(20); // std::stringとかの場合
 						}
 					}
-					else if (isstring(s)) // あからさまにstring("")の場合
+					else if (isstring(s)) // あからさまにstd::string("")の場合
 					{
 						err(20);
 					}
@@ -1638,7 +1637,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 						{
 							ans += stold(nx());
 						}
-						catch (const exception &e)
+						catch (const std::exception &e)
 						{
 							err(20); // 一応
 						}
@@ -1650,7 +1649,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 						{
 							ans += stold(s);
 						}
-						catch (const exception &e)
+						catch (const std::exception &e)
 						{
 							err(20); // 察し((
 						}
@@ -1658,7 +1657,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 				}
 
 				// 全部終わり! じゃあね!
-				return to_string(ans);
+				return std::to_string(ans);
 			}
 			else if (func == "gcd")
 			{
@@ -1691,7 +1690,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				// Pythonのordと一緒
 
-				string s = "";
+				std::string s = "";
 
 				if (isstring(code[1]))
 				{
@@ -1724,9 +1723,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 				}
 
 #ifdef WINDOWS
-				u32string x = utf32conv.from_bytes(ansi_to_utf8(s));
+				std::u32string x = utf32conv.from_bytes(ansi_to_utf8(s));
 #else
-				u32string x = utf32conv.from_bytes(s);
+				std::u32string x = utf32conv.from_bytes(s);
 #endif
 
 				if (x.size() != 1)
@@ -1734,7 +1733,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(28);
 				}
 
-				return to_string((int)x[0]);
+				return std::to_string((int)x[0]);
 			}
 			else if (func == "chr")
 			{
@@ -1783,7 +1782,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					err(2);
 				}
 
-				string s = "";
+				std::string s = "";
 
 				if (isstring(code[1]))
 				{
@@ -1820,15 +1819,15 @@ inline string aqua(string script, vector<string> line, int linenum)
 				}
 
 #ifdef WINDOWS
-				u32string at = utf32conv.from_bytes(ansi_to_utf8(s));
+				std::u32string at = utf32conv.from_bytes(ansi_to_utf8(s));
 #else
-				u32string at = utf32conv.from_bytes(s);
+				std::u32string at = utf32conv.from_bytes(s);
 #endif
 				if (index > -1 && index < at.size())
 				{
 					// 日本語対応部分
 					// WindowsはUTF-8に直してやる
-					u32string a = u32string{at[index]};
+					std::u32string a = std::u32string{at[index]};
 
 #ifdef WINDOWS
 					return utf8_to_ansi(utf32conv.to_bytes(a));
@@ -1845,7 +1844,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				// Pythonみたいに長さはかるやつ
 
-				string s = "";
+				std::string s = "";
 
 				if (isstring(code[1]))
 				{
@@ -1882,12 +1881,12 @@ inline string aqua(string script, vector<string> line, int linenum)
 				}
 
 #ifdef WINDOWS
-				u32string len = utf32conv.from_bytes(ansi_to_utf8(s));
+				std::u32string len = utf32conv.from_bytes(ansi_to_utf8(s));
 #else
-				u32string len = utf32conv.from_bytes(s);
+				std::u32string len = utf32conv.from_bytes(s);
 #endif
 
-				return to_string(len.size());
+				return std::to_string(len.size());
 			}
 			else if (func == "?")
 			{
@@ -1926,8 +1925,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				// 入力を一行受け取ってそれを返す
 
-				string s = "undefined";
-				getline(cin, s);
+				std::string s = "undefined";
+				std::getline(std::cin, s);
 				return s;
 			}
 			else if (func == "lsh")
@@ -1946,7 +1945,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 			{
 				if (us_net)
 				{
-					string url = get_str(code[1]), path = get_str(code[2]);
+					std::string url = get_str(code[1]), path = get_str(code[2]);
 
 					if (path[path.length() - 1] == ' ')
 					{
@@ -2052,8 +2051,8 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 			else if (func == "cin")
 			{
-				string S;
-				cin >> S;
+				std::string S;
+				std::cin >> S;
 
 				return S;
 			}
@@ -2065,7 +2064,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					chmax(ans, to_num(code[i + 1]));
 				}
 
-				return to_string(ans);
+				return std::to_string(ans);
 			}
 			else if (func == "min")
 			{
@@ -2075,7 +2074,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					chmin(ans, to_num(code[i + 1]));
 				}
 
-				return to_string(ans);
+				return std::to_string(ans);
 			}
 			else if (func == "find")
 			{
@@ -2085,11 +2084,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 				code[2] = get_str(code[2]);
 
 #ifdef WINDOWS
-				u32string a = utf32conv.from_bytes(ansi_to_utf8(code[1]));
-				u32string b = utf32conv.from_bytes(ansi_to_utf8(code[2]));
+				std::u32string a = utf32conv.from_bytes(ansi_to_utf8(code[1]));
+				std::u32string b = utf32conv.from_bytes(ansi_to_utf8(code[2]));
 #else
-				u32string a = utf32conv.from_bytes(code[1]);
-				u32string b = utf32conv.from_bytes(code[2]);
+				std::u32string a = utf32conv.from_bytes(code[1]);
+				std::u32string b = utf32conv.from_bytes(code[2]);
 #endif
 				if (var_pos == 2 || val_str)
 				{
@@ -2103,7 +2102,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					{
 						if (a[i] == find_check)
 						{
-							return to_string(i);
+							return std::to_string(i);
 						}
 					}
 
@@ -2122,11 +2121,11 @@ inline string aqua(string script, vector<string> line, int linenum)
 				code[2] = get_str(code[2]);
 
 #ifdef WINDOWS
-				u32string a = utf32conv.from_bytes(ansi_to_utf8(code[1]));
-				u32string b = utf32conv.from_bytes(ansi_to_utf8(code[2]));
+				std::u32string a = utf32conv.from_bytes(ansi_to_utf8(code[1]));
+				std::u32string b = utf32conv.from_bytes(ansi_to_utf8(code[2]));
 #else
-				u32string a = utf32conv.from_bytes(code[1]);
-				u32string b = utf32conv.from_bytes(code[2]);
+				std::u32string a = utf32conv.from_bytes(code[1]);
+				std::u32string b = utf32conv.from_bytes(code[2]);
 #endif
 				if (var_pos == 2 || val_str)
 				{
@@ -2140,7 +2139,7 @@ inline string aqua(string script, vector<string> line, int linenum)
 					{
 						if (a[i] == find_check)
 						{
-							return to_string(i);
+							return std::to_string(i);
 						}
 					}
 
@@ -2285,9 +2284,9 @@ inline string aqua(string script, vector<string> line, int linenum)
 			}
 		}
 	}
-	catch (exception &e)
+	catch (std::exception &e)
 	{
-		cerr << e.what() << endl;
+		std::cerr << e.what() << std::endl;
 		err(41);
 	}
 
@@ -2295,19 +2294,19 @@ inline string aqua(string script, vector<string> line, int linenum)
 	return "undefined";
 }
 
-inline string js_next(vector<string> line, int linenum)
+inline std::string js_next(std::vector<std::string> line, int linenum)
 {
 	isjnx++;
 	return to_js(line[linenum + 1], line, linenum + 1);
 }
 
 // JavaScriptコンパイラ
-inline string to_js(string script, vector<string> line, int linenum)
+inline std::string to_js(std::string script, std::vector<std::string> line, int linenum)
 {
 	// スペースごとに変換
-	vector<string> code = scriptcut(script);
-	string func = code[0];
-	string ans = "";
+	std::vector<std::string> code = scriptcut(script);
+	std::string func = code[0];
+	std::string ans = "";
 	// bool sc = true;
 
 	ll argn = code.size() - 1;
@@ -2402,7 +2401,7 @@ inline string to_js(string script, vector<string> line, int linenum)
 	}
 	else if (func == "style")
 	{
-		string s = "";
+		std::string s = "";
 
 		ans += "process.stdout.write(\"" + s + "\")";
 	}
@@ -2414,9 +2413,9 @@ inline string to_js(string script, vector<string> line, int linenum)
 	return ans;
 }
 
-inline string nx()
+inline std::string nx()
 {
-	string ans;
+	std::string ans;
 	code_line++;
 	ans = aqua(lines[code_line], lines, code_line);
 	code_line--;
@@ -2429,7 +2428,7 @@ inline string nx()
 int main(int argc, char const *argv[])
 {
 	// OS取得
-	string os = "Unknown";
+	std::string os = "Unknown";
 	bool os_win64 = false;
 
 #ifdef _WIN64
@@ -2478,11 +2477,11 @@ int main(int argc, char const *argv[])
 	iswin = false;
 #endif
 
-	// 引数をvector<string>に変換
-	vector<string> args(argv, argv + argc);
+	// 引数をstd::vector<std::string>に変換
+	std::vector<std::string> args(argv, argv + argc);
 
 	// 最優先オプション
-	if (count(all(args), "--win"))
+	if (std::count(all(args), "--win"))
 	{
 		if (!iswin)
 		{
@@ -2537,19 +2536,19 @@ int main(int argc, char const *argv[])
 
 		ll pyinc = 0;
 		bool nxrun = false; // falseの時そのまま実行 trueの時もう一度入力
-		const unordered_set<string> inc_plus_func = {"if", "while", "until", "forever"};
+		const std::unordered_set<std::string> inc_plus_func = {"if", "while", "until", "forever"};
 
 		while (true)
 		{
 			cou((pyinc > 0 || nxrun ? "... " : ">>> "));
-			string inp;
-			getline(cin, inp);
+			std::string inp;
+			std::getline(std::cin, inp);
 			nxrun = false;
 
 			lines.push_back(inp);
 
-			vector<string> code_tmp = scriptcut(incident(vector<string>{inp})[0]);
-			string func = code_tmp[0];
+			std::vector<std::string> code_tmp = scriptcut(incident(std::vector<std::string>{inp})[0]);
+			std::string func = code_tmp[0];
 			if (func == "end")
 			{
 				pyinc--;
@@ -2564,9 +2563,9 @@ int main(int argc, char const *argv[])
 				for (code_line = 0; code_line < lines.size(); code_line++)
 				{
 					if (st_style)
-						cout << "\033[2m" << aqua(lines[code_line], lines, code_line) << "\033[m\n";
+						std::cout << "\033[2m" << aqua(lines[code_line], lines, code_line) << "\033[m\n";
 					else
-						cout << "(" << aqua(lines[code_line], lines, code_line) << ")\n";
+						std::cout << "(" << aqua(lines[code_line], lines, code_line) << ")\n";
 
 					if (isnx) // :使ったら繰り越し
 					{
@@ -2599,10 +2598,10 @@ int main(int argc, char const *argv[])
 	fclose(fp);
 
 	// ファイル読み込み
-	ifstream file;
+	std::ifstream file;
 	file.open(args[1]);
 
-	string read_file;
+	std::string read_file;
 
 	while (getline(file, read_file))
 	{
@@ -2626,7 +2625,7 @@ int main(int argc, char const *argv[])
 
 		co("Compiling... " + args[1]);
 
-		string jsfile;
+		std::string jsfile;
 
 		if (argc == 3)
 		{
@@ -2637,17 +2636,17 @@ int main(int argc, char const *argv[])
 			jsfile = args[2];
 		}
 
-		ofstream js;
-		js.open(jsfile, ios::out);
+		std::ofstream js;
+		js.open(jsfile, std::ios::out);
 
 		js << "\n// Created with Aqua JavaScript compiler.\n"
-		   << endl;
+		   << std::endl;
 
 		for (code_line = 0; code_line < lines.size(); code_line++)
 		{
 			linenume = code_line;
 #ifdef WINDOWS
-			js << ansi_to_utf8(to_js(lines[code_line], lines, code_line)) << endl;
+			js << ansi_to_utf8(to_js(lines[code_line], lines, code_line)) << std::endl;
 #else
 			js << to_js(lines[code_line], lines, code_line) << endl;
 #endif
@@ -2664,7 +2663,7 @@ int main(int argc, char const *argv[])
 	// Aqua実行
 	for (code_line = 0; code_line < lines.size(); code_line++)
 	{
-		// cout << inc_now << " " << inc_code << endl;
+		// std::cout << inc_now << " " << inc_code << endl;
 		linenume = code_line;
 		aqua(lines[code_line], lines, code_line);
 
@@ -2673,7 +2672,7 @@ int main(int argc, char const *argv[])
 			code_line += isnx;
 			isnx = 0;
 		}
-		// cout << inc_code << " " << inc_now << endl;
+		// std::cout << inc_code << " " << inc_now << endl;
 	}
 
 	if (op_stylereset && sett[0])

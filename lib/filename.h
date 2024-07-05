@@ -11,11 +11,10 @@
 *******************************************************/
 
 #include <string>
-using namespace std;
 
 #pragma once
 
-inline string get_filename(string s)
+inline std::string get_filename(std::string s)
 {
 	long long at = 9999999999999LL;
 	for (long long i = s.size() - 1; 0 <= i; i--)
@@ -30,7 +29,7 @@ inline string get_filename(string s)
 	return s.substr(0, at);
 }
 
-inline bool is_jsfile(string filename)
+inline bool is_jsfile(std::string filename)
 {
 	if (filename.substr(filename.size() - 2) == "js")
 	{

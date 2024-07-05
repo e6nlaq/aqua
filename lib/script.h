@@ -13,12 +13,11 @@
 #pragma once
 
 #include "./stdc++.h"
-using namespace std;
 
-inline vector<string> scriptcut(string line)
+inline std::vector<std::string> scriptcut(std::string line)
 {
-	vector<string> result(1, "");
-	string copystr = "";
+	std::vector<std::string> result(1, "");
+	std::string copystr = "";
 	bool isstr = false;
 
 	int i = 0;
@@ -58,7 +57,7 @@ inline vector<string> scriptcut(string line)
 	return result;
 }
 
-inline bool isvarok(string s)
+inline bool isvarok(std::string s)
 {
 	if (s == "")
 		return false;
@@ -85,7 +84,7 @@ inline bool isvarok(string s)
 	return true;
 }
 
-inline bool isvardecok(string s)
+inline bool isvardecok(std::string s)
 {
 	if (s == "")
 		return false;
@@ -116,21 +115,21 @@ inline bool isvardecok(string s)
 	return true;
 }
 
-inline string bond(string a, string b)
+inline std::string bond(std::string a, std::string b)
 {
 	return a + b;
 }
 
-inline string boty(string s)
+inline std::string boty(std::string s)
 {
 	return s.substr(3);
 }
 
-inline vector<string> incident(vector<string> s)
+inline std::vector<std::string> incident(std::vector<std::string> s)
 {
 	// Return
-	vector<string> ret;
-	string a = "";
+	std::vector<std::string> ret;
+	std::string a = "";
 	bool in_char = false;
 
 	// For each
@@ -160,9 +159,9 @@ inline vector<string> incident(vector<string> s)
 	return ret;
 }
 
-inline string vtos(vector<string> s)
+inline std::string vtos(std::vector<std::string> s)
 {
-	string ans = "";
+	std::string ans = "";
 
 	for (auto x : s)
 	{
@@ -173,7 +172,7 @@ inline string vtos(vector<string> s)
 	return ans;
 }
 
-inline void now(vector<string> s, int a)
+inline void now(std::vector<std::string> s, int a)
 {
-	cout << "\nCurrent Value: " << s[a] << "\n\n";
+	std::cout << "\nCurrent Value: " << s[a] << "\n\n";
 }

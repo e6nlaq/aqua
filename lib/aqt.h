@@ -52,9 +52,9 @@ inline bool tool_ok()
 }
 
 template <class... A>
-inline void run(string filename, A... args)
+inline void run(std::string filename, A... args)
 {
-	string cmd = "echo";
+	std::string cmd = "echo";
 	if (is_jsfile(filename))
 		cmd = "node";
 	else
@@ -62,7 +62,7 @@ inline void run(string filename, A... args)
 
 	cmd += " ./node_modules/aqua-tools/" + filename;
 
-	for (auto x : initializer_list<string>{args...})
+	for (auto x : std::initializer_list<std::string>{args...})
 	{
 		cmd += " \"" + x + "\"";
 	}
@@ -70,14 +70,14 @@ inline void run(string filename, A... args)
 	system(cmd.c_str());
 }
 
-inline string get_return()
+inline std::string get_return()
 {
-	ifstream file;
+	std::ifstream file;
 
-	file.open("./node_modules/aqua-tools/return.txt", ios::in);
-	string ans = "", tmp = "";
+	file.open("./node_modules/aqua-tools/return.txt", std::ios::in);
+	std::string ans = "", tmp = "";
 
-	while (getline(file, tmp))
+	while (std::getline(file, tmp))
 	{
 		ans += tmp + "\n";
 	}
