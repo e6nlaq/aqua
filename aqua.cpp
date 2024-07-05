@@ -879,7 +879,7 @@ inline std::string aqua(std::string script, std::vector<std::string> line, int l
 						{
 							var_int[code[2]] = stoi(code[3]);
 						}
-						else if (code[1] == "std::string")
+						else if (code[1] == "string")
 						{
 							if (changed)
 								var_string[code[2]] = "";
@@ -1203,11 +1203,11 @@ inline std::string aqua(std::string script, std::vector<std::string> line, int l
 				{
 					if (var_search(code[1]) == 1)
 					{
-						var_int[code[1]]++;
+						return std::to_string(var_int[code[1]]++);
 					}
 					else
 					{
-						var_int[code[1]]++;
+						return std::to_string(var_int[code[1]]++);
 					}
 				}
 				else
@@ -1219,11 +1219,11 @@ inline std::string aqua(std::string script, std::vector<std::string> line, int l
 				{
 					if (var_search(code[1]) == 1)
 					{
-						var_int[code[1]]--;
+						return std::to_string(var_int[code[1]]--);
 					}
 					else
 					{
-						var_int[code[1]]--;
+						return std::to_string(var_int[code[1]]--);
 					}
 				}
 				else
