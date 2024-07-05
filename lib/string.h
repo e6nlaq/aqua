@@ -16,9 +16,8 @@
 #include "./type.h"
 #include <cassert>
 #include <iostream>
-using namespace std;
 
-inline bool isint(string s)
+inline bool isint(std::string s)
 {
 	if (s == "")
 		return false;
@@ -32,9 +31,9 @@ inline bool isint(string s)
 	return true;
 }
 
-inline string cutstr(string cut)
+inline std::string cutstr(std::string cut)
 {
-	string ret = "", ans = "";
+	std::string ret = "", ans = "";
 
 	ret = cut.substr(1, cut.size() - 2);
 
@@ -118,19 +117,19 @@ inline string cutstr(string cut)
 	return ans;
 }
 
-inline bool isstring(string str)
+inline bool isstring(std::string str)
 {
 	return (str[0] == '\"' && str[str.size() - 1] == '\"') || (str[0] == '\'' && str[str.size() - 1] == '\'');
 }
 
-inline bool stob(string s)
+inline bool stob(std::string s)
 {
 	if (s == "true")
 		return true;
 
 	if (isint(s))
 	{
-		if (stoi(s) != 0)
+		if (std::stoi(s) != 0)
 			return true;
 	}
 	if (isstring(s))
