@@ -2154,6 +2154,36 @@ inline std::string aqua(std::string script, std::vector<std::string> line, int l
 			{
 				comment = true;
 			}
+			else if (func == "err")
+			{
+				if (isstring(code[1]))
+					err_out(cutstr(code[1]));
+				else if (code[1] == ":")
+				{
+					err_out(nx());
+				}
+				else if (isvarok(code[1]))
+				{
+					err_out(var_value(code[1]));
+				}
+				else
+					err(2);
+			}
+			else if (func == "errf")
+			{
+				if (isstring(code[1]))
+					err_outf(cutstr(code[1]));
+				else if (code[1] == ":")
+				{
+					err_outf(nx());
+				}
+				else if (isvarok(code[1]))
+				{
+					err_outf(var_value(code[1]));
+				}
+				else
+					err(2);
+			}
 			else
 			{
 				if (!op_funcskip && func != "" && func[0] >= '0')
